@@ -3,7 +3,11 @@
 </div>
 
 <div class="panels">
-  {{endocrine-panel data=model.gameData}}
+  <div class="panel-column">
+    {{endocrine-panel data=model.gameData}}
+  </div>
 
-  {{nutrient-panel data=model.gameData}}
+  <div class="panel-column">
+    {{nutrient-panel data=model.gameData}}
+  </div>
 </div>

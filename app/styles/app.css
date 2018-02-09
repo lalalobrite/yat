@@ -19,7 +19,6 @@ body {
 }
 
 .player-avatar-canvas {
-  min-width: 33%;
 }
 
 
@@ -29,5 +28,34 @@ body {
 }
 
 .panels {
+  display: flex;
   flex-grow: 1;
+}
+
+.panels .panel-column:first-child {
+  margin-left: 10px;
+}
+
+.panel-column {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.panel {
+  margin: 10px 0;
+  padding: 10px;
+  border: thin solid #333;
+}
+
+.panel-header {
+  margin: 0 0 10px;
+}
+
+.panel-stat {
+  margin-bottom: 5px;
+}
+
+.panel-stat-secondary {
+  margin-top: 2px;
+  font-size: 90%;
 }

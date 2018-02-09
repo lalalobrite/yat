@@ -2,6 +2,8 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default Component.extend({
+  classNames: ['endocrine-panel', 'panel'],
+
   testosteroneCost: computed('data.endocrine.testosterone', function() {
     return Math.round(this.get('data.endocrine.testosterone') / 1000) + 1;
   }),

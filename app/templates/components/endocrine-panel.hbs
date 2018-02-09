@@ -1,7 +1,11 @@
+<h2 class="panel-header">Endocrine System</h2>
+
 <div class="panel-stat">
-  <div>
+  <div class="panel-stat-primary">
     <button {{action "createTestosterone"}} disabled={{testosteroneDisabled}}>Testosterone</button>
     {{weight-measurement data.endocrine.testosterone}}
   </div>
-  Cost: {{weight-measurement testosteroneCost}}
+  <div class="panel-stat-secondary">
+    Cost: {{weight-measurement testosteroneCost}} Fat
+  </div>
 </div>

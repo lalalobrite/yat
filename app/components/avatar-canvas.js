@@ -9,8 +9,6 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
     this.set('canvasGroup', da.getCanvasGroup(this.element.id, {
-      // provide some styling options; width and height are particularly important
-      border: "1px solid black",
       width: this.element.clientHeight * 0.4,
       height: this.element.clientHeight,
     }));
