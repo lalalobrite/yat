@@ -14,7 +14,7 @@ export default Component.extend({
   nutrientTick: task(function * () {
     yield timeout(3300);
 
-    const imperative = (this.get('data.ri.nutrientImperative') / 1000) * randomNumber(100, 300);
+    const imperative = (this.get('data.ri.nutrientImperative') / 100) * randomNumber(1000, 3000);
 
     ['fat', 'minerals', 'protein', 'calories'].forEach((nutrient) => {
       this.incrementProperty(`data.nutrients.${nutrient}`, Math.round(this.get(`data.mood.hunger.${nutrient}`) * imperative));

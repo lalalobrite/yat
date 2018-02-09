@@ -9,3 +9,16 @@
     Cost: {{weight-measurement arousalCost}} Testosterone
   </div>
 </div>
+
+
+<hr>
+
+<div class="panel-stat">
+  <div class="panel-stat-primary">
+    <button class="panel-stat-button" {{action "createArousalFactory"}} disabled={{arousalFactoryDisabled}}>Arousal Factory</button>
+    <span class="panel-stat-amount">{{data.mood.arousalFactories}}</span>
+  </div>
+  <div class="panel-stat-secondary">
+    Cost: {{weight-measurement arousalFactoryCost}} Protein
+  </div>
+</div>

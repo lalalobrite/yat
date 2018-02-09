@@ -15,34 +15,38 @@ export default Route.extend({
       messages: ['You are testicles. You must procreate.'],
       endocrine: {
         testosterone: 0,
-        testosteroneFactories: 0
+        testosteroneFactories: 0,
+        testosteroneMultiplier: 10
       },
       fertility: {
         eggs: {
           available: 0
         },
         sperm: {
-          dead: randomNumber(1000000, 2000000),
+          dead: 0,
           available: {
-            0: randomNumber(100000, 200000),
-            1: randomNumber(100000, 200000),
-            2: randomNumber(100000, 200000),
-            3: randomNumber(100000, 200000),
-            4: randomNumber(100000, 200000),
-            5: randomNumber(100000, 200000)
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0
           },
           immature: {
-            0: randomNumber(100000, 200000),
-            1: randomNumber(100000, 200000),
-            2: randomNumber(100000, 200000),
-            3: randomNumber(100000, 200000),
-            4: randomNumber(100000, 200000),
-            5: randomNumber(100000, 200000)
+            0: 0,
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0,
+            5: 0
           }
-        }
+        },
+        spermFactories: 0,
+        spermMultiplier: 1000
       },
       mood: {
         arousal: 0,
+        arousalFactories: 0,
         hunger: {
           calories: 40,
           fat: 25,

@@ -12,7 +12,7 @@ export default Component.extend({
   },
 
   hormoneGeneration: task(function * () {
-    yield timeout(502);
+    yield timeout(402);
 
     this.increaseTestosterone(this.get('data.endocrine.testosteroneFactories'));
 
@@ -20,7 +20,7 @@ export default Component.extend({
   }),
 
   testosteroneCost: computed('data.endocrine.testosterone', function() {
-    return 1;
+    return 10;
   }),
 
   testosteroneDisabled: computed('testosteroneCost', 'data.nutrients.fat', function() {
@@ -35,11 +35,11 @@ export default Component.extend({
     }
 
     this.decrementProperty('data.nutrients.fat', this.get('testosteroneCost') * amount);
-    this.incrementProperty('data.endocrine.testosterone', amount);
+    this.incrementProperty('data.endocrine.testosterone', amount * this.get('data.endocrine.testosteroneMultiplier'));
   },
 
   testosteroneFactoryCost: computed('data.endocrine.testosteroneFactories', function() {
-    return Math.round(this.get('data.endocrine.testosteroneFactories') * 50) + 1;
+    return Math.round((this.get('data.endocrine.testosteroneFactories') + 1) * 5000);
   }),
 
   testosteroneFactoryDisabled: computed('testosteroneFactoryCost', 'data.nutrients.protein', function() {

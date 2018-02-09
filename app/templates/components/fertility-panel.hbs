@@ -13,3 +13,15 @@
     <li>Dead: {{totalSpermDead}}</li>
   </ul>
 </div>
+
+<hr>
+
+<div class="panel-stat">
+  <div class="panel-stat-primary">
+    <button class="panel-stat-button" {{action "createSpermFactory"}} disabled={{spermFactoryDisabled}}>Sperm Factory</button>
+    <span class="panel-stat-amount">{{data.fertility.spermFactories}}</span>
+  </div>
+  <div class="panel-stat-secondary">
+    Cost: {{weight-measurement spermFactoryCost}} Protein
+  </div>
+</div>

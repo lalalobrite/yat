@@ -10,6 +10,7 @@ export default Component.extend({
     this._super(...arguments);
 
     this.get('spermMaturation').perform();
+    this.get('spermGeneration').perform();
   },
 
   spermMaturation: task(function * () {
@@ -32,20 +33,13 @@ export default Component.extend({
     this.get('spermMaturation').perform();
   }),
 
-  spermCost: computed('data.fertility.sperm', function() {
-    return 1
+  spermGeneration: task(function * () {
+    yield timeout(509);
+
+    this.increaseSperm(this.get('data.fertility.spermFactories'));
+
+    this.get('spermGeneration').perform();
   }),
-
-  spermDisabled: computed('spermCost', 'data.endocrine.testosterone', function() {
-    return this.get('spermCost') > this.get('data.endocrine.testosterone');
-  }),
-
-  increaseSperm() {
-    if (this.get('spermDisabled')) return;
-
-    this.decrementProperty('data.endocrine.testosterone', this.get('spermCost'));
-    this.incrementProperty('data.fertility.sperm.immature.5');
-  },
 
   totalSpermAvailable: computed('data.fertility.sperm.available.0', 'data.fertility.sperm.available.1', 'data.fertility.sperm.available.2', 'data.fertility.sperm.available.3', 'data.fertility.sperm.available.4', 'data.fertility.sperm.available.5', function() {
     return ['data.fertility.sperm.available.0', 'data.fertility.sperm.available.1', 'data.fertility.sperm.available.2', 'data.fertility.sperm.available.3', 'data.fertility.sperm.available.4', 'data.fertility.sperm.available.5'].reduce((sum, source) => sum + this.get(source), 0);
@@ -57,9 +51,47 @@ export default Component.extend({
 
   totalSpermDead: alias('data.fertility.sperm.dead'),
 
+  spermCost: computed('data.fertility.sperm', function() {
+    return 1
+  }),
+
+  spermDisabled: computed('spermCost', 'data.endocrine.testosterone', function() {
+    return this.get('spermCost') > this.get('data.endocrine.testosterone');
+  }),
+
+  increaseSperm(amount) {
+    if (this.get('spermDisabled')) return;
+
+    if (this.get('spermCost') * amount > this.get('data.endocrine.testosterone')) {
+      amount = Math.floor(this.get('data.endocrine.testosterone') / this.get('spermCost'))
+    }
+
+    this.decrementProperty('data.endocrine.testosterone', this.get('spermCost') * amount);
+    this.incrementProperty('data.fertility.sperm.immature.5', amount * this.get('data.fertility.spermMultiplier'));
+  },
+
+  spermFactoryCost: computed('data.fertility.spermFactories', function() {
+    return Math.round((this.get('data.fertility.spermFactories') + 1) * 25);
+  }),
+
+  spermFactoryDisabled: computed('spermFactoryCost', 'data.nutrients.protein', function() {
+    return this.get('spermFactoryCost') > this.get('data.nutrients.protein');
+  }),
+
+  createSpermFactory() {
+    if (this.get('spermFactoryDisabled')) return;
+
+    this.decrementProperty('data.nutrients.protein', this.get('spermFactoryCost'));
+    this.incrementProperty('data.fertility.spermFactories');
+  },
+
   actions: {
     createSperm() {
-      this.increaseSperm();
+      this.increaseSperm(1);
+    },
+
+    createSpermFactory() {
+      this.createSpermFactory();
     }
   }
 });
