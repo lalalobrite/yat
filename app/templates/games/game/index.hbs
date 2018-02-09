@@ -2,12 +2,18 @@
   {{avatar-canvas avatar=model.gameData.player}}
 </div>
 
-<div class="panels">
-  <div class="panel-column">
-    {{endocrine-panel data=model.gameData}}
+<div class="content">
+  <div class="panels">
+    <div class="panel-column">
+      {{endocrine-panel data=model.gameData}}
+    </div>
+
+    <div class="panel-column">
+      {{nutrient-panel data=model.gameData}}
+    </div>
   </div>
 
-  <div class="panel-column">
-    {{nutrient-panel data=model.gameData}}
-  </div>
+  {{message-box
+    messages=model.gameData.messages
+  }}
 </div>

@@ -9,6 +9,7 @@ export default Route.extend({
   },
 
   defaultData: {
+    messages: ['You are testicles. You must procreate'],
     endocrine: {
       testosterone: 0,
     },

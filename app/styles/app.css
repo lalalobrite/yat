@@ -31,6 +31,12 @@ body {
   flex-grow: 1;
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 .player-avatar-canvas {
 }
 
@@ -71,4 +77,16 @@ body {
 .panel-stat-secondary {
   margin-top: 2px;
   font-size: 90%;
+}
+
+.message-box {
+  flex-shrink: 0;
+  height: 200px;
+  padding: 10px;
+  border-top: thin solid #333;
+  overflow: hidden;
+}
+
+.message-box .message:first-child {
+  font-weight: bold;
 }
