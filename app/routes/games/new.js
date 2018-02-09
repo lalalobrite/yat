@@ -12,7 +12,7 @@ export default Route.extend({
 
   defaultData: computed(function() {
     return {
-      messages: ['You are testicles. You must procreate'],
+      messages: ['You are testicles. You must procreate.'],
       endocrine: {
         testosterone: 0
       },
@@ -43,19 +43,18 @@ export default Route.extend({
       mood: {
         arousal: 0,
         hunger: {
-          overall: 0,
-          rate: 1,
-          carbs: 25,
-          fat: 15,
-          minerals: 10,
-          protein: 50
+          appetite: 8,
+          carbs: 40,
+          fat: 25,
+          minerals: 5,
+          protein: 30
         }
       },
       nutrients: {
-        caleries: 0,
-        fat: 0,
-        minerals: 0,
-        protein: 0
+        caleries: randomNumber(10000, 20000),
+        fat: randomNumber(10000, 20000),
+        minerals: randomNumber(10, 200),
+        protein: randomNumber(10000, 20000)
       },
       ri: {
         ri: 0,

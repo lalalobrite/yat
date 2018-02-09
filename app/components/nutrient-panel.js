@@ -12,18 +12,30 @@ export default Component.extend({
   },
 
   nutrientTick: task(function * () {
-    yield timeout(1000);
+    yield timeout(3300);
 
-    const overallHunger = Math.round(this.get('data.mood.hunger.overall'));
+    const appetite = this.get('data.mood.hunger.appetite') * randomNumber(5000000, 15000000);
 
-    if (overallHunger > randomNumber(0, 100)) {
-      this.incrementProperty('data.nutrients.carbs', this.get('data.mood.hunger.carbs') * overallHunger);
-      this.incrementProperty('data.nutrients.fat', this.get('data.mood.hunger.fat') * overallHunger);
-      this.incrementProperty('data.nutrients.minerals', this.get('data.mood.hunger.minerals') * overallHunger);
-      this.incrementProperty('data.nutrients.protein', this.get('data.mood.hunger.protein') * overallHunger);
-      this.set('data.mood.hunger.overall', 0);
-    } else {
-      this.incrementProperty('data.mood.hunger.overall', this.get('data.mood.hunger.rate') / 1000);
+    this.incrementProperty('data.nutrients.fat', this.get('data.mood.hunger.fat') * appetite);
+    this.incrementProperty('data.nutrients.minerals', this.get('data.mood.hunger.minerals') * appetite);
+    this.incrementProperty('data.nutrients.protein', this.get('data.mood.hunger.protein') * appetite);
+    this.incrementProperty('data.nutrients.caleries', (this.get('data.mood.hunger.carbs') * appetite) / 4);
+
+    const maxProtein = 9000000000;
+    if (this.get('data.nutrients.protein') > maxProtein) {
+      this.incrementProperty('data.nutrients.caleries', ((this.get('data.nutrients.protein') - maxProtein) / 4));
+      this.set('data.nutrients.protein', maxProtein);
+    }
+
+    const maxMinerals = 9000000000;
+    if (this.get('data.nutrients.minerals') > maxMinerals) {
+      this.set('data.nutrients.minerals', maxMinerals);
+    }
+
+    const maxCaleries = 9000000000;
+    if (this.get('data.nutrients.caleries') > maxCaleries) {
+      this.incrementProperty('data.nutrients.fat', ((this.get('data.nutrients.caleries') - maxCaleries) / 9));
+      this.set('data.nutrients.caleries', maxCaleries);
     }
 
     this.get('nutrientTick').perform();

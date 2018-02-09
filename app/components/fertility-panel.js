@@ -44,7 +44,7 @@ export default Component.extend({
     if (this.get('spermDisabled')) return;
 
     this.decrementProperty('data.endocrine.testosterone', this.get('spermCost'));
-    this.incrementProperty('data.fertility.sperm.immature');
+    this.incrementProperty('data.fertility.sperm.immature.5');
   },
 
   totalSpermAvailable: computed('data.fertility.sperm.available.0', 'data.fertility.sperm.available.1', 'data.fertility.sperm.available.2', 'data.fertility.sperm.available.3', 'data.fertility.sperm.available.4', 'data.fertility.sperm.available.5', function() {
