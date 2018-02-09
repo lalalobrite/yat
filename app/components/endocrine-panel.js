@@ -12,10 +12,16 @@ export default Component.extend({
     return this.get('testosteroneCost') > this.get('data.nutrients.fat');
   }),
 
+  increaseTestosterone() {
+    if (this.get('testosteroneDisabled')) return;
+
+    this.decrementProperty('data.nutrients.fat', this.get('testosteroneCost'));
+    this.incrementProperty('data.endocrine.testosterone');
+  },
+
   actions: {
     createTestosterone() {
-      this.decrementProperty('data.nutrients.fat', this.get('testosteroneCost'));
-      this.incrementProperty('data.endocrine.testosterone');
+      this.increaseTestosterone();
     }
   }
 });

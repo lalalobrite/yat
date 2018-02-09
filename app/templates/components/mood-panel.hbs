@@ -1,0 +1,11 @@
+<h2 class="panel-header">Mood</h2>
+
+<div class="panel-stat">
+  <div class="panel-stat-primary">
+    <button class="panel-stat-button" {{action "generateArousal"}} disabled={{arousalDisabled}}>Arousal</button>
+    <span class="panel-stat-amount">{{data.mood.arousal}}%</span>
+  </div>
+  <div class="panel-stat-secondary">
+    Cost: {{weight-measurement arousalCost}} Testosterone
+  </div>
+</div>

@@ -2,8 +2,8 @@
 
 <div class="panel-stat">
   <div class="panel-stat-primary">
-    <button {{action "createTestosterone"}} disabled={{testosteroneDisabled}}>Testosterone</button>
-    {{weight-measurement data.endocrine.testosterone}}
+    <button class="panel-stat-button" {{action "createTestosterone"}} disabled={{testosteroneDisabled}}>Testosterone</button>
+    <span class="panel-stat-amount">{{weight-measurement data.endocrine.testosterone}}</span>
   </div>
   <div class="panel-stat-secondary">
     Cost: {{weight-measurement testosteroneCost}} Fat
