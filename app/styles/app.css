@@ -13,6 +13,19 @@ body {
   width: 100vw;
 }
 
+.top-bar {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-bottom: thin solid #333;
+}
+
+.top-bar-title {
+  margin: 0;
+  margin-right: auto;
+}
+
 .main {
   display: flex;
   flex-grow: 1;
