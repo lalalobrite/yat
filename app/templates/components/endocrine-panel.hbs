@@ -9,3 +9,15 @@
     Cost: {{weight-measurement testosteroneCost}} Fat
   </div>
 </div>
+
+<hr>
+
+<div class="panel-stat">
+  <div class="panel-stat-primary">
+    <button class="panel-stat-button" {{action "createTestosteroneFactory"}} disabled={{testosteroneFactoryDisabled}}>Testosterone Factory</button>
+    <span class="panel-stat-amount">{{data.endocrine.testosteroneFactories}}</span>
+  </div>
+  <div class="panel-stat-secondary">
+    Cost: {{weight-measurement testosteroneFactoryCost}} Protein
+  </div>
+</div>

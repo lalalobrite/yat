@@ -14,7 +14,8 @@ export default Route.extend({
     return {
       messages: ['You are testicles. You must procreate.'],
       endocrine: {
-        testosterone: 0
+        testosterone: 0,
+        testosteroneFactories: 0
       },
       fertility: {
         eggs: {
@@ -43,23 +44,23 @@ export default Route.extend({
       mood: {
         arousal: 0,
         hunger: {
-          appetite: 8,
-          carbs: 40,
+          calories: 40,
           fat: 25,
           minerals: 5,
           protein: 30
         }
       },
       nutrients: {
-        caleries: randomNumber(10000, 20000),
-        fat: randomNumber(10000, 20000),
-        minerals: randomNumber(10, 200),
-        protein: randomNumber(10000, 20000)
+        calories: 10,
+        fat: 5,
+        minerals: 1,
+        protein: 1
       },
       ri: {
         ri: 0,
         children: 0,
-        childrenUncertain: false
+        childrenUncertain: false,
+        nutrientImperative: 1
       },
       player: {
         name : '',
