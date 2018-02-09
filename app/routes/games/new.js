@@ -9,6 +9,12 @@ export default Route.extend({
   },
 
   defaultData: {
+    endocrine: {
+      testosterone: 0,
+    },
+    nutrients: {
+      fat: 10
+    },
     player: {
       name : '',
       // occupation : "Pod Bay Opener",

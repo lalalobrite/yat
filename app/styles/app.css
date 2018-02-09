@@ -19,11 +19,15 @@ body {
 }
 
 .player-avatar-canvas {
-  flex-grow: 1;
+  min-width: 33%;
 }
 
 
 .avatar-canvas {
   height: 100%;
   width: 100%;
+}
+
+.panels {
+  flex-grow: 1;
 }
