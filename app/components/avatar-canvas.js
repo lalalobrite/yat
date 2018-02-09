@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { get } from '@ember/object';
+import { assign } from '@ember/polyfills';
 import { isPresent, typeOf } from '@ember/utils';
 
 export default Component.extend({
@@ -14,7 +15,13 @@ export default Component.extend({
       height: this.element.clientHeight,
     }));
 
-    this.set('daInstance', new da.Player(this.get('avatar')));
+    this.set('daInstance', new da.Player(assign({
+      parts: [
+        da.Part.create(da.Part.VaginaHuman),
+        da.Part.create(da.Part.TesticlesHuman),
+        da.Part.create(da.Part.PenisHuman)
+      ]
+    }, this.get('avatar'))));
 
     this.setupObservers();
     this.draw();

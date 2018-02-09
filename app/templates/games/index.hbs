@@ -1,0 +1,6 @@
+<ul class="games">
+  <li class="game">{{#link-to "games.new"}}New Game{{/link-to}}</li>
+  {{#each model as |game|}}
+    <li class="game">{{#link-to "games.game" game}}{{moment-format game.date 'MM/DD/YYYY h:mma'}}{{/link-to}} {{#link-to "games.game.delete" game}}{{fa-icon "times"}}{{/link-to}}</li>
+  {{/each}}
+</ul>

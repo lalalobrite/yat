@@ -4,6 +4,10 @@ module.exports = {
     ecmaVersion: 2017,
     sourceType: 'module'
   },
+  globals: {
+    da: true,
+    LokiIndexedAdapter: true
+  },
   plugins: [
     'ember'
   ],
