@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import { get } from '@ember/object';
-import { assign } from '@ember/polyfills';
 import { isPresent, typeOf } from '@ember/utils';
 
 export default Component.extend({
@@ -13,13 +12,31 @@ export default Component.extend({
       height: this.element.clientHeight,
     }));
 
-    this.set('daInstance', new da.Player(assign({
+    this.set('daInstance', new da.Player({
+      name: '',
+      basedim: {},
+      clothes: [],
+      decorativeParts: [],
+      faceParts: [],
       parts: [
         da.Part.create(da.Part.VaginaHuman),
         da.Part.create(da.Part.TesticlesHuman),
         da.Part.create(da.Part.PenisHuman)
-      ]
-    }, this.get('avatar'))));
+      ],
+      Mods: {
+        browBotCurl: 6,
+        eyeTilt: 5,
+        eyeTopSize: 0,
+        lipTopCurve: 30,
+        lipTopSize: 10,
+        lipBotSize: 0,
+        lipWidth: -100,
+        lipCupidsBow: -10,
+        breastPerkiness: 4,
+        eyeBotSize: 4,
+        arousal: 0,
+      },
+    }));
 
     this.setupObservers();
     this.draw();
@@ -30,33 +47,15 @@ export default Component.extend({
   },
 
   setupObservers(...paths) {
-    const joinedPath = paths.join('.');
-    Object.keys(this.get(isPresent(joinedPath) ? `avatar.${joinedPath}` : 'avatar')).forEach((childPath) => {
-      const fullJoinedPath = [...paths, childPath].join('.');
-      const childElement = this.get(`avatar.${fullJoinedPath}`);
+    ['fat', 'muscle', 'skeletal', 'skin'].forEach((category) => {
+      Object.keys(this.get(`data.${category}`)).forEach((attribute) => {
+        this.set(`daInstance.basedim.${attribute}`, this.get(`data.${category}.${attribute}.amount`));
 
-      switch (typeOf(childElement)) {
-        case 'object': return this.setupObservers(...paths, childPath);
-        case 'array': return this.addObserver(`avatar.${fullJoinedPath}.[]`, () => {
-          switch (childPath) {
-            case 'clothes': {
-              const daInstance = this.get('daInstance');
-              daInstance.clothes.forEach((instance) => {
-                 daInstance.removeClothing(instance);
-              });
-              this.get('avatar.clothes').forEach((item) => {
-                const instance = da.Clothes.create(get(da, item.type), get(da, item.options));
-                daInstance.wearClothing(instance);
-              });
-              return this.draw();
-            }
-          }
-        });
-        default: return this.addObserver(`avatar.${fullJoinedPath}`, () => {
-          this.set(`daInstance.${fullJoinedPath}`, this.get(`avatar.${fullJoinedPath}`));
+        this.addObserver(`data.${category}.${attribute}.amount`, () => {
+          this.set(`daInstance.basedim.${attribute}`, this.get(`data.${category}.${attribute}.amount`));
           this.draw();
         });
-      }
+      });
     });
   }
 });

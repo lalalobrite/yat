@@ -1,0 +1,13 @@
+<div class="player-avatar-canvas">
+  {{avatar-canvas data=game.gameData}}
+</div>
+
+<div class="content">
+  {{panels-section
+    data=game.gameData
+  }}
+
+  {{message-box
+    messages=game.gameData.messages
+  }}
+</div>

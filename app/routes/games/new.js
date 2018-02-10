@@ -128,79 +128,509 @@ export default Route.extend({
         childrenUncertain: false,
         nutrientImperative: 1
       },
-      player: {
-        name : '',
-        // occupation : "Pod Bay Opener",
-        // // provide specific values here to override the default ones set
-        // age : 26,
-        // base physical dimensions
-        basedim: {
-          areolaSize: 15,
-          armThickness: 55,
-          armLength: 40,
-          buttFullness: 0,
-          breastSize: -1,
-          chinWidth: 50,
-          eyelashLength: 2,
-          eyeSize: 15,
-          faceFem: 0,
-          faceLength: 240,
-          faceWidth: 90,
-          hairHue: 0,
-          hairLength: 0,
-          hairLightness: 0,
-          hairSaturation: 0,
-          hairStyle: 6,
-          handSize: 150,
-          height: 170,
-          hipWidth: 110,
-          legFem: 0,
-          legFullness: 0,
-          legLength: 95,
-          lipSize: 10,
-          lowerMuscle: 10,
-          neckLength: 85,
-          neckWidth: 50,
-          penisSize: 65,
-          shoulderWidth: 75,
-          skin: 1,
-          testicleSize: 50,
-          upperMuscle: 20,
-          vaginaSize: 0,
-          waistWidth: 100,
+      fat: {
+        breastSize: {
+          amount: -1,
+          max: {
+            amount: 15,
+            max: {
+              amount: 50
+            }
+          },
+          min: {
+            amount: -1,
+            min: {
+              amount: -1
+            }
+          }
+        },
+        buttFullness: {
+          amount: 0,
+          max: {
+            amount: 15,
+            max: {
+              amount: 40
+            }
+          },
+          min: {
+            amount: 0,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        faceFem: {
+          amount: 0,
+          max: {
+            amount: 15,
+            max: {
+              amount: 40
+            }
+          },
+          min: {
+            amount: 0,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        legFem: {
+          amount: 0,
+          max: {
+            amount: 15,
+            max: {
+              amount: 40
+            }
+          },
+          min: {
+            amount: 0,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        legFullness: {
+          amount: 0,
+          max: {
+            amount: 15,
+            max: {
+              amount:40
+            }
+          },
+          min: {
+            amount: 0,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        waistWidth: {
+          amount: 120,
+          max: {
+            amount: 150,
+            max: {
+              amount: 150
+            }
+          },
+          min: {
+            amount: 100,
+            min: {
+              amount: 70
+            }
+          }
+        }
+      },
+      muscle: {
+        lowerMuscle: {
+          amount: 10,
+          max: {
+            amount: 20,
+            max: {
+              amount: 40
+            }
+          },
+          min: {
+            amount: 10,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        neckWidth: {
+          amount: 50,
+          max: {
+            amount: 60,
+            max: {
+              amount: 75
+            }
+          },
+          min: {
+            amount: 45,
+            min: {
+              amount: 35
+            }
+          }
+        },
+        penisSize: {
+          amount: 65,
+          max: {
+            amount: 100,
+            max: {
+              amount: 200
+            }
+          },
+          min: {
+            amount: 50,
+            min: {
+              amount: 14
+            }
+          }
+        },
+        testicleSize: {
+          amount: 45,
+          max: {
+            amount: 60,
+            max: {
+              amount: 100
+            }
+          },
+          min: {
+            amount: 35,
+            min: {
+              amount: 26
+            }
+          }
+        },
+        upperMuscle: {
+          amount: 15,
+          max: {
+            amount: 28,
+            max: {
+              amount: 40
+            }
+          },
+          min: {
+            amount: 10,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        vaginaSize: {
+          amount: 0,
+          max: {
+            amount: 50,
+            max: {
+              amount: 100
+            }
+          },
+          min: {
+            amount: 0,
+            min: {
+              amount: 0
+            }
+          }
+        },
+      },
+      skeletal: {
+        armLength: {
+          amount: 40,
+          max: {
+            amount: 45,
+            max: {
+              amount: 80
+            }
+          },
+          min: {
+            amount: 35,
+            min: {
+              amount: 30
+            }
+          }
+        },
+        armThickness: { // shoulder width
+          amount: 65,
+          max: {
+            amount: 85,
+            max: {
+              amount: 95
+            }
+          },
+          min: {
+            amount: 55,
+            min: {
+              amount: 45
+            }
+          }
+        },
+        chinWidth: {
+          amount: 50,
+          max: {
+            amount: 40,
+            max: {
+              amount: 110
+            }
+          },
+          min: {
+            amount: 60,
+            min: {
+              amount: 30
+            }
+          }
+        },
+        faceLength: {
+          amount: 240,
+          max: {
+            amount: 260,
+            max: {
+              amount: 270
+            }
+          },
+          min: {
+            amount: 220,
+            min: {
+              amount: 180
+            }
+          }
+        },
+        faceWidth: {
+          amount: 90,
+          max: {
+            amount: 100,
+            max: {
+              amount: 105
+            }
+          },
+          min: {
+            amount: 80,
+            min: {
+              amount: 75
+            }
+          }
+        },
+        height: { // overall
+          amount: 170,
+          max: {
+            amount: 180,
+            max: {
+              amount: 190
+            }
+          },
+          min: {
+            amount: 150,
+            min: {
+              amount: 110
+            }
+          }
+        },
+        handSize: {
+          amount: 150,
+          max: {
+            amount: 170,
+            max: {
+              amount: 200
+            }
+          },
+          min: {
+            amount: 130,
+            min: {
+              amount: 40
+            }
+          }
+        },
+        hipWidth: {
+          amount: 110,
+          max: {
+            amount: 140,
+            max: {
+              amount: 200
+            }
+          },
+          min: {
+            amount: 100,
+            min: {
+              amount: 90
+            }
+          }
+        },
+        legLength: {
+          amount: 95,
+          max: {
+            amount: 100,
+            max: {
+              amount: 115
+            }
+          },
+          min: {
+            amount: 90,
+            min: {
+              amount: 90
+            }
+          }
+        },
+        neckLength: {
+          amount: 85,
+          max: {
+            amount: 95,
+            max: {
+              amount: 120
+            }
+          },
+          min: {
+            amount: 70,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        shoulderWidth: {
+          amount: 75,
+          max: {
+            amount: 90,
+            max: {
+              amount: 150
+            }
+          },
+          min: {
+            amount: 65,
+            min: {
+              amount: 40
+            }
+          }
+        },
+      },
+      skin: {
+        areolaSize: {
+          amount: 15,
+          max: {
+            amount: 25,
+            max: {
+              amount: 50
+            }
+          },
+          min: {
+            amount: 10,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        eyelashLength: {
+          amount: 2,
+          max: {
+            amount: 5,
+            max: {
+              amount: 15
+            }
+          },
+          min: {
+            amount: 0,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        eyeSize: {
+          amount: 15,
+          max: {
+            amount: 20,
+            max: {
+              amount: 40
+            }
+          },
+          min: {
+            amount: 10,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        hairHue: {
+          amount: 0,
+          max: {
+            amount: 360,
+            max: {
+              amount: 360
+            }
+          },
+          min: {
+            amount: 0,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        hairLength: {
+          amount: 0,
+          max: {
+            amount: 30,
+            max: {
+              amount: 110
+            }
+          },
+          min: {
+            amount: 0,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        hairLightness: {
+          amount: 0,
+          max: {
+            amount: 100,
+            max: {
+              amount: 100
+            }
+          },
+          min: {
+            amount: 0,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        hairSaturation: {
+          amount: 0,
+          max: {
+            amount: 100,
+            max: {
+              amount: 100
+            }
+          },
+          min: {
+            amount: 0,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        hairStyle: {
+          amount: 6,
+          max: {
+            amount: 6,
+            max: {
+              amount: 6
+            }
+          },
+          min: {
+            amount: 0,
+            min: {
+              amount: 0
+            }
+          }
+        },
+        lipSize: {
+          amount: 15,
+          max: {
+            amount: 20,
+            max: {
+              amount: 30
+            }
+          },
+          min: {
+            amount: 10,
+            min: {
+              amount: 5
+            }
+          }
+        },
+        skin: {
+          amount: 1,
+          max: {
+            amount: 27,
+            max: {
+              amount: 27
+            }
+          },
+          min: {
+            amount: -2,
+            min: {
+              amount: -2
+            }
+          }
         },
 
-        // overriding body parts
-        parts: [
-
-           //  da.Part.create(da.Part.VaginaHuman),
-           // da.Part.create(da.Part.TesticlesHuman),
-           // da.Part.create(da.Part.PenisHuman),
-        ],
-        faceParts: [],
-        decorativeParts: [
-            //            da.Part.create(null, da.Part.PenisHeadHuman),
-            // da.Part.create(null, da.Part.BeautyMark),
-        ],
-        Mods: {
-            browBotCurl: 6,
-            eyeTilt: 5,
-            eyeTopSize: 0,
-            lipTopCurve: 30,
-            lipTopSize: 10,
-            lipBotSize: 0,
-            lipWidth: -100,
-            lipCupidsBow: -10,
-            breastPerkiness: 4,
-            eyeBotSize: 4,
-            arousal: 0,
-        },
-
-        // overriding clothing (default to simple red underwear)
-        clothes: [
-            // da.Clothes.create(da.Clothes.Bra, da.Materials.sheerFabric),
-            // da.Clothes.create(da.Clothes.Panties, da.Materials.sheerFabric)
-        ]
       }
     }
   }).volatile()

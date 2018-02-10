@@ -1,13 +1,1 @@
-<div class="player-avatar-canvas">
-  {{avatar-canvas avatar=model.gameData.player}}
-</div>
-
-<div class="content">
-  {{panels-section
-    data=model.gameData
-  }}
-
-  {{message-box
-    messages=model.gameData.messages
-  }}
-</div>
+{{game-window game=model}}
