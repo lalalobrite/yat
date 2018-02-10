@@ -1,6 +1,8 @@
-{{panel-stat-button
-  name=name
-  resource=resource.factories
-  costs=costs
-  createResource=createResource
-}}
+{{#if resource.factories.unlocked}}
+  {{panel-stat-button
+    name=name
+    resource=resource.factories
+    costs=costs
+    createResource=createResource
+  }}
+{{/if}}

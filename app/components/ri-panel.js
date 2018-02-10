@@ -12,8 +12,6 @@ export default Component.extend({
   },
 
   considerGettingOff: task(function * () {
-    yield timeout(10000);
-
     if (this.get('data.mood.arousal') > randomNumber(5, 125) && this.get('data.fertility.sperm.amount') > 0) {
       this.incrementProperty('data.ri.ri', Math.ceil(this.get('data.fertility.sperm.amount') / 5000000));
       this.set('data.fertility.sperm.amount', 0);
@@ -25,6 +23,8 @@ export default Component.extend({
 
       this.get('data.messages').unshiftObject('You have ejaculated. You lack the sensory information to know where.')
     }
+
+    yield timeout(10000);
 
     this.get('considerGettingOff').perform();
   })

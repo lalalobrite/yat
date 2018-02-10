@@ -14,9 +14,55 @@ export default Route.extend({
     return {
       messages: ['You are testicles. You must procreate.'],
       endocrine: {
-        testosterone: {
+        estrogen: {
+          unlocked: true,
           amount: 0,
           factories: {
+            unlocked: true,
+            amount: 0
+          },
+          multiplier: {
+            amount: 1
+          }
+        },
+        humanGrowthHormone: {
+          unlocked: true,
+          amount: 0,
+          factories: {
+            unlocked: true,
+            amount: 0
+          },
+          multiplier: {
+            amount: 1
+          }
+        },
+        progesterone: {
+          unlocked: true,
+          amount: 0,
+          factories: {
+            unlocked: true,
+            amount: 0
+          },
+          multiplier: {
+            amount: 1
+          }
+        },
+        prolactin: {
+          unlocked: true,
+          amount: 0,
+          factories: {
+            unlocked: true,
+            amount: 0
+          },
+          multiplier: {
+            amount: 1
+          }
+        },
+        testosterone: {
+          unlocked: true,
+          amount: 0,
+          factories: {
+            unlocked: true,
             amount: 0
           },
           multiplier: {
@@ -29,8 +75,10 @@ export default Route.extend({
           amount: 0
         },
         sperm: {
+          unlocked: true,
           amount: 0,
           factories: {
+            unlocked: true,
             amount: 0
           },
           multiplier: {
@@ -40,8 +88,10 @@ export default Route.extend({
       },
       mood: {
         arousal: {
+          unlocked: true,
           amount: 0,
           factories: {
+            unlocked: true,
             amount: 0
           },
           multiplier: {

@@ -1,19 +1,102 @@
 <h2 class="panel-header">Endocrine System</h2>
 
-{{panel-stat-button
-  name="testosterone"
-  unit="weight"
-  resource=data.endocrine.testosterone
-  costs=testosteroneCosts
-  createResource=createResource
-}}
+{{#if data.endocrine.estrogen.unlocked}}
+  <div class="panel-stat-group">
+    {{panel-stat-button
+      name="estrogen"
+      unit="weight"
+      resource=data.endocrine.estrogen
+      costs=estrogenCosts
+      createResource=createResource
+    }}
 
-<hr>
+    {{panel-stat-button-factory
+      name="estrogen factory"
+      resource=data.endocrine.estrogen
+      costs=estrogenFactoryCosts
+      resourceCosts=estrogenCosts
+      createResource=createResource
+    }}
+  </div>
+{{/if}}
 
-{{panel-stat-button-factory
-  name="testosterone factory"
-  resource=data.endocrine.testosterone
-  costs=testosteroneFactoryCosts
-  resourceCosts=testosteroneCosts
-  createResource=createResource
-}}
+{{#if data.endocrine.progesterone.unlocked}}
+  <div class="panel-stat-group">
+    {{panel-stat-button
+      name="progesterone"
+      unit="weight"
+      resource=data.endocrine.progesterone
+      costs=progesteroneCosts
+      createResource=createResource
+    }}
+
+    {{panel-stat-button-factory
+      name="progesterone factory"
+      resource=data.endocrine.progesterone
+      costs=progesteroneFactoryCosts
+      resourceCosts=progesteroneCosts
+      createResource=createResource
+    }}
+  </div>
+{{/if}}
+
+{{#if data.endocrine.prolactin.unlocked}}
+  <div class="panel-stat-group">
+    {{panel-stat-button
+      name="prolactin"
+      unit="weight"
+      resource=data.endocrine.prolactin
+      costs=prolactinCosts
+      createResource=createResource
+    }}
+
+    {{panel-stat-button-factory
+      name="prolactin factory"
+      resource=data.endocrine.prolactin
+      costs=prolactinFactoryCosts
+      resourceCosts=prolactinCosts
+      createResource=createResource
+    }}
+  </div>
+{{/if}}
+
+{{#if data.endocrine.humanGrowthHormone.unlocked}}
+  <div class="panel-stat-group">
+    {{panel-stat-button
+      name="human growth hormone (HGH)"
+      unit="weight"
+      resource=data.endocrine.humanGrowthHormone
+      costs=humanGrowthHormoneCosts
+      createResource=createResource
+    }}
+
+    {{panel-stat-button-factory
+      name="HGH factory"
+      resource=data.endocrine.humanGrowthHormone
+      costs=humanGrowthHormoneFactoryCosts
+      resourceCosts=humanGrowthHormoneCosts
+      createResource=createResource
+    }}
+  </div>
+{{/if}}
+
+
+{{#if data.endocrine.testosterone.unlocked}}
+  <div class="panel-stat-group">
+    {{panel-stat-button
+      name="testosterone"
+      unit="weight"
+      resource=data.endocrine.testosterone
+      costs=testosteroneCosts
+      createResource=createResource
+    }}
+
+    {{panel-stat-button-factory
+      name="testosterone factory"
+      resource=data.endocrine.testosterone
+      costs=testosteroneFactoryCosts
+      resourceCosts=testosteroneCosts
+      createResource=createResource
+    }}
+  </div>
+{{/if}}

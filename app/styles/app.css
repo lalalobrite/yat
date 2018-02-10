@@ -70,6 +70,16 @@ body {
   margin: 0 0 10px;
 }
 
+.panel-stat-group {
+  border-bottom: thin solid #333;
+  margin-bottom: 10px;
+}
+
+.panel .panel-stat-group:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+
 .panel-stat {
   margin-bottom: 5px;
 }
