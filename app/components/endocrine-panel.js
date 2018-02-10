@@ -6,8 +6,6 @@ export default Component.extend({
 
   estrogenCosts: computed(function() {
     return [{
-      name: 'fat',
-      unit: 'weight',
       amount: 1,
       source: this.get('data.nutrients.fat')
     }]
@@ -17,8 +15,6 @@ export default Component.extend({
     const totalResourcce = this.get('data.endocrine.estrogen.factories.amount');
 
     return [{
-      name: 'protein',
-      unit: 'weight',
       amount: Math.pow(totalResourcce, 2) + 1,
       source: this.get('data.nutrients.protein')
     }]
@@ -26,8 +22,6 @@ export default Component.extend({
 
   humanGrowthHormoneCosts: computed(function() {
     return [{
-      name: 'fat',
-      unit: 'weight',
       amount: 1,
       source: this.get('data.nutrients.fat')
     }]
@@ -37,8 +31,6 @@ export default Component.extend({
     const totalResourcce = this.get('data.endocrine.humanGrowthHormone.factories.amount');
 
     return [{
-      name: 'protein',
-      unit: 'weight',
       amount: Math.pow(totalResourcce, 2) + 1,
       source: this.get('data.nutrients.protein')
     }]
@@ -46,8 +38,6 @@ export default Component.extend({
 
   progesteroneCosts: computed(function() {
     return [{
-      name: 'fat',
-      unit: 'weight',
       amount: 1,
       source: this.get('data.nutrients.fat')
     }]
@@ -57,28 +47,6 @@ export default Component.extend({
     const totalResourcce = this.get('data.endocrine.progesterone.factories.amount');
 
     return [{
-      name: 'protein',
-      unit: 'weight',
-      amount: Math.pow(totalResourcce, 2) + 1,
-      source: this.get('data.nutrients.protein')
-    }]
-  }),
-
-  prolactinCosts: computed(function() {
-    return [{
-      name: 'fat',
-      unit: 'weight',
-      amount: 1,
-      source: this.get('data.nutrients.fat')
-    }]
-  }),
-
-  prolactinFactoryCosts: computed('data.endocrine.prolactin.factories.amount', function() {
-    const totalResourcce = this.get('data.endocrine.prolactin.factories.amount');
-
-    return [{
-      name: 'protein',
-      unit: 'weight',
       amount: Math.pow(totalResourcce, 2) + 1,
       source: this.get('data.nutrients.protein')
     }]
@@ -86,8 +54,6 @@ export default Component.extend({
 
   testosteroneCosts: computed(function() {
     return [{
-      name: 'fat',
-      unit: 'weight',
       amount: 1,
       source: this.get('data.nutrients.fat')
     }]
@@ -97,8 +63,6 @@ export default Component.extend({
     const totalResourcce = this.get('data.endocrine.testosterone.factories.amount');
 
     return [{
-      name: 'protein',
-      unit: 'weight',
       amount: Math.pow(totalResourcce, 2) + 1,
       source: this.get('data.nutrients.protein')
     }]

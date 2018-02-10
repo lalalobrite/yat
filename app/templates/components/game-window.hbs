@@ -1,13 +1,13 @@
 <div class="player-avatar-canvas">
-  {{avatar-canvas data=game.gameData}}
+  {{avatar-canvas data=data}}
 </div>
 
 <div class="content">
   {{panels-section
-    data=game.gameData
+    data=data
   }}
 
   {{message-box
-    messages=game.gameData.messages
+    messages=data
   }}
 </div>
