@@ -16,26 +16,40 @@ export default Route.extend({
       endocrine: {
         testosterone: {
           amount: 0,
-          factories: 0,
-          multiplier: 1
+          factories: {
+            amount: 0
+          },
+          multiplier: {
+            amount: 1
+          }
         }
       },
       fertility: {
         eggs: {
-          available: 0
+          amount: 0
         },
         sperm: {
           amount: 0,
-          factories: 0,
-          multiplier: 1
+          factories: {
+            amount: 0
+          },
+          multiplier: {
+            amount: 1
+          }
         }
       },
       mood: {
         arousal: {
           amount: 0,
-          factories: 0,
-          multiplier: 1,
-          max: 100
+          factories: {
+            amount: 0
+          },
+          multiplier: {
+            amount: 1
+          },
+          max: {
+            amount: 100
+          }
         },
         hunger: {
           calories: 40,
@@ -45,12 +59,18 @@ export default Route.extend({
         }
       },
       nutrients: {
-        calories: 10,
+        calories: {
+          amount: 5
+        },
         fat: {
           amount: 5
         },
-        minerals: 1,
-        protein: 1
+        minerals: {
+          amount: 5
+        },
+        protein: {
+          amount: 5
+        }
       },
       ri: {
         ri: 0,

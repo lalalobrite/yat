@@ -4,18 +4,16 @@
   name="testosterone"
   unit="weight"
   resource=data.endocrine.testosterone
-  costs=testosteroneCost
-  onClick=createResource
+  costs=testosteroneCosts
+  createResource=createResource
 }}
 
 <hr>
 
-<div class="panel-stat">
-  <div class="panel-stat-primary">
-    <button class="panel-stat-button" {{action "createTestosteroneFactory"}} disabled={{testosteroneFactoryDisabled}}>Testosterone Factory</button>
-    <span class="panel-stat-amount">{{data.endocrine.testosterone.factories}}</span>
-  </div>
-  <div class="panel-stat-secondary">
-    Cost: {{weight-measurement testosteroneFactoryCost}} Protein
-  </div>
-</div>
+{{panel-stat-button-factory
+  name="testosterone factory"
+  resource=data.endocrine.testosterone
+  costs=testosteroneFactoryCosts
+  resourceCosts=testosteroneCosts
+  createResource=createResource
+}}

@@ -18,7 +18,7 @@ export default Component.extend({
     const imperative = (this.get('data.ri.nutrientImperative') / 100) * randomNumber(1000, 3000);
 
     ['fat', 'minerals', 'protein', 'calories'].forEach((nutrient) => {
-      this.incrementProperty(`data.nutrients.${nutrient}`, Math.round(this.get(`data.mood.hunger.${nutrient}`) * imperative));
+      this.incrementProperty(`data.nutrients.${nutrient}.amount`, Math.round(this.get(`data.mood.hunger.${nutrient}`) * imperative));
     });
 
     this.get('nutrientTick').perform();

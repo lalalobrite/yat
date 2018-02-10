@@ -6,6 +6,8 @@ export default Component.extend({
 
   actions: {
     createResource(resource, costs, amount) {
+      if (resource.max && amount + resource.amount >= resource.max.amount) amount = resource.max.amount - resource.amount;
+
       costs.forEach((cost) => {
         if (cost.amount * amount > cost.source.amount) {
           amount = Math.floor(cost.source.amount / cost.amount)
@@ -16,7 +18,9 @@ export default Component.extend({
         set(cost.source, 'amount', cost.source.amount - (amount * cost.amount));
       });
 
-      set(resource, 'amount', resource.amount + (amount * resource.multiplier));
+      if (resource.multiplier) amount *= resource.multiplier.amount;
+
+      set(resource, 'amount', resource.amount + amount);
     }
   }
 });

@@ -1,26 +1,11 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
 import { alias, sum } from '@ember/object/computed';
-import { task, timeout } from 'ember-concurrency';
 
 export default Component.extend({
   classNames: ['fertility-panel', 'panel'],
 
-  didInsertElement() {
-    this._super(...arguments);
-
-    this.get('spermGeneration').perform();
-  },
-
-  spermGeneration: task(function * () {
-    yield timeout(509);
-
-    // this.increaseSperm(this.get('data.fertility.sperm.factories'));
-
-    this.get('spermGeneration').perform();
-  }),
-
-  spermCost: computed(function() {
+  spermCosts: computed(function() {
     return [{
       name: 'testosterone',
       unit: 'weight',
@@ -29,24 +14,14 @@ export default Component.extend({
     }]
   }),
 
-  spermFactoryCost: computed('data.fertility.sperm.factories', function() {
-    return Math.ceil(Math.pow(this.get('data.fertility.sperm.factories') + 1, 2) / 10);
-  }),
+  spermFactoryCosts: computed('data.fertility.sperm.factories.amount', function() {
+    const totalResourcce = this.get('data.fertility.sperm.factories.amount');
 
-  spermFactoryDisabled: computed('spermFactoryCost', 'data.nutrients.protein', function() {
-    return this.get('spermFactoryCost') > this.get('data.nutrients.protein');
-  }),
-
-  createSpermFactory() {
-    if (this.get('spermFactoryDisabled')) return;
-
-    this.decrementProperty('data.nutrients.protein', this.get('spermFactoryCost'));
-    this.incrementProperty('data.fertility.sperm.factories');
-  },
-
-  actions: {
-    createSpermFactory() {
-      this.createSpermFactory();
-    }
-  }
+    return [{
+      name: 'protein',
+      unit: 'weight',
+      amount: Math.pow(totalResourcce, 2) + 1,
+      source: this.get('data.nutrients.protein')
+    }]
+  })
 });

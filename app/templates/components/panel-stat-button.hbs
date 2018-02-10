@@ -7,6 +7,6 @@
 <div class="panel-stat-secondary">
   Cost:
   {{#each costs as |cost|}}
-    {{measurement-unit amount=cost.amount unit=cost.unit}}
+    {{measurement-unit amount=cost.amount unit=cost.unit}} {{cost.name}};
   {{/each}}
 </div>
