@@ -16,7 +16,7 @@ export default Component.extend({
 
     const totalAvailableSperm = [0, 1, 2, 3, 4, 5].reduce((sum, index) => sum + this.get(`data.fertility.sperm.available.${index}`), 0);
 
-    if (this.get('data.mood.arousal') > randomNumber(5, 150) && (totalAvailableSperm > 0) || this.get('data.fertility.sperm.dead') > 0) {
+    if (this.get('data.mood.arousal') > randomNumber(5, 125) && (totalAvailableSperm > 0 || this.get('data.fertility.sperm.dead') > 0)) {
       for (let x = 0; x < 5; ++x) {
         this.set(`data.fertility.sperm.available.${x}`, 0);
       }
@@ -27,6 +27,8 @@ export default Component.extend({
       if (this.get('data.mood.arousal') < 0) this.set('data.mood.arousal', 0);
 
       this.set('data.ri.childrenUncertain', true);
+
+      this.get('data.messages').unshiftObject('You have ejaculated. You lack the sensory information to know where.')
     }
 
     this.get('considerGettingOff').perform();

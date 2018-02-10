@@ -71,7 +71,7 @@ export default Component.extend({
   },
 
   spermFactoryCost: computed('data.fertility.spermFactories', function() {
-    return Math.round((this.get('data.fertility.spermFactories') + 1) * 25);
+    return Math.ceil(Math.pow(this.get('data.fertility.spermFactories') + 1, 2) / 10);
   }),
 
   spermFactoryDisabled: computed('spermFactoryCost', 'data.nutrients.protein', function() {

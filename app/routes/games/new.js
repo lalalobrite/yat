@@ -16,7 +16,7 @@ export default Route.extend({
       endocrine: {
         testosterone: 0,
         testosteroneFactories: 0,
-        testosteroneMultiplier: 10
+        testosteroneMultiplier: 1
       },
       fertility: {
         eggs: {
@@ -42,11 +42,12 @@ export default Route.extend({
           }
         },
         spermFactories: 0,
-        spermMultiplier: 1000
+        spermMultiplier: 1
       },
       mood: {
         arousal: 0,
         arousalFactories: 0,
+        arousalMultiplier: 1,
         hunger: {
           calories: 40,
           fat: 25,

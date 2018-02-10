@@ -23,3 +23,14 @@
     <span class="panel-stat-type">Protein:</span> <span class="panel-stat-amount">{{weight-measurement data.nutrients.protein}}</span>
   </div>
 </div>
+
+
+<div class="panel-stat">
+  <div class="panel-stat-primary">
+    <button class="panel-stat-button" {{action "increaseImperative"}} disabled={{imperativeDisabled}}>Imperative</button>
+    <span class="panel-stat-amount">{{data.ri.nutrientImperative}}</span>
+  </div>
+  <div class="panel-stat-secondary">
+    Cost: {{imperativeCost}} RI
+  </div>
+</div>

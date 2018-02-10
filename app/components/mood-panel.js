@@ -35,11 +35,11 @@ export default Component.extend({
     }
 
     this.decrementProperty('data.endocrine.testosterone', this.get('arousalCost') * amount);
-    this.incrementProperty('data.mood.arousal', amount);
+    this.incrementProperty('data.mood.arousal', amount * this.get('data.mood.arousalMultiplier'));
   },
 
   arousalFactoryCost: computed('data.mood.arousalFactories', function() {
-    return Math.round((this.get('data.mood.arousalFactories') + 1) * 500);
+    return Math.pow(this.get('data.mood.arousalFactories') + 1, 2);
   }),
 
   arousalFactoryDisabled: computed('arousalFactoryCost', 'data.nutrients.protein', function() {

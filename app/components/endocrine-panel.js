@@ -39,7 +39,7 @@ export default Component.extend({
   },
 
   testosteroneFactoryCost: computed('data.endocrine.testosteroneFactories', function() {
-    return Math.round((this.get('data.endocrine.testosteroneFactories') + 1) * 5000);
+    return Math.pow(this.get('data.endocrine.testosteroneFactories') + 1, 2) * 500;
   }),
 
   testosteroneFactoryDisabled: computed('testosteroneFactoryCost', 'data.nutrients.protein', function() {
