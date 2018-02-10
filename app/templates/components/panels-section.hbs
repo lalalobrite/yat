@@ -1,15 +1,28 @@
 <div class="panel-column">
-  {{endocrine-panel data=data
+  {{endocrine-panel
+    data=data
     createResource=(action "createResource")
   }}
-  {{mood-panel data=data}}
-  {{fertility-panel data=data}}
+  {{mood-panel
+    data=data
+    createResource=(action "createResource")
+  }}
+  {{fertility-panel
+    data=data
+    createResource=(action "createResource")
+  }}
 </div>
 
 <div class="panel-column">
 </div>
 
 <div class="panel-column">
-  {{ri-panel data=data}}
-  {{nutrient-panel data=data}}
+  {{ri-panel
+    data=data
+    createResource=(action "createResource")
+  }}
+  {{nutrient-panel
+    data=data
+    createResource=(action "createResource")
+  }}
 </div>

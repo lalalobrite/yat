@@ -9,69 +9,28 @@ export default Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    this.get('spermMaturation').perform();
     this.get('spermGeneration').perform();
   },
-
-  spermMaturation: task(function * () {
-    yield timeout(10007);
-
-    this.incrementProperty('data.fertility.sperm.dead', this.get('data.fertility.sperm.available.0'));
-
-    for (let x = 0; x < 5; ++x) {
-      this.set(`data.fertility.sperm.available.${x}`, this.get(`data.fertility.sperm.available.${x + 1}`));
-    }
-
-    this.set('data.fertility.sperm.available.5', this.get('data.fertility.sperm.immature.0'));
-
-    for (let x = 0; x < 5; ++x) {
-      this.set(`data.fertility.sperm.immature.${x}`, this.get(`data.fertility.sperm.immature.${x + 1}`));
-    }
-
-    this.set('data.fertility.sperm.immature.5', 0);
-
-    this.get('spermMaturation').perform();
-  }),
 
   spermGeneration: task(function * () {
     yield timeout(509);
 
-    this.increaseSperm(this.get('data.fertility.spermFactories'));
+    // this.increaseSperm(this.get('data.fertility.sperm.factories'));
 
     this.get('spermGeneration').perform();
   }),
 
-  totalSpermAvailable: computed('data.fertility.sperm.available.0', 'data.fertility.sperm.available.1', 'data.fertility.sperm.available.2', 'data.fertility.sperm.available.3', 'data.fertility.sperm.available.4', 'data.fertility.sperm.available.5', function() {
-    return ['data.fertility.sperm.available.0', 'data.fertility.sperm.available.1', 'data.fertility.sperm.available.2', 'data.fertility.sperm.available.3', 'data.fertility.sperm.available.4', 'data.fertility.sperm.available.5'].reduce((sum, source) => sum + this.get(source), 0);
+  spermCost: computed(function() {
+    return [{
+      name: 'testosterone',
+      unit: 'weight',
+      amount: 1,
+      source: this.get('data.endocrine.testosterone')
+    }]
   }),
 
-  totalSpermImmature: computed('data.fertility.sperm.immature.0', 'data.fertility.sperm.immature.1', 'data.fertility.sperm.immature.2', 'data.fertility.sperm.immature.3', 'data.fertility.sperm.immature.4', 'data.fertility.sperm.immature.5', function() {
-    return ['data.fertility.sperm.immature.0', 'data.fertility.sperm.immature.1', 'data.fertility.sperm.immature.2', 'data.fertility.sperm.immature.3', 'data.fertility.sperm.immature.4', 'data.fertility.sperm.immature.5'].reduce((sum, source) => sum + this.get(source), 0);
-  }),
-
-  totalSpermDead: alias('data.fertility.sperm.dead'),
-
-  spermCost: computed('data.fertility.sperm', function() {
-    return 1
-  }),
-
-  spermDisabled: computed('spermCost', 'data.endocrine.testosterone.amount', function() {
-    return this.get('spermCost') > this.get('data.endocrine.testosterone.amount');
-  }),
-
-  increaseSperm(amount) {
-    if (this.get('spermDisabled')) return;
-
-    if (this.get('spermCost') * amount > this.get('data.endocrine.testosterone.amount')) {
-      amount = Math.floor(this.get('data.endocrine.testosterone.amount') / this.get('spermCost'))
-    }
-
-    this.decrementProperty('data.endocrine.testosterone.amount', this.get('spermCost') * amount);
-    this.incrementProperty('data.fertility.sperm.immature.5', amount * this.get('data.fertility.spermMultiplier'));
-  },
-
-  spermFactoryCost: computed('data.fertility.spermFactories', function() {
-    return Math.ceil(Math.pow(this.get('data.fertility.spermFactories') + 1, 2) / 10);
+  spermFactoryCost: computed('data.fertility.sperm.factories', function() {
+    return Math.ceil(Math.pow(this.get('data.fertility.sperm.factories') + 1, 2) / 10);
   }),
 
   spermFactoryDisabled: computed('spermFactoryCost', 'data.nutrients.protein', function() {
@@ -82,14 +41,10 @@ export default Component.extend({
     if (this.get('spermFactoryDisabled')) return;
 
     this.decrementProperty('data.nutrients.protein', this.get('spermFactoryCost'));
-    this.incrementProperty('data.fertility.spermFactories');
+    this.incrementProperty('data.fertility.sperm.factories');
   },
 
   actions: {
-    createSperm() {
-      this.increaseSperm(1);
-    },
-
     createSpermFactory() {
       this.createSpermFactory();
     }

@@ -25,31 +25,18 @@ export default Route.extend({
           available: 0
         },
         sperm: {
-          dead: 0,
-          available: {
-            0: 0,
-            1: 0,
-            2: 0,
-            3: 0,
-            4: 0,
-            5: 0
-          },
-          immature: {
-            0: 0,
-            1: 0,
-            2: 0,
-            3: 0,
-            4: 0,
-            5: 0
-          }
-        },
-        spermFactories: 0,
-        spermMultiplier: 1
+          amount: 0,
+          factories: 0,
+          multiplier: 1
+        }
       },
       mood: {
-        arousal: 0,
-        arousalFactories: 0,
-        arousalMultiplier: 1,
+        arousal: {
+          amount: 0,
+          factories: 0,
+          multiplier: 1,
+          max: 100
+        },
         hunger: {
           calories: 40,
           fat: 25,

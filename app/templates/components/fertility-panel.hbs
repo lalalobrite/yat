@@ -1,18 +1,12 @@
 <h2 class="panel-header">Fertility</h2>
 
-<div class="panel-stat">
-  <div class="panel-stat-primary">
-    <button class="panel-stat-button" {{action "createSperm"}} disabled={{spermDisabled}}>Sperm</button>
-  </div>
-  <div class="panel-stat-secondary">
-    Cost: {{weight-measurement spermCost}} Testosterone
-  </div>
-  <ul>
-    <li>Available: {{totalSpermAvailable}}</li>
-    <li>Immature: {{totalSpermImmature}}</li>
-    <li>Dead: {{totalSpermDead}}</li>
-  </ul>
-</div>
+{{panel-stat-button
+  name="sperm"
+  unit="weight"
+  resource=data.fertility.sperm
+  costs=spermCost
+  onClick=createResource
+}}
 
 <hr>
 

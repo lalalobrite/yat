@@ -19,12 +19,13 @@ export default Component.extend({
     this.get('moodGeneration').perform();
   }),
 
-  arousalCost: computed('data.mood.arousal', function() {
-    return 1;
-  }),
-
-  arousalDisabled: computed('arousalCost', 'data.endocrine.testosterone.amount', 'data.mood.arousal', function() {
-    return this.get('data.mood.arousal') >= 100 || this.get('arousalCost') > this.get('data.endocrine.testosterone.amount');
+  arousalCost: computed(function() {
+    return [{
+      name: 'testosterone',
+      unit: 'weight',
+      amount: 1,
+      source: this.get('data.endocrine.testosterone')
+    }]
   }),
 
   increaseArousal(amount) {
