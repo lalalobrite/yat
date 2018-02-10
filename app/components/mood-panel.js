@@ -23,18 +23,18 @@ export default Component.extend({
     return 1;
   }),
 
-  arousalDisabled: computed('arousalCost', 'data.endocrine.testosterone', 'data.mood.arousal', function() {
-    return this.get('data.mood.arousal') >= 100 || this.get('arousalCost') > this.get('data.endocrine.testosterone');
+  arousalDisabled: computed('arousalCost', 'data.endocrine.testosterone.amount', 'data.mood.arousal', function() {
+    return this.get('data.mood.arousal') >= 100 || this.get('arousalCost') > this.get('data.endocrine.testosterone.amount');
   }),
 
   increaseArousal(amount) {
     if (this.get('arousalDisabled')) return;
 
-    if (this.get('arousalCost') * amount > this.get('data.endocrine.testosterone')) {
-      amount = Math.floor(this.get('data.endocrine.testosterone') / this.get('arousalCost'))
+    if (this.get('arousalCost') * amount > this.get('data.endocrine.testosterone.amount')) {
+      amount = Math.floor(this.get('data.endocrine.testosterone.amount') / this.get('arousalCost'))
     }
 
-    this.decrementProperty('data.endocrine.testosterone', this.get('arousalCost') * amount);
+    this.decrementProperty('data.endocrine.testosterone.amount', this.get('arousalCost') * amount);
     this.incrementProperty('data.mood.arousal', amount * this.get('data.mood.arousalMultiplier'));
   },
 

@@ -3,21 +3,9 @@
 </div>
 
 <div class="content">
-  <div class="panels">
-    <div class="panel-column">
-      {{endocrine-panel data=model.gameData}}
-      {{mood-panel data=model.gameData}}
-      {{fertility-panel data=model.gameData}}
-    </div>
-
-    <div class="panel-column">
-    </div>
-
-    <div class="panel-column">
-      {{ri-panel data=model.gameData}}
-      {{nutrient-panel data=model.gameData}}
-    </div>
-  </div>
+  {{panels-section
+    data=model.gameData
+  }}
 
   {{message-box
     messages=model.gameData.messages

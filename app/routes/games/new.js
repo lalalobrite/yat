@@ -14,9 +14,11 @@ export default Route.extend({
     return {
       messages: ['You are testicles. You must procreate.'],
       endocrine: {
-        testosterone: 0,
-        testosteroneFactories: 0,
-        testosteroneMultiplier: 1
+        testosterone: {
+          amount: 0,
+          factories: 0,
+          multiplier: 1
+        }
       },
       fertility: {
         eggs: {
@@ -57,7 +59,9 @@ export default Route.extend({
       },
       nutrients: {
         calories: 10,
-        fat: 5,
+        fat: {
+          amount: 5
+        },
         minerals: 1,
         protein: 1
       },

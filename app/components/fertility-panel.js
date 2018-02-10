@@ -55,18 +55,18 @@ export default Component.extend({
     return 1
   }),
 
-  spermDisabled: computed('spermCost', 'data.endocrine.testosterone', function() {
-    return this.get('spermCost') > this.get('data.endocrine.testosterone');
+  spermDisabled: computed('spermCost', 'data.endocrine.testosterone.amount', function() {
+    return this.get('spermCost') > this.get('data.endocrine.testosterone.amount');
   }),
 
   increaseSperm(amount) {
     if (this.get('spermDisabled')) return;
 
-    if (this.get('spermCost') * amount > this.get('data.endocrine.testosterone')) {
-      amount = Math.floor(this.get('data.endocrine.testosterone') / this.get('spermCost'))
+    if (this.get('spermCost') * amount > this.get('data.endocrine.testosterone.amount')) {
+      amount = Math.floor(this.get('data.endocrine.testosterone.amount') / this.get('spermCost'))
     }
 
-    this.decrementProperty('data.endocrine.testosterone', this.get('spermCost') * amount);
+    this.decrementProperty('data.endocrine.testosterone.amount', this.get('spermCost') * amount);
     this.incrementProperty('data.fertility.sperm.immature.5', amount * this.get('data.fertility.spermMultiplier'));
   },
 

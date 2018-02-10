@@ -14,32 +14,23 @@ export default Component.extend({
   hormoneGeneration: task(function * () {
     yield timeout(402);
 
-    this.increaseTestosterone(this.get('data.endocrine.testosteroneFactories'));
+    // this.increaseTestosterone(this.get('data.endocrine.testosterone.factories'));
+    this.attrs.createResource(this.get('data.endocrine.testosterone'), this.get('testosteroneCost'), this.get('data.endocrine.testosterone.factories'))
 
     this.get('hormoneGeneration').perform();
   }),
 
-  testosteroneCost: computed('data.endocrine.testosterone', function() {
-    return 10;
+  testosteroneCost: computed(function() {
+    return [{
+      name: 'fat',
+      unit: 'weight',
+      amount: 1,
+      source: this.get('data.nutrients.fat')
+    }]
   }),
 
-  testosteroneDisabled: computed('testosteroneCost', 'data.nutrients.fat', function() {
-    return this.get('testosteroneCost') > this.get('data.nutrients.fat');
-  }),
-
-  increaseTestosterone(amount) {
-    if (this.get('testosteroneDisabled')) return;
-
-    if (this.get('testosteroneCost') * amount > this.get('data.nutrients.fat')) {
-      amount = Math.floor(this.get('data.nutrients.fat') / this.get('testosteroneCost'))
-    }
-
-    this.decrementProperty('data.nutrients.fat', this.get('testosteroneCost') * amount);
-    this.incrementProperty('data.endocrine.testosterone', amount * this.get('data.endocrine.testosteroneMultiplier'));
-  },
-
-  testosteroneFactoryCost: computed('data.endocrine.testosteroneFactories', function() {
-    return Math.pow(this.get('data.endocrine.testosteroneFactories') + 1, 2) * 500;
+  testosteroneFactoryCost: computed('data.endocrine.testosterone.factories', function() {
+    return Math.pow(this.get('data.endocrine.testosterone.factories') + 1, 2) * 500;
   }),
 
   testosteroneFactoryDisabled: computed('testosteroneFactoryCost', 'data.nutrients.protein', function() {
@@ -50,14 +41,10 @@ export default Component.extend({
     if (this.get('testosteroneFactoryDisabled')) return;
 
     this.decrementProperty('data.nutrients.protein', this.get('testosteroneFactoryCost'));
-    this.incrementProperty('data.endocrine.testosteroneFactories');
+    this.incrementProperty('data.endocrine.testosterone.factories');
   },
 
   actions: {
-    createTestosterone() {
-      this.increaseTestosterone(1);
-    },
-
     createTestosteroneFactory() {
       this.createTestosteroneFactory();
     }

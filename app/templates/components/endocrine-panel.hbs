@@ -1,21 +1,19 @@
 <h2 class="panel-header">Endocrine System</h2>
 
-<div class="panel-stat">
-  <div class="panel-stat-primary">
-    <button class="panel-stat-button" {{action "createTestosterone"}} disabled={{testosteroneDisabled}}>Testosterone</button>
-    <span class="panel-stat-amount">{{weight-measurement data.endocrine.testosterone}}</span>
-  </div>
-  <div class="panel-stat-secondary">
-    Cost: {{weight-measurement testosteroneCost}} Fat
-  </div>
-</div>
+{{panel-stat-button
+  name="testosterone"
+  unit="weight"
+  resource=data.endocrine.testosterone
+  costs=testosteroneCost
+  onClick=createResource
+}}
 
 <hr>
 
 <div class="panel-stat">
   <div class="panel-stat-primary">
     <button class="panel-stat-button" {{action "createTestosteroneFactory"}} disabled={{testosteroneFactoryDisabled}}>Testosterone Factory</button>
-    <span class="panel-stat-amount">{{data.endocrine.testosteroneFactories}}</span>
+    <span class="panel-stat-amount">{{data.endocrine.testosterone.factories}}</span>
   </div>
   <div class="panel-stat-secondary">
     Cost: {{weight-measurement testosteroneFactoryCost}} Protein

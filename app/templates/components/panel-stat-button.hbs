@@ -1,0 +1,21 @@
+<div class="panel-stat-primary">
+  <button class="panel-stat-button" {{action "onClick"}} disabled={{disabled}}>{{name}}</button>
+  <span class="panel-stat-amount">
+    {{#if (eq unit "weight")}}
+      {{weight-measurement resource.amount}}
+    {{else}}
+      {{resource.amount}}
+    {{/if}}
+  </span>
+</div>
+<div class="panel-stat-secondary">
+  Cost:
+  {{#each costs as |cost|}}
+    {{#if (eq cost.unit "weight")}}
+      {{weight-measurement cost.amount}}
+    {{else}}
+      {{cost.amount}}
+    {{/if}}
+    {{cost.name}}
+  {{/each}}
+</div>
