@@ -269,7 +269,7 @@ export default function schema(data) {
         name: 'breasts',
         amount: -1,
         multiplier: {
-          amount: 1
+          amount: 0.5
         },
         costs: [{
           data,
@@ -320,31 +320,31 @@ export default function schema(data) {
         name: 'butt',
         amount: 0,
         multiplier: {
-          amount: 1
+          amount: 0.4
         },
         costs: [{
           data,
           amount: computed('data.fat.buttFullness.amount', function() {
-            return costFactor((this.get('data.fat.buttFullness.amount') + 1) * 2.25, 'macro15');
+            return costFactor((this.get('data.fat.buttFullness.amount') + 1) * 2.5, 'macro15');
           }),
           source: alias('data.nutrients.fat')
         }, {
           data,
           amount: computed('data.fat.buttFullness.amount', function() {
-            return costFactor((this.get('data.fat.buttFullness.amount') + 1) * 2.25, 'micro15');
+            return costFactor((this.get('data.fat.buttFullness.amount') + 1) * 2.5, 'micro15');
           }),
           source: alias('data.endocrine.estrogen')
         }],
         destroyCosts: [{
           data,
           amount: computed('data.fat.buttFullness.amount', function() {
-            return -costFactor((this.get('data.fat.buttFullness.amount') + 1) * 2.25, 'macro15');
+            return -costFactor((this.get('data.fat.buttFullness.amount') + 1) * 2.5, 'macro15');
           }),
           source: alias('data.nutrients.fat')
         }, {
           data,
           amount: computed('data.fat.breastSize.amount', function() {
-            return costFactor(101 - ((this.get('data.fat.buttFullness.amount') + 1) * 2.25), 'micro15');
+            return costFactor(101 - ((this.get('data.fat.buttFullness.amount') + 1) * 2.5), 'micro15');
           }),
           source: alias('data.endocrine.testosterone')
         }],
@@ -365,31 +365,31 @@ export default function schema(data) {
         name: 'face',
         amount: 0,
         multiplier: {
-          amount: 1
+          amount: 0.4
         },
         costs: [{
           data,
           amount: computed('data.fat.faceFem.amount', function() {
-            return costFactor((this.get('data.fat.faceFem.amount') + 1) * 2.25, 'macro5');
+            return costFactor((this.get('data.fat.faceFem.amount') + 1) * 2.5, 'macro5');
           }),
           source: alias('data.nutrients.fat')
         }, {
           data,
           amount: computed('data.fat.faceFem.amount', function() {
-            return costFactor((this.get('data.fat.faceFem.amount') + 1) * 2.25, 'micro5');
+            return costFactor((this.get('data.fat.faceFem.amount') + 1) * 2.5, 'micro5');
           }),
           source: alias('data.endocrine.estrogen')
         }],
         destroyCosts: [{
           data,
           amount: computed('data.fat.faceFem.amount', function() {
-            return -costFactor((this.get('data.fat.faceFem.amount') + 1) * 2.25, 'macro5');
+            return -costFactor((this.get('data.fat.faceFem.amount') + 1) * 2.5, 'macro5');
           }),
           source: alias('data.nutrients.fat')
         }, {
           data,
           amount: computed('data.fat.faceFem.amount', function() {
-            return costFactor(101 - ((this.get('data.fat.faceFem.amount') + 1) * 2.25), 'micro5');
+            return costFactor(101 - ((this.get('data.fat.faceFem.amount') + 1) * 2.5), 'micro5');
           }),
           source: alias('data.endocrine.testosterone')
         }],
@@ -410,31 +410,31 @@ export default function schema(data) {
         name: 'hips',
         amount: 0,
         multiplier: {
-          amount: 1
+          amount: 0.4
         },
         costs: [{
           data,
           amount: computed('data.fat.legFem.amount', function() {
-            return costFactor((this.get('data.fat.legFem.amount') + 1) * 2.25, 'macro15');
+            return costFactor((this.get('data.fat.legFem.amount') + 1) * 2.5, 'macro15');
           }),
           source: alias('data.nutrients.fat')
         }, {
           data,
           amount: computed('data.fat.legFem.amount', function() {
-            return costFactor((this.get('data.fat.legFem.amount') + 1) * 2.25, 'micro15');
+            return costFactor((this.get('data.fat.legFem.amount') + 1) * 2.5, 'micro15');
           }),
           source: alias('data.endocrine.estrogen')
         }],
         destroyCosts: [{
           data,
           amount: computed('data.fat.legFem.amount', function() {
-            return -costFactor((this.get('data.fat.legFem.amount') + 1) * 2.25, 'macro15');
+            return -costFactor((this.get('data.fat.legFem.amount') + 1) * 2.5, 'macro15');
           }),
           source: alias('data.nutrients.fat')
         }, {
           data,
           amount: computed('data.fat.legFem.amount', function() {
-            return costFactor(101 - ((this.get('data.fat.legFem.amount') + 1) * 2.25), 'micro15');
+            return costFactor(101 - ((this.get('data.fat.legFem.amount') + 1) * 2.5), 'micro15');
           }),
           source: alias('data.endocrine.testosterone')
         }],
@@ -455,31 +455,31 @@ export default function schema(data) {
         name: 'thighs',
         amount: 0,
         multiplier: {
-          amount: 1
+          amount: 0.4
         },
         costs: [{
           data,
           amount: computed('data.fat.legFullness.amount', function() {
-            return costFactor((this.get('data.fat.legFullness.amount') + 1) * 2.25, 'macro20');
+            return costFactor((this.get('data.fat.legFullness.amount') + 1) * 2.5, 'macro20');
           }),
           source: alias('data.nutrients.fat')
         }, {
           data,
           amount: computed('data.fat.legFullness.amount', function() {
-            return costFactor((this.get('data.fat.legFullness.amount') + 1) * 2.25, 'micro20');
+            return costFactor((this.get('data.fat.legFullness.amount') + 1) * 2.5, 'micro20');
           }),
           source: alias('data.endocrine.estrogen')
         }],
         destroyCosts: [{
           data,
           amount: computed('data.fat.legFullness.amount', function() {
-            return -costFactor((this.get('data.fat.legFullness.amount') + 1) * 2.25, 'macro20');
+            return -costFactor((this.get('data.fat.legFullness.amount') + 1) * 2.5, 'macro20');
           }),
           source: alias('data.nutrients.fat')
         }, {
           data,
           amount: computed('data.fat.legFullness.amount', function() {
-            return costFactor(101 - ((this.get('data.fat.legFullness.amount') + 1) * 2.25), 'micro20');
+            return costFactor(101 - ((this.get('data.fat.legFullness.amount') + 1) * 2.5), 'micro20');
           }),
           source: alias('data.endocrine.testosterone')
         }],
@@ -500,7 +500,7 @@ export default function schema(data) {
         name: 'waist',
         amount: 120,
         multiplier: {
-          amount: 1
+          amount: 0.8
         },
         costs: [{
           data,
@@ -547,31 +547,31 @@ export default function schema(data) {
         name: 'legs',
         amount: 10,
         multiplier: {
-          amount: 1
+          amount: 0.4
         },
         costs: [{
           data,
           amount: computed('data.muscle.lowerMuscle.amount', function() {
-            return costFactor((this.get('data.muscle.lowerMuscle.amount') + 1) * 2.25, 'macro20');
+            return costFactor((this.get('data.muscle.lowerMuscle.amount') + 1) * 2.5, 'macro20');
           }),
           source: alias('data.nutrients.protein')
         }, {
           data,
           amount: computed('data.muscle.lowerMuscle.amount', function() {
-            return costFactor((this.get('data.muscle.lowerMuscle.amount') + 1) * 2.25, 'micro20');
+            return costFactor((this.get('data.muscle.lowerMuscle.amount') + 1) * 2.5, 'micro20');
           }),
           source: alias('data.endocrine.testosterone')
         }],
         destroyCosts: [{
           data,
           amount: computed('data.muscle.lowerMuscle.amount', function() {
-            return -costFactor((this.get('data.muscle.lowerMuscle.amount') + 1) * 2.25, 'macro20');
+            return -costFactor((this.get('data.muscle.lowerMuscle.amount') + 1) * 2.5, 'macro20');
           }),
           source: alias('data.nutrients.protein')
         }, {
           data,
           amount: computed('data.muscle.lowerMuscle.amount', function() {
-            return costFactor(101 - ((this.get('data.muscle.lowerMuscle.amount') + 1) * 2.25), 'micro20');
+            return costFactor(101 - ((this.get('data.muscle.lowerMuscle.amount') + 1) * 2.5), 'micro20');
           }),
           source: alias('data.endocrine.estrogen')
         }],
@@ -592,31 +592,31 @@ export default function schema(data) {
         name: 'neck',
         amount: 50,
         multiplier: {
-          amount: 1
+          amount: 0.4
         },
         costs: [{
           data,
           amount: computed('data.muscle.neckWidth.amount', function() {
-            return costFactor((this.get('data.muscle.neckWidth.amount') - 34) * 2.25, 'macro10');
+            return costFactor((this.get('data.muscle.neckWidth.amount') - 34) * 2.5, 'macro10');
           }),
           source: alias('data.nutrients.protein')
         }, {
           data,
           amount: computed('data.muscle.neckWidth.amount', function() {
-            return costFactor((this.get('data.muscle.neckWidth.amount') - 34) * 2.25, 'micro10');
+            return costFactor((this.get('data.muscle.neckWidth.amount') - 34) * 2.5, 'micro10');
           }),
           source: alias('data.endocrine.testosterone')
         }],
         destroyCosts: [{
           data,
           amount: computed('data.muscle.neckWidth.amount', function() {
-            return -costFactor((this.get('data.muscle.neckWidth.amount') - 34) * 2.25, 'macro10');
+            return -costFactor((this.get('data.muscle.neckWidth.amount') - 34) * 2.5, 'macro10');
           }),
           source: alias('data.nutrients.protein')
         }, {
           data,
           amount: computed('data.muscle.neckWidth.amount', function() {
-            return costFactor(101 - ((this.get('data.muscle.neckWidth.amount') - 34) * 2.25), 'micro10');
+            return costFactor(101 - ((this.get('data.muscle.neckWidth.amount') - 34) * 2.5), 'micro10');
           }),
           source: alias('data.endocrine.estrogen')
         }],
@@ -637,7 +637,7 @@ export default function schema(data) {
         name: 'penis',
         amount: 65,
         multiplier: {
-          amount: 1
+          amount: 1.85
         },
         costs: [{
           data,
@@ -682,7 +682,7 @@ export default function schema(data) {
         name: 'testicles',
         amount: 45,
         multiplier: {
-          amount: 1
+          amount: 0.74
         },
         costs: [{
           data,
@@ -727,31 +727,31 @@ export default function schema(data) {
         name: 'upper body',
         amount: 15,
         multiplier: {
-          amount: 1
+          amount: 0.4
         },
         costs: [{
           data,
           amount: computed('data.muscle.upperMuscle.amount', function() {
-            return costFactor((this.get('data.muscle.upperMuscle.amount') + 1) * 2.25, 'macro20');
+            return costFactor((this.get('data.muscle.upperMuscle.amount') + 1) * 2.5, 'macro20');
           }),
           source: alias('data.nutrients.protein')
         }, {
           data,
           amount: computed('data.muscle.upperMuscle.amount', function() {
-            return costFactor((this.get('data.muscle.upperMuscle.amount') + 1) * 2.25, 'micro20');
+            return costFactor((this.get('data.muscle.upperMuscle.amount') + 1) * 2.5, 'micro20');
           }),
           source: alias('data.endocrine.testosterone')
         }],
         destroyCosts: [{
           data,
           amount: computed('data.muscle.upperMuscle.amount', function() {
-            return -costFactor((this.get('data.muscle.upperMuscle.amount') + 1) * 2.25, 'macro20');
+            return -costFactor((this.get('data.muscle.upperMuscle.amount') + 1) * 2.5, 'macro20');
           }),
           source: alias('data.nutrients.protein')
         }, {
           data,
           amount: computed('data.muscle.upperMuscle.amount', function() {
-            return costFactor(101 - ((this.get('data.muscle.upperMuscle.amount') + 1) * 2.25), 'micro20');
+            return costFactor(101 - ((this.get('data.muscle.upperMuscle.amount') + 1) * 2.5), 'micro20');
           }),
           source: alias('data.endocrine.estrogen')
         }],
@@ -819,7 +819,7 @@ export default function schema(data) {
         name: 'arms',
         amount: 40,
         multiplier: {
-          amount: 1
+          amount: 0.5
         },
         costs: [{
           data,
@@ -864,7 +864,7 @@ export default function schema(data) {
         name: 'shoulders',
         amount: 65,
         multiplier: {
-          amount: 1
+          amount: 0.5
         },
         costs: [{
           data,
@@ -915,7 +915,7 @@ export default function schema(data) {
         name: 'chin',
         amount: 50,
         multiplier: {
-          amount: 1
+          amount: 0.8
         },
         costs: [{
           data,
@@ -966,7 +966,7 @@ export default function schema(data) {
         name: 'face length',
         amount: 240,
         multiplier: {
-          amount: 1
+          amount: 0.9
         },
         costs: [{
           data,
@@ -1011,7 +1011,7 @@ export default function schema(data) {
         name: 'face width',
         amount: 90,
         multiplier: {
-          amount: 1
+          amount: 0.3
         },
         costs: [{
           data,
@@ -1056,7 +1056,7 @@ export default function schema(data) {
         name: 'overall',
         amount: 170,
         multiplier: {
-          amount: 1
+          amount: 0.8
         },
         costs: [{
           data,
@@ -1107,7 +1107,7 @@ export default function schema(data) {
         name: 'hands',
         amount: 150,
         multiplier: {
-          amount: 1
+          amount: 1.6
         },
         costs: [{
           data,
@@ -1158,7 +1158,7 @@ export default function schema(data) {
         name: 'hips',
         amount: 110,
         multiplier: {
-          amount: 1
+          amount: 1.1
         },
         costs: [{
           data,
@@ -1209,7 +1209,7 @@ export default function schema(data) {
         name: 'legs',
         amount: 95,
         multiplier: {
-          amount: 1
+          amount: 0.25
         },
         costs: [{
           data,
@@ -1254,7 +1254,7 @@ export default function schema(data) {
         name: 'neck',
         amount: 85,
         multiplier: {
-          amount: 1
+          amount: 1.21
         },
         costs: [{
           data,
@@ -1299,7 +1299,7 @@ export default function schema(data) {
         name: 'chest',
         amount: 75,
         multiplier: {
-          amount: 1
+          amount: 1.1
         },
         costs: [{
           data,
@@ -1352,7 +1352,7 @@ export default function schema(data) {
         name: 'nipples',
         amount: 15,
         multiplier: {
-          amount: 1
+          amount: 0.5
         },
         costs: [{
           data,
@@ -1403,7 +1403,7 @@ export default function schema(data) {
         name: 'eye lashes',
         amount: 2,
         multiplier: {
-          amount: 1
+          amount: 0.15
         },
         costs: [{
           data,
@@ -1448,31 +1448,31 @@ export default function schema(data) {
         name: 'eye size',
         amount: 15,
         multiplier: {
-          amount: 1
+          amount: 0.4
         },
         costs: [{
           data,
           amount: computed('data.skin.eyeSize.amount', function() {
-            return costFactor((this.get('data.skin.eyeSize.amount') + 1) * 2.25, 'macro5');
+            return costFactor((this.get('data.skin.eyeSize.amount') + 1) * 2.5, 'macro5');
           }),
           source: alias('data.nutrients.minerals')
         }, {
           data,
           amount: computed('data.skin.eyeSize.amount', function() {
-            return costFactor((this.get('data.skin.eyeSize.amount') + 1) * 2.25, 'micro5');
+            return costFactor((this.get('data.skin.eyeSize.amount') + 1) * 2.5, 'micro5');
           }),
           source: alias('data.endocrine.estrogen')
         }],
         destroyCosts: [{
           data,
           amount: computed('data.skin.eyeSize.amount', function() {
-            return -costFactor((this.get('data.skin.eyeSize.amount') + 1) * 2.25, 'macro5');
+            return -costFactor((this.get('data.skin.eyeSize.amount') + 1) * 2.5, 'macro5');
           }),
           source: alias('data.nutrients.minerals')
         }, {
           data,
           amount: computed('data.skin.eyeSize.amount', function() {
-            return costFactor(101 - ((this.get('data.skin.eyeSize.amount') + 1) * 2.25), 'micro5');
+            return costFactor(101 - ((this.get('data.skin.eyeSize.amount') + 1) * 2.5), 'micro5');
           }),
           source: alias('data.endocrine.testosterone')
         }],
@@ -1522,7 +1522,7 @@ export default function schema(data) {
         name: 'hair length',
         amount: 0,
         multiplier: {
-          amount: 1
+          amount: 1.1
         },
         costs: [{
           data,
@@ -1648,7 +1648,7 @@ export default function schema(data) {
         name: 'lips',
         amount: 15,
         multiplier: {
-          amount: 1
+          amount: 0.25
         },
         costs: [{
           data,
