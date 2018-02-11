@@ -11,7 +11,11 @@ export default Component.extend({
   store: service(),
 
   _data: computed(function() {
-    return EmberObject.create(this.get('game.gateData') || this.get('game.gameData', {}));
+    const data = Ember.Object.create(this.get('game.gameData'));
+
+    if (isNone(data.get('nutrients'))) data.set('nutrients', {});
+
+    return data;
   }),
 
   data: computed(function() {
@@ -31,7 +35,7 @@ export default Component.extend({
       }
 
       return Object.keys(value).reduce((accumulator, key) => {
-        if (key !== 'amount' && key !== 'unlocked') accumulator.set(key, this.attachModels(get(value, key), isPresent(path) ? `${path}.${key}` : key));
+        if (key !== 'amount' && key !== 'unlocked') accumulator.set(key, key === 'source' ? get(value, key) : this.attachModels(get(value, key), isPresent(path) ? `${path}.${key}` : key));
 
         return accumulator;
       }, isPresent(path) ? EmberObject.extend(options.isArrayItem ? value : {
