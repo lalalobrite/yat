@@ -197,20 +197,8 @@ export default function schema(data) {
       arousal: {
         name: 'arousal',
         unit: 'percent',
-        unlocked: true,
+        component: 'special-arousal',
         amount: 0,
-        factories: {
-          name: 'arousal factory',
-          unlocked: true,
-          amount: 0,
-          costs: [{
-            data,
-            amount: computed('data.mood.arousal.factories.amount', function() {
-              return Math.pow(this.get('data.mood.arousal.factories.amount'), 2) + 1
-            }),
-            source: alias('data.nutrients.protein')
-          }]
-        },
         multiplier: {
           amount: 1
         },
