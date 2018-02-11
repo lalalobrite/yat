@@ -4,7 +4,6 @@ import costFactor from 'yat/utils/cost-factor';
 
 export default function schema(data) {
   return {
-    debugging: true,
     panels: [{
       panels: [{
         title: 'Skeletal System',
@@ -20,23 +19,28 @@ export default function schema(data) {
         path: 'skin'
       }]
     }, {
+      unlocked: true,
       panels: [{
         title: 'Endocrine System',
-        path: 'endocrine'
+        path: 'endocrine',
+        unlocked: true
       }, {
         title: 'Mood',
         path: 'mood'
       }, {
         title: 'Fertility',
-        path: 'fertility'
+        path: 'fertility',
+        unlocked: true
       }]
     }, {
+      unlocked: true,
       panels: [{
         title: 'Reproductive Imperative',
         path: 'ri'
       }, {
         title: 'Nutrients',
-        path: 'nutrients'
+        path: 'nutrients',
+        unlocked: true
       }]
     }],
     endocrine: {
@@ -72,11 +76,9 @@ export default function schema(data) {
         name: 'human growth hormone (HGH)',
         shortName: 'HGH',
         unit: 'weight',
-        unlocked: true,
         amount: 0,
         factories: {
           name: 'HGH factory',
-          unlocked: true,
           amount: 0,
           costs: [{
             data,
@@ -102,11 +104,9 @@ export default function schema(data) {
         name: 'progesterone (P)',
         shortName: 'P',
         unit: 'weight',
-        unlocked: true,
         amount: 0,
         factories: {
           name: 'progesterone factory',
-          unlocked: true,
           amount: 0,
           costs: [{
             data,
@@ -136,7 +136,6 @@ export default function schema(data) {
         amount: 0,
         factories: {
           name: 'testosterone factory',
-          unlocked: true,
           amount: 0,
           costs: [{
             data,
@@ -170,7 +169,6 @@ export default function schema(data) {
         amount: 0,
         factories: {
           name: 'sperm factory',
-          unlocked: true,
           amount: 0,
           costs: [{
             data,
@@ -245,7 +243,8 @@ export default function schema(data) {
     },
     nutrients: {
       eater: {
-        component: 'special-nutrient-eater'
+        component: 'special-nutrient-eater',
+        unlocked: true
       },
       imperative: {
         amount: 1
@@ -256,22 +255,26 @@ export default function schema(data) {
       calories: {
         name: 'calories',
         unit: 'energy',
-        amount: 5
+        amount: 5,
+        unlocked: true
       },
       fat: {
         name: 'fat',
         unit: 'weight',
-        amount: 5
+        amount: 5,
+        unlocked: true
       },
       minerals: {
         name: 'minerals',
         unit: 'weight',
-        amount: 5
+        amount: 5,
+        unlocked: true
       },
       protein: {
         name: 'protein',
         unit: 'weight',
-        amount: 5
+        amount: 5,
+        unlocked: true
       }
     },
     ri: {

@@ -83,6 +83,28 @@ export default Component.extend({
     return amount;
   },
 
+  lockResource(resource, path) {
+    resource.set('unlocked', false);
+
+    let childPanel;
+
+    const parentPanel = this.get('data.panels.panels').find((panel) => {
+      if (panel.get('path') === path) {
+        childPanel = panel;
+        return true;
+      }
+    });
+
+    if (Object.keys(childPanel).every((key) => childPanel.get(`${key}.unlocked`) === false)) childPanel.set('locked', true);
+    if (Object.keys(parentPanel).every((key) => parentPanel.get(`${key}.unlocked`) === false)) parentPanel.set('locked', true);
+  },
+
+  unlockResource(resource, path) {
+    resource.set('unlocked', true);
+
+    this.get('data.panels.panels').find((panel) => panel.get('path') === path ? panel.set('unlocked', true) : false).set('unlocked', true);
+  },
+
   actions: {
     createResource() {
       this.createResource(...arguments);
@@ -90,6 +112,14 @@ export default Component.extend({
 
     destroyResource() {
       this.destroyResource(...arguments);
+    },
+
+    lockResource() {
+      this.lockResource(...arguments);
+    },
+
+    unlockResource() {
+      this.unlockResource(...arguments);
     }
   }
 });

@@ -1,21 +1,27 @@
 {{#each panels as |panel|}}
-  {{#if panel.panels}}
-    <div class="panel-column">
-      {{panels-section
+  {{#if panel.unlocked}}
+    {{#if panel.panels}}
+      <div class="panel-column">
+        {{panels-section
+          data=data
+          panels=panel.panels
+          tagName=""
+          createResource=createResource
+          destroyResource=destroyResource
+          lockResource=lockResource
+          unlockResource=unlockResource
+        }}
+      </div>
+    {{else}}
+      {{panel-component
+        title=panel.title
+        category=panel.path
         data=data
-        panels=panel.panels
-        tagName=""
         createResource=createResource
         destroyResource=destroyResource
+        lockResource=lockResource
+        unlockResource=unlockResource
       }}
-    </div>
-  {{else}}
-    {{panel-component
-      title=panel.title
-      category=panel.path
-      data=data
-      createResource=createResource
-      destroyResource=destroyResource
-    }}
+    {{/if}}
   {{/if}}
 {{/each}}
