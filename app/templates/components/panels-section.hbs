@@ -5,6 +5,8 @@
         data=data
         panels=panel.panels
         tagName=""
+        createResource=createResource
+        destroyResource=destroyResource
       }}
     </div>
   {{else}}
@@ -12,8 +14,8 @@
       title=panel.title
       category=panel.path
       data=data
-      createResource=(action "createResource")
-      destroyResource=(action "destroyResource")
+      createResource=createResource
+      destroyResource=destroyResource
     }}
   {{/if}}
 {{/each}}

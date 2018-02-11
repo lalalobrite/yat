@@ -48,5 +48,41 @@ export default Component.extend({
 
   schema: computed(function() {
     return schema(this.get('_data'));
-  }).volatile()
+  }),
+
+  createResource(resource, amount) {
+    if (resource.max && amount + resource.get('amount') >= resource.get('max.amount')) amount = resource.get('max.amount') - resource.get('amount');
+
+    resource.incrementProperty('amount', this.payResourceCost(resource, amount, resource.get('costs')));
+  },
+
+  destroyResource(resource, amount) {
+    if (resource.min && resource.get('amount') - amount <= resource.get('min.amount')) amount = resource.get('amount') - resource.get('min.amount');
+
+    resource.decrementProperty('amount', this.payResourceCost(resource, amount, resource.get('destroyCosts')));
+  },
+
+  payResourceCost(resource, amount, costs) {
+    costs.forEach((cost) => {
+      if (cost.get('amount') * amount > cost.get('source.amount')) {
+        amount = Math.floor(cost.get('source.amount') / cost.get('amount'))
+      }
+    });
+
+    costs.forEach((cost) => {
+      cost.decrementProperty('source.amount', amount * cost.get('amount'));
+    });
+
+    return amount * resource.get('multiplier.amount') || 1;
+  },
+
+  actions: {
+    createResource() {
+      this.createResource(...arguments);
+    },
+
+    destroyResource() {
+      this.destroyResource(...arguments);
+    }
+  }
 });
