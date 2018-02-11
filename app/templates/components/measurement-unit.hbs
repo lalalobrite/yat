@@ -1,5 +1,7 @@
 {{#if (eq unit "weight")}}
   {{weight-measurement amount}}
+{{else if (eq unit "energy")}}
+  {{energy-measurement amount}}
 {{else if (eq unit "percent")}}
   {{amount}}%
 {{else}}

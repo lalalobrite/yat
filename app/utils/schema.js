@@ -224,10 +224,26 @@ export default function schema(data) {
         }]
       },
       hunger: {
-        calories: 40,
-        fat: 25,
-        minerals: 5,
-        protein: 30
+        calories: {
+          name: 'calories',
+          unit: 'percent',
+          amount: 40
+        },
+        fat: {
+          name: 'calories',
+          unit: 'percent',
+          amount: 25
+        },
+        minerals: {
+          name: 'calories',
+          unit: 'percent',
+          amount: 5
+        },
+        protein: {
+          name: 'calories',
+          unit: 'percent',
+          amount: 30
+        }
       }
     },
     nutrients: {

@@ -71,9 +71,12 @@ export default Component.extend({
 
     costs.forEach((cost) => {
       cost.decrementProperty('source.amount', amount * cost.get('amount'));
+      if (amount < 0 && cost.get('source.max.amount') < cost.get('source.amount')) cost.set('source.amount', cost.get('source.max.amount'));
     });
 
-    return amount * resource.get('multiplier.amount') || 1;
+    if (resource.get('multiplier')) amount *= resource.get('multiplier.amount');
+
+    return amount;
   },
 
   actions: {
