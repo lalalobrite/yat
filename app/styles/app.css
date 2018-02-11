@@ -49,6 +49,7 @@ body {
 .panels {
   display: flex;
   flex-grow: 1;
+  overflow-x: auto;
 }
 
 .panels .panel-column:first-child {

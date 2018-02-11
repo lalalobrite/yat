@@ -1,7 +1,7 @@
 <h2 class="panel-header">{{title}}</h2>
 
 {{#each resources as |resource|}}
-  {{#if resource.unlocked}}
+  {{#if (and (or resource.unlocked data.debugging) resource.costs)}}
     <div class="panel-stat-group">
       {{panel-stat-button
         resource=resource
@@ -14,5 +14,9 @@
         createResource=createResource
       }}
     </div>
+  {{else if (and resource.name (not resource.costs))}}
+    {{panel-stat-info
+      resource=resource
+    }}
   {{/if}}
 {{/each}}

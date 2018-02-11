@@ -48,6 +48,7 @@ export default Component.extend({
   schema: computed(function() {
     const data = this.get('_data');
     return {
+      debugging: true,
       panels: [{
         panels: [{
           title: 'Endocrine System',
@@ -58,6 +59,18 @@ export default Component.extend({
         }, {
           title: 'Fertility',
           path: 'fertility'
+        }, {
+          title: 'Skeletal System',
+          path: 'skeletal'
+        }, {
+          title: 'Muscles',
+          path: 'muscle'
+        }, {
+          title: 'Fat',
+          path: 'fat'
+        }, {
+          title: 'Skin & Hair',
+          path: 'skin'
         }]
       }, {
         panels: [{
@@ -268,14 +281,43 @@ export default Component.extend({
         }
       },
       ri: {
-        ri: 0,
-        children: 0,
+        ri: {
+          name: 'ri',
+          amount: 0
+        },
+        children: {
+          name: 'children',
+          amount: 0
+        },
         childrenUncertain: false,
         nutrientImperative: 1
       },
       fat: {
         breastSize: {
+          name: 'breasts',
           amount: -1,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.fat.breastSize.amount', function() {
+              return Math.pow(this.get('data.fat.breastSize.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.fat')
+          }, {
+            data,
+            amount: computed('data.fat.breastSize.amount', function() {
+              return Math.pow(this.get('data.fat.breastSize.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }, {
+            data,
+            amount: computed('data.fat.breastSize.amount', function() {
+              return Math.pow(this.get('data.fat.breastSize.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.progesterone')
+          }],
           max: {
             amount: 15,
             max: {
@@ -290,7 +332,24 @@ export default Component.extend({
           }
         },
         buttFullness: {
+          name: 'butt',
           amount: 0,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.fat.buttFullness.amount', function() {
+              return Math.pow(this.get('data.fat.buttFullness.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.fat')
+          }, {
+            data,
+            amount: computed('data.fat.buttFullness.amount', function() {
+              return Math.pow(this.get('data.fat.buttFullness.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 15,
             max: {
@@ -305,7 +364,24 @@ export default Component.extend({
           }
         },
         faceFem: {
+          name: 'face',
           amount: 0,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.fat.faceFem.amount', function() {
+              return Math.pow(this.get('data.fat.faceFem.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.fat')
+          }, {
+            data,
+            amount: computed('data.fat.faceFem.amount', function() {
+              return Math.pow(this.get('data.fat.faceFem.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 15,
             max: {
@@ -320,7 +396,24 @@ export default Component.extend({
           }
         },
         legFem: {
+          name: 'hips',
           amount: 0,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.fat.legFem.amount', function() {
+              return Math.pow(this.get('data.fat.legFem.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.fat')
+          }, {
+            data,
+            amount: computed('data.fat.legFem.amount', function() {
+              return Math.pow(this.get('data.fat.legFem.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 15,
             max: {
@@ -335,7 +428,24 @@ export default Component.extend({
           }
         },
         legFullness: {
+          name: 'thighs',
           amount: 0,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.fat.legFullness.amount', function() {
+              return Math.pow(this.get('data.fat.legFullness.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.fat')
+          }, {
+            data,
+            amount: computed('data.fat.legFullness.amount', function() {
+              return Math.pow(this.get('data.fat.legFullness.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 15,
             max: {
@@ -350,7 +460,24 @@ export default Component.extend({
           }
         },
         waistWidth: {
+          name: 'waist',
           amount: 120,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.fat.waist.amount', function() {
+              return Math.pow(this.get('data.fat.waist.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.fat')
+          }, {
+            data,
+            amount: computed('data.fat.waist.amount', function() {
+              return Math.pow(this.get('data.fat.waist.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 150,
             max: {
@@ -367,7 +494,24 @@ export default Component.extend({
       },
       muscle: {
         lowerMuscle: {
+          name: 'legs',
           amount: 10,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.muscle.lowerMuscle.amount', function() {
+              return Math.pow(this.get('data.muscle.lowerMuscle.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.protein')
+          }, {
+            data,
+            amount: computed('data.muscle.lowerMuscle.amount', function() {
+              return Math.pow(this.get('data.muscle.lowerMuscle.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.testosterone')
+          }],
           max: {
             amount: 20,
             max: {
@@ -382,7 +526,24 @@ export default Component.extend({
           }
         },
         neckWidth: {
+          name: 'neck',
           amount: 50,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.muscle.neckWidth.amount', function() {
+              return Math.pow(this.get('data.muscle.neckWidth.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.protein')
+          }, {
+            data,
+            amount: computed('data.muscle.neckWidth.amount', function() {
+              return Math.pow(this.get('data.muscle.neckWidth.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.testosterone')
+          }],
           max: {
             amount: 60,
             max: {
@@ -397,7 +558,24 @@ export default Component.extend({
           }
         },
         penisSize: {
+          name: 'penis',
           amount: 65,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.muscle.penisSize.amount', function() {
+              return Math.pow(this.get('data.muscle.penisSize.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.protein')
+          }, {
+            data,
+            amount: computed('data.muscle.penisSize.amount', function() {
+              return Math.pow(this.get('data.muscle.penisSize.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.testosterone')
+          }],
           max: {
             amount: 100,
             max: {
@@ -412,7 +590,24 @@ export default Component.extend({
           }
         },
         testicleSize: {
+          name: 'testicles',
           amount: 45,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.muscle.testicleSize.amount', function() {
+              return Math.pow(this.get('data.muscle.testicleSize.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.protein')
+          }, {
+            data,
+            amount: computed('data.muscle.testicleSize.amount', function() {
+              return Math.pow(this.get('data.muscle.testicleSize.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.testosterone')
+          }],
           max: {
             amount: 60,
             max: {
@@ -427,7 +622,24 @@ export default Component.extend({
           }
         },
         upperMuscle: {
+          name: 'upper body',
           amount: 15,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.muscle.upperMuscle.amount', function() {
+              return Math.pow(this.get('data.muscle.upperMuscle.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.protein')
+          }, {
+            data,
+            amount: computed('data.muscle.upperMuscle.amount', function() {
+              return Math.pow(this.get('data.muscle.upperMuscle.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.testosterone')
+          }],
           max: {
             amount: 28,
             max: {
@@ -442,7 +654,24 @@ export default Component.extend({
           }
         },
         vaginaSize: {
+          name: 'vagina',
           amount: 0,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.muscle.vaginaSize.amount', function() {
+              return Math.pow(this.get('data.muscle.vaginaSize.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.protein')
+          }, {
+            data,
+            amount: computed('data.muscle.vaginaSize.amount', function() {
+              return Math.pow(this.get('data.muscle.vaginaSize.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.testosterone')
+          }],
           max: {
             amount: 50,
             max: {
@@ -459,7 +688,24 @@ export default Component.extend({
       },
       skeletal: {
         armLength: {
+          name: 'arm length',
           amount: 40,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skeletal.armLength.amount', function() {
+              return Math.pow(this.get('data.skeletal.armLength.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skeletal.armLength.amount', function() {
+              return Math.pow(this.get('data.skeletal.armLength.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.humanGrowthHormone')
+          }],
           max: {
             amount: 45,
             max: {
@@ -473,8 +719,25 @@ export default Component.extend({
             }
           }
         },
-        armThickness: { // shoulder width
+        armThickness: {
+          name: 'shoulders',
           amount: 65,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skeletal.armThickness.amount', function() {
+              return Math.pow(this.get('data.skeletal.armThickness.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skeletal.armThickness.amount', function() {
+              return Math.pow(this.get('data.skeletal.armThickness.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.humanGrowthHormone')
+          }],
           max: {
             amount: 85,
             max: {
@@ -489,7 +752,24 @@ export default Component.extend({
           }
         },
         chinWidth: {
+          name: 'chin',
           amount: 50,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skeletal.chinWidth.amount', function() {
+              return Math.pow(this.get('data.skeletal.chinWidth.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skeletal.chinWidth.amount', function() {
+              return Math.pow(this.get('data.skeletal.chinWidth.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.humanGrowthHormone')
+          }],
           max: {
             amount: 40,
             max: {
@@ -504,7 +784,24 @@ export default Component.extend({
           }
         },
         faceLength: {
+          name: 'face length',
           amount: 240,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skeletal.faceLength.amount', function() {
+              return Math.pow(this.get('data.skeletal.faceLength.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skeletal.faceLength.amount', function() {
+              return Math.pow(this.get('data.skeletal.faceLength.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.humanGrowthHormone')
+          }],
           max: {
             amount: 260,
             max: {
@@ -519,7 +816,24 @@ export default Component.extend({
           }
         },
         faceWidth: {
+          name: 'face width',
           amount: 90,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skeletal.faceWidth.amount', function() {
+              return Math.pow(this.get('data.skeletal.faceWidth.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skeletal.faceWidth.amount', function() {
+              return Math.pow(this.get('data.skeletal.faceWidth.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.humanGrowthHormone')
+          }],
           max: {
             amount: 100,
             max: {
@@ -533,8 +847,25 @@ export default Component.extend({
             }
           }
         },
-        height: { // overall
+        height: {
+          name: 'overall',
           amount: 170,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skeletal.height.amount', function() {
+              return Math.pow(this.get('data.skeletal.height.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skeletal.height.amount', function() {
+              return Math.pow(this.get('data.skeletal.height.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.humanGrowthHormone')
+          }],
           max: {
             amount: 180,
             max: {
@@ -549,7 +880,24 @@ export default Component.extend({
           }
         },
         handSize: {
+          name: 'hands',
           amount: 150,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skeletal.handSize.amount', function() {
+              return Math.pow(this.get('data.skeletal.handSize.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skeletal.handSize.amount', function() {
+              return Math.pow(this.get('data.skeletal.handSize.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.humanGrowthHormone')
+          }],
           max: {
             amount: 170,
             max: {
@@ -564,7 +912,24 @@ export default Component.extend({
           }
         },
         hipWidth: {
+          name: 'hips',
           amount: 110,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skeletal.hipWidth.amount', function() {
+              return Math.pow(this.get('data.skeletal.hipWidth.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skeletal.hipWidth.amount', function() {
+              return Math.pow(this.get('data.skeletal.hipWidth.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.humanGrowthHormone')
+          }],
           max: {
             amount: 140,
             max: {
@@ -579,7 +944,24 @@ export default Component.extend({
           }
         },
         legLength: {
+          name: 'legs',
           amount: 95,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skeletal.legLength.amount', function() {
+              return Math.pow(this.get('data.skeletal.legLength.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skeletal.legLength.amount', function() {
+              return Math.pow(this.get('data.skeletal.legLength.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.humanGrowthHormone')
+          }],
           max: {
             amount: 100,
             max: {
@@ -594,7 +976,24 @@ export default Component.extend({
           }
         },
         neckLength: {
+          name: 'neck',
           amount: 85,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skeletal.neckLength.amount', function() {
+              return Math.pow(this.get('data.skeletal.neckLength.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skeletal.neckLength.amount', function() {
+              return Math.pow(this.get('data.skeletal.neckLength.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.humanGrowthHormone')
+          }],
           max: {
             amount: 95,
             max: {
@@ -609,7 +1008,24 @@ export default Component.extend({
           }
         },
         shoulderWidth: {
+          name: 'chest',
           amount: 75,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skeletal.shoulderWidth.amount', function() {
+              return Math.pow(this.get('data.skeletal.shoulderWidth.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skeletal.shoulderWidth.amount', function() {
+              return Math.pow(this.get('data.skeletal.shoulderWidth.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.humanGrowthHormone')
+          }],
           max: {
             amount: 90,
             max: {
@@ -626,7 +1042,24 @@ export default Component.extend({
       },
       skin: {
         areolaSize: {
+          name: 'nipples',
           amount: 15,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skin.areolaSize.amount', function() {
+              return Math.pow(this.get('data.skin.areolaSize.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skin.areolaSize.amount', function() {
+              return Math.pow(this.get('data.skin.areolaSize.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 25,
             max: {
@@ -641,7 +1074,24 @@ export default Component.extend({
           }
         },
         eyelashLength: {
+          name: 'eye lashes',
           amount: 2,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skin.eyelashLength.amount', function() {
+              return Math.pow(this.get('data.skin.eyelashLength.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skin.eyelashLength.amount', function() {
+              return Math.pow(this.get('data.skin.eyelashLength.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 5,
             max: {
@@ -656,7 +1106,24 @@ export default Component.extend({
           }
         },
         eyeSize: {
+          name: 'eye size',
           amount: 15,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skin.eyeSize.amount', function() {
+              return Math.pow(this.get('data.skin.eyeSize.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skin.eyeSize.amount', function() {
+              return Math.pow(this.get('data.skin.eyeSize.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 20,
             max: {
@@ -671,7 +1138,24 @@ export default Component.extend({
           }
         },
         hairHue: {
+          name: 'hair hue',
           amount: 0,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skin.hairHue.amount', function() {
+              return Math.pow(this.get('data.skin.hairHue.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skin.hairHue.amount', function() {
+              return Math.pow(this.get('data.skin.hairHue.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 360,
             max: {
@@ -686,7 +1170,24 @@ export default Component.extend({
           }
         },
         hairLength: {
+          name: 'hair length',
           amount: 0,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skin.hairLength.amount', function() {
+              return Math.pow(this.get('data.skin.hairLength.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skin.hairLength.amount', function() {
+              return Math.pow(this.get('data.skin.hairLength.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 30,
             max: {
@@ -701,7 +1202,24 @@ export default Component.extend({
           }
         },
         hairLightness: {
+          name: 'hair lightness',
           amount: 0,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skin.hairLightness.amount', function() {
+              return Math.pow(this.get('data.skin.hairLightness.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skin.hairLightness.amount', function() {
+              return Math.pow(this.get('data.skin.hairLightness.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 100,
             max: {
@@ -716,7 +1234,24 @@ export default Component.extend({
           }
         },
         hairSaturation: {
+          name: 'hair saturation',
           amount: 0,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skin.hairSaturation.amount', function() {
+              return Math.pow(this.get('data.skin.hairSaturation.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skin.hairSaturation.amount', function() {
+              return Math.pow(this.get('data.skin.hairSaturation.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 100,
             max: {
@@ -731,7 +1266,24 @@ export default Component.extend({
           }
         },
         hairStyle: {
+          name: 'hair style',
           amount: 6,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skin.hairStyle.amount', function() {
+              return Math.pow(this.get('data.skin.hairStyle.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skin.hairStyle.amount', function() {
+              return Math.pow(this.get('data.skin.hairStyle.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 6,
             max: {
@@ -746,7 +1298,24 @@ export default Component.extend({
           }
         },
         lipSize: {
+          name: 'lips',
           amount: 15,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skin.lipSize.amount', function() {
+              return Math.pow(this.get('data.skin.lipSize.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.fat')
+          }, {
+            data,
+            amount: computed('data.skin.lipSize.amount', function() {
+              return Math.pow(this.get('data.skin.lipSize.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 20,
             max: {
@@ -761,7 +1330,24 @@ export default Component.extend({
           }
         },
         skin: {
+          name: 'skin color',
           amount: 1,
+          multiplier: {
+            amount: 1
+          },
+          costs: [{
+            data,
+            amount: computed('data.skin.skin.amount', function() {
+              return Math.pow(this.get('data.skin.skin.amount'), 2) + 1
+            }),
+            source: alias('data.nutrients.minerals')
+          }, {
+            data,
+            amount: computed('data.skin.skin.amount', function() {
+              return Math.pow(this.get('data.skin.skin.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.estrogen')
+          }],
           max: {
             amount: 27,
             max: {
