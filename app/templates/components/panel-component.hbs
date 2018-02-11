@@ -5,13 +5,14 @@
     <div class="panel-stat-group">
       {{panel-stat-button
         resource=resource
-        costs=resource.costs
         createResource=createResource
+        destroyResource=destroyResource
       }}
 
       {{panel-stat-button-factory
         resource=resource
         createResource=createResource
+        destroyResource=destroyResource
       }}
     </div>
   {{else if (and resource.name (not resource.costs))}}

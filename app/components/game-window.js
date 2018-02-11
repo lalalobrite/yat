@@ -225,6 +225,7 @@ export default Component.extend({
       mood: {
         arousal: {
           name: 'arousal',
+          unit: 'percent',
           unlocked: true,
           amount: 0,
           factories: {
@@ -317,6 +318,19 @@ export default Component.extend({
               return Math.pow(this.get('data.fat.breastSize.amount'), 2) + 1
             }),
             source: alias('data.endocrine.progesterone')
+          }],
+          destroyCosts: [{
+            data,
+            amount: computed('data.fat.breastSize.amount', function() {
+              return -(Math.pow(this.get('data.fat.breastSize.amount'), 2) + 1)
+            }),
+            source: alias('data.nutrients.fat')
+          }, {
+            data,
+            amount: computed('data.fat.breastSize.amount', function() {
+              return Math.pow(this.get('data.fat.breastSize.amount'), 2) + 1
+            }),
+            source: alias('data.endocrine.testosterone')
           }],
           max: {
             amount: 15,
