@@ -12,7 +12,7 @@ export default Component.extend({
     if (this.get('resource.max') && this.get('resource.amount') >= this.get('resource.max.amount')) return true;
 
     this.get('createSources'); //need to initialize
-    return this.get('resource.costs').every((cost) => get(cost, 'amount') > get(cost, 'source.amount'));
+    return this.get('resource.costs').any((cost) => cost.get('amount') > cost.get('source.amount'));
   }),
 
   destroySources: computed('resource.destroyCosts.@each.source', function() {
@@ -23,7 +23,7 @@ export default Component.extend({
     if (this.get('resource.min') && this.get('resource.amount') <= this.get('resource.min.amount')) return true;
 
     this.get('destroySources'); //need to initialize
-    return this.get('resource.destroyCosts').every((cost) => get(cost, 'amount') > get(cost, 'source.amount'));
+    return this.get('resource.destroyCosts').any((cost) => cost.get('amount') > cost.get('source.amount'));
   }),
 
   actions: {

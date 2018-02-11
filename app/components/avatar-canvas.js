@@ -32,7 +32,7 @@ export default Component.extend({
         lipBotSize: 0,
         lipWidth: -100,
         lipCupidsBow: -10,
-        breastPerkiness: 4,
+        breastPerkiness: 7,
         eyeBotSize: 4,
         arousal: 0,
       },
