@@ -2,7 +2,7 @@ import { helper } from '@ember/component/helper';
 
 export function weightMeasurement(params/*, hash*/) {
   if (params < 1000) {
-    return `${params}ncal`;
+    return `${(params / 1).toFixed(0)}ncal`;
   } else if (params < 1000000){
     return `${(params / 1000).toFixed(2)}μcal`;
   } else if (params < 10000000){

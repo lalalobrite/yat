@@ -8,8 +8,17 @@
   </span>
 </div>
 <div class="panel-stat-secondary">
-  Cost:
+  cost:
   {{#each resource.costs as |cost|}}
     {{measurement-unit amount=cost.amount unit=cost.source.unit}} {{fallthrough cost.source.shortName cost.source.name}};
   {{/each}}
 </div>
+
+{{#if resource.destroyCosts}}
+  <div class="panel-stat-secondary">
+    decrease cost:
+    {{#each resource.destroyCosts as |cost|}}
+      {{measurement-unit amount=cost.amount unit=cost.source.unit}} {{fallthrough cost.source.shortName cost.source.name}};
+    {{/each}}
+  </div>
+{{/if}}
