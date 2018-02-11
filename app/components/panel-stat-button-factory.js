@@ -13,7 +13,7 @@ export default Component.extend({
   generate: task(function * () {
     const totalFactories = this.get('resource.factories.amount');
 
-    if (totalFactories > 0) this.attrs.createResource(this.get('resource'), this.get('resourceCosts'), 1);
+    if (totalFactories > 0) this.attrs.createResource(this.get('resource'), this.get('resource.costs'), 1);
 
     yield timeout(1000 / ( totalFactories || 1));
 

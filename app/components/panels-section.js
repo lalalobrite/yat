@@ -8,13 +8,13 @@ export default Component.extend({
       if (resource.max && amount + resource.get('amount') >= resource.get('max.amount')) amount = resource.get('max.amount') - resource.get('amount');
 
       costs.forEach((cost) => {
-        if (cost.amount * amount > cost.source.get('amount')) {
-          amount = Math.floor(cost.source.get('amount') / cost.amount)
+        if (cost.get('amount') * amount > cost.get('source.amount')) {
+          amount = Math.floor(cost.get('source.amount') / cost.get('amount'))
         }
       });
 
       costs.forEach((cost) => {
-        cost.source.decrementProperty('amount', amount * cost.amount);
+        cost.decrementProperty('source.amount', amount * cost.get('amount'));
       });
 
       amount *= resource.get('multiplier.amount') || 1;

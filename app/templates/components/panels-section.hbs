@@ -1,28 +1,18 @@
-<div class="panel-column">
-  {{endocrine-panel
-    data=data
-    createResource=(action "createResource")
-  }}
-  {{mood-panel
-    data=data
-    createResource=(action "createResource")
-  }}
-  {{fertility-panel
-    data=data
-    createResource=(action "createResource")
-  }}
-</div>
-
-<div class="panel-column">
-</div>
-
-<div class="panel-column">
-  {{ri-panel
-    data=data
-    createResource=(action "createResource")
-  }}
-  {{nutrient-panel
-    data=data
-    createResource=(action "createResource")
-  }}
-</div>
+{{#each panels as |panel|}}
+  {{#if panel.panels}}
+    <div class="panel-column">
+      {{panels-section
+        data=data
+        panels=panel.panels
+        tagName=""
+      }}
+    </div>
+  {{else}}
+    {{panel-component
+      title=panel.title
+      category=panel.path
+      data=data
+      createResource=(action "createResource")
+    }}
+  {{/if}}
+{{/each}}

@@ -9,34 +9,65 @@ export default Component.extend({
 
   store: service(),
 
+  _data: computed(function() {
+    return EmberObject.create(this.get('game.gateData') || this.get('game.gameData', {}));
+  }),
+
   data: computed(function() {
     return this.attachModels(this.get('schema'), '');
   }),
 
-  attachModels(value, path) {
+  attachModels(value, path, options = {}) {
     if (typeOf(value) === 'object') {
-      const extendablePath = isPresent(path) ? `.${path}` : path;
-      const gameData = this.get(`game.gameData${extendablePath}`) || this.set(`game.gameData${extendablePath}`, {
-        amount: value.amount || 0,
-        unlocked: value.unlocked || false
-      });
+      let gameData;
+      if (isPresent(path)) {
+        gameData = this.get(`game.gameData.${path}`) || this.set(`game.gameData.${path}`, {
+          amount: value.amount || 0,
+          unlocked: value.unlocked || false
+        });
+      } else {
+        gameData = this.get('_data');
+      }
 
       return Object.keys(value).reduce((accumulator, key) => {
-        if (accumulator[key] === undefined) accumulator.set(key, this.attachModels(get(value, key), isPresent(path) ? `${path}.${key}` : key));
+        if (key !== 'amount' && key !== 'unlocked') accumulator.set(key, this.attachModels(get(value, key), isPresent(path) ? `${path}.${key}` : key));
 
         return accumulator;
-      }, EmberObject.create({
+      }, isPresent(path) ? EmberObject.extend(options.isArrayItem ? value : {
         gameData,
         amount: alias('gameData.amount'),
         unlocked: alias('gameData.unlocked')
-      }))
+      }).create() : gameData);
+    } else if (typeOf(value) === 'array') {
+      return value.map((item) => this.attachModels(item, path, { isArrayItem: true }));
     } else {
       return value;
     }
   },
 
   schema: computed(function() {
+    const data = this.get('_data');
     return {
+      panels: [{
+        panels: [{
+          title: 'Endocrine System',
+          path: 'endocrine'
+        }, {
+          title: 'Mood',
+          path: 'mood'
+        }, {
+          title: 'Fertility',
+          path: 'fertility'
+        }]
+      }, {
+        panels: [{
+          title: 'Reproductive Imperative',
+          path: 'ri'
+        }, {
+          title: 'Nutrients',
+          path: 'nutrients'
+        }]
+      }],
       endocrine: {
         estrogen: {
           name: 'estrogen (E)',
@@ -47,11 +78,23 @@ export default Component.extend({
           factories: {
             name: 'estrogen factory',
             unlocked: true,
-            amount: 0
+            amount: 0,
+            costs: [{
+              data,
+              amount: computed('data.endocrine.estrogen.factories.amount', function() {
+                return Math.pow(this.get('data.endocrine.estrogen.factories.amount'), 2) + 1
+              }),
+              source: alias('data.nutrients.protein')
+            }]
           },
           multiplier: {
             amount: 1
-          }
+          },
+          costs: [{
+            data,
+            amount: 1,
+            source: alias('data.nutrients.fat')
+          }]
         },
         humanGrowthHormone: {
           name: 'human growth hormone (HGH)',
@@ -62,11 +105,23 @@ export default Component.extend({
           factories: {
             name: 'HGH factory',
             unlocked: true,
-            amount: 0
+            amount: 0,
+            costs: [{
+              data,
+              amount: computed('data.endocrine.humanGrowthHormone.factories.amount', function() {
+                return Math.pow(this.get('data.endocrine.humanGrowthHormone.factories.amount'), 2) + 1
+              }),
+              source: alias('data.nutrients.protein')
+            }]
           },
           multiplier: {
             amount: 1
-          }
+          },
+          costs: [{
+            data,
+            amount: 1,
+            source: alias('data.nutrients.fat')
+          }]
         },
         progesterone: {
           name: 'progesterone (P)',
@@ -77,11 +132,23 @@ export default Component.extend({
           factories: {
             name: 'progesterone factory',
             unlocked: true,
-            amount: 0
+            amount: 0,
+            costs: [{
+              data,
+              amount: computed('data.endocrine.progesterone.factories.amount', function() {
+                return Math.pow(this.get('data.endocrine.progesterone.factories.amount'), 2) + 1
+              }),
+              source: alias('data.nutrients.protein')
+            }]
           },
           multiplier: {
             amount: 1
-          }
+          },
+          costs: [{
+            data,
+            amount: 1,
+            source: alias('data.nutrients.fat')
+          }]
         },
         testosterone: {
           name: 'testosterone (T)',
@@ -92,11 +159,23 @@ export default Component.extend({
           factories: {
             name: 'testosterone factory',
             unlocked: true,
-            amount: 0
+            amount: 0,
+            costs: [{
+              data,
+              amount: computed('data.endocrine.testosterone.factories.amount', function() {
+                return Math.pow(this.get('data.endocrine.testosterone.factories.amount'), 2) + 1
+              }),
+              source: alias('data.nutrients.protein')
+            }]
           },
           multiplier: {
             amount: 1
-          }
+          },
+          costs: [{
+            data,
+            amount: 1,
+            source: alias('data.nutrients.fat')
+          }]
         }
       },
       fertility: {
@@ -111,11 +190,23 @@ export default Component.extend({
           factories: {
             name: 'sperm factory',
             unlocked: true,
-            amount: 0
+            amount: 0,
+            costs: [{
+              data,
+              amount: computed('data.fertility.sperm.factories.amount', function() {
+                return Math.pow(this.get('data.fertility.sperm.factories.amount'), 2) + 1
+              }),
+              source: alias('data.nutrients.protein')
+            }]
           },
           multiplier: {
             amount: 1
-          }
+          },
+          costs: [{
+            data,
+            amount: 1,
+            source: alias('data.endocrine.testosterone')
+          }]
         }
       },
       mood: {
@@ -126,14 +217,26 @@ export default Component.extend({
           factories: {
             name: 'arousal factory',
             unlocked: true,
-            amount: 0
+            amount: 0,
+            costs: [{
+              data,
+              amount: computed('data.mood.arousal.factories.amount', function() {
+                return Math.pow(this.get('data.mood.arousal.factories.amount'), 2) + 1
+              }),
+              source: alias('data.nutrients.protein')
+            }]
           },
           multiplier: {
             amount: 1
           },
           max: {
             amount: 100
-          }
+          },
+          costs: [{
+            data,
+            amount: 1,
+            source: alias('data.endocrine.testosterone')
+          }]
         },
         hunger: {
           calories: 40,

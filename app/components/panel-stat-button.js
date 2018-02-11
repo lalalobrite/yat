@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { computed, get } from '@ember/object';
 
 export default Component.extend({
   classNames: ['panel-stat'],
@@ -12,7 +12,7 @@ export default Component.extend({
     if (this.get('resource.max') && this.get('resource.amount') >= this.get('resource.max.amount')) return true;
 
     this.get('sources'); //need to initialize
-    return this.get('costs').every((cost) => cost.amount > cost.source.amount);
+    return this.get('costs').every((cost) => get(cost, 'amount') > get(cost, 'source.amount'));
   }),
 
   actions: {
