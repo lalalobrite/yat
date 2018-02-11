@@ -1,23 +1,31 @@
 <h2 class="panel-header">{{title}}</h2>
 
 {{#each resources as |resource|}}
-  {{#if (and (or resource.unlocked data.debugging) resource.costs)}}
-    <div class="panel-stat-group">
-      {{panel-stat-button
-        resource=resource
+  {{#if (or resource.unlocked data.debugging)}}
+    {{#if resource.component}}
+      {{component resource.component
+        data=data
         createResource=createResource
         destroyResource=destroyResource
       }}
+    {{else if resource.costs}}
+      <div class="panel-stat-group">
+        {{panel-stat-button
+          resource=resource
+          createResource=createResource
+          destroyResource=destroyResource
+        }}
 
-      {{panel-stat-button-factory
+        {{panel-stat-button-factory
+          resource=resource
+          createResource=createResource
+          destroyResource=destroyResource
+        }}
+      </div>
+    {{else if resource.name}}
+      {{panel-stat-info
         resource=resource
-        createResource=createResource
-        destroyResource=destroyResource
       }}
-    </div>
-  {{else if (and resource.name (not resource.costs))}}
-    {{panel-stat-info
-      resource=resource
-    }}
+    {{/if}}
   {{/if}}
 {{/each}}

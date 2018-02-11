@@ -224,6 +224,15 @@ export default function schema(data) {
         }]
       },
       hunger: {
+        overall: {
+          amount: 0
+        },
+        rate: {
+          amount: 1,
+          max: {
+            amount: 100
+          }
+        },
         calories: {
           name: 'calories',
           unit: 'percent',
@@ -247,6 +256,12 @@ export default function schema(data) {
       }
     },
     nutrients: {
+      eater: {
+        component: 'special-nutrient-eater'
+      },
+      imperative: {
+        amount: 1
+      },
       calories: {
         name: 'calories',
         unit: 'energy',
