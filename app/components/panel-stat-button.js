@@ -5,7 +5,7 @@ export default Component.extend({
   classNames: ['panel-stat'],
 
   createSources: computed('resource.costs.@each.source', function() {
-    return this.get('resource.costs').map((cost) => cost.source);
+    return this.get('resource.costs').map((cost) => cost.get('source'));
   }),
 
   createDisabled: computed('resource.costs.@each.amount', 'createSources.@each.amount', 'resource.max.amount', function() {
@@ -16,7 +16,7 @@ export default Component.extend({
   }),
 
   destroySources: computed('resource.destroyCosts.@each.source', function() {
-    return this.get('resource.destroyCosts').map((cost) => cost.source);
+    return this.get('resource.destroyCosts').map((cost) => cost.get('source'));
   }),
 
   destroyDisabled: computed('resource.destroyCosts.@each.amount', 'destroySources.@each.amount', 'resource.min.amount', function() {
