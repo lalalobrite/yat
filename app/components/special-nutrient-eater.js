@@ -10,22 +10,11 @@ export default Component.extend({
     this.get('hungerTick').perform();
   },
 
-  hungerStatus: computed('data.mood.hunger.overall.amount', function() {
-    const hunger = this.get('data.mood.hunger.overall.amount');
-    if (hunger < 33) {
-      return 'full';
-    } else if (hunger < 66) {
-      return 'peckish';
-    } else if (hunger < 100) {
-      return 'hungry';
-    } else {
-      return 'starving';
-    }
-  }),
-
   hungerTick: task(function * () {
     if (this.incrementProperty('data.mood.hunger.overall.amount') >= randomNumber(60, 125)) {
-      this.eat();
+      this.get('digest').perform((this.get('data.nutrients.imperative.amount') / 100) * randomNumber(500, 1500));
+
+      this.set('data.mood.hunger.overall.amount', 0);
     }
 
     yield timeout(100 / this.get('data.mood.hunger.rate.amount'));
@@ -33,13 +22,17 @@ export default Component.extend({
     this.get('hungerTick').perform();
   }),
 
-  eat() {
-    const imperative = (this.get('data.nutrients.imperative.amount') / 100) * randomNumber(1000, 3000);
+  digest: task(function * (totalNutrients) {
+    const absorption = Math.round(totalNutrients / 10);
+
+    if (absorption === 0) return;
 
     ['fat', 'minerals', 'protein', 'calories'].forEach((nutrient) => {
-      this.incrementProperty(`data.nutrients.${nutrient}.amount`, Math.round(this.get(`data.mood.hunger.${nutrient}.amount`) * imperative));
+      this.incrementProperty(`data.nutrients.${nutrient}.amount`, Math.round(this.get(`data.mood.hunger.${nutrient}.amount`) * absorption));
     });
 
-    this.set('data.mood.hunger.overall.amount', 0);
-  }
+    yield timeout(75);
+
+    this.get('digest').perform(totalNutrients - absorption);
+  })
 });

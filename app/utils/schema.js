@@ -248,7 +248,7 @@ export default function schema(data) {
       },
       hunger: {
         overall: {
-          amount: 0
+          amount: 100
         },
         rate: {
           amount: 1,
@@ -292,25 +292,25 @@ export default function schema(data) {
       calories: {
         name: 'calories',
         unit: 'energy',
-        amount: 5,
+        amount: 0,
         unlocked: true
       },
       fat: {
         name: 'fat',
         unit: 'weight',
-        amount: 5,
+        amount: 0,
         unlocked: true
       },
       minerals: {
         name: 'minerals',
         unit: 'weight',
-        amount: 5,
+        amount: 0,
         unlocked: true
       },
       protein: {
         name: 'protein',
         unit: 'weight',
-        amount: 5,
+        amount: 0,
         unlocked: true
       }
     },
