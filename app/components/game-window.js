@@ -94,7 +94,7 @@ export default Component.extend({
     return amount;
   },
 
-  lockResource(resource, path) {
+  lockResource(resource, columnKey, panelKey) {
     resource.set('unlocked', false);
 
     let childPanel;
@@ -106,20 +106,18 @@ export default Component.extend({
       }
     });
 
-    if (Object.keys(childPanel).every((key) => childPanel.get(`${key}.unlocked`) === false)) childPanel.set('locked', true);
-    if (Object.keys(parentPanel).every((key) => parentPanel.get(`${key}.unlocked`) === false)) parentPanel.set('locked', true);
+    const panel = this.get(`data.columns.${columnKey}.panels.${panelKey}`);
+    const column = this.get(`data.columns.${columnKey}`);
+
+    if (Object.keys(panel).every((key) => panel.get(`${key}.unlocked`) !== true)) panel.set('unlocked', false);
+    if (Object.keys(column.get('panels')).every((key) => column.get(`panels.${key}.unlocked`) !== true)) column.set('unlocked', false);
   },
 
-  unlockResource(resource, path) {
+  unlockResource(resource, column, panel) {
     resource.set('unlocked', true);
 
-    this.get('data.panels').find((parentPanel) => {
-      const childPanel = parentPanel.get('panels').find((panel) => panel.get('path') === path ? panel.set('unlocked', true) : false);
-
-      if (isPresent(childPanel)) parentPanel.set('unlocked', true);
-
-      return isPresent(childPanel);
-    });
+    this.set(`data.columns.${column}.unlocked`, true);
+    this.set(`data.columns.${column}.panels.${panel}.unlocked`, true);
   },
 
   actions: {

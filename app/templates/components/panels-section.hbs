@@ -1,27 +1,19 @@
-{{#each panels as |panel|}}
-  {{#if panel.unlocked}}
-    {{#if panel.panels}}
-      <div class="panel-column">
-        {{panels-section
-          data=data
-          panels=panel.panels
-          tagName=""
-          createResource=createResource
-          destroyResource=destroyResource
-          lockResource=lockResource
-          unlockResource=unlockResource
-        }}
-      </div>
-    {{else}}
-      {{panel-component
-        title=panel.title
-        category=panel.path
-        data=data
-        createResource=createResource
-        destroyResource=destroyResource
-        lockResource=lockResource
-        unlockResource=unlockResource
-      }}
-    {{/if}}
+{{#each-in columns as |key column|}}
+  {{#if column.unlocked}}
+    <div class="panel-column">
+      {{#each-in column.panels as |key panel|}}
+        {{#if panel.unlocked}}
+          {{panel-component
+            title=panel.title
+            category=key
+            data=data
+            createResource=createResource
+            destroyResource=destroyResource
+            lockResource=lockResource
+            unlockResource=unlockResource
+          }}
+        {{/if}}
+      {{/each-in}}
+    </div>
   {{/if}}
-{{/each}}
+{{/each-in}}

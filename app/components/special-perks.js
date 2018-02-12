@@ -23,7 +23,7 @@ export default Component.extend({
           source: alias('data.endocrine.testosterone')
         }],
         callback() {
-          this.attrs.unlockResource(this.get('data.fertility.sperm.factories'), 'fertility');
+          this.attrs.unlockResource(this.get('data.fertility.sperm.factories'), 'primary', 'fertility');
         }
       }
     }
@@ -41,7 +41,7 @@ export default Component.extend({
           source: alias('data.nutrients.protein')
         }],
         callback() {
-          this.attrs.unlockResource(this.get('data.endocrine.testosterone.factories'), 'endocrine');
+          this.attrs.unlockResource(this.get('data.endocrine.testosterone.factories'), 'primary', 'endocrine');
         }
       }
     }
@@ -59,7 +59,7 @@ export default Component.extend({
           source: alias('data.endocrine.testosterone')
         }],
         callback() {
-          this.attrs.unlockResource(this.get('data.mood.arousal'), 'mood');
+          this.attrs.unlockResource(this.get('data.mood.arousal'), 'primary', 'mood');
         }
       }
     }
@@ -77,8 +77,8 @@ export default Component.extend({
           source: alias('data.mood.arousal')
         }],
         callback() {
-          this.attrs.unlockResource(this.get('data.ri.ri'), 'ri');
-          this.attrs.unlockResource(this.get('data.ri.children'), 'ri');
+          this.attrs.unlockResource(this.get('data.ri.ri'), 'tertiary', 'ri');
+          this.attrs.unlockResource(this.get('data.ri.children'), 'tertiary', 'ri');
         }
       }
     }

@@ -4,52 +4,52 @@ import costFactor from 'yat/utils/cost-factor';
 
 export default function schema(data) {
   return {
-    panels: [{
-      panels: [{
-        title: 'Skeletal System',
-        path: 'skeletal'
-      }, {
-        title: 'Muscles',
-        path: 'muscle'
-      }, {
-        title: 'Fat',
-        path: 'fat'
-      }, {
-        title: 'Skin & Hair',
-        path: 'skin'
-      }]
-    }, {
-      unlocked: true,
-      panels: [{
-        title: 'Endocrine System',
-        path: 'endocrine',
-        unlocked: true
-      }, {
-        title: 'Mood',
-        path: 'mood'
-      }, {
-        title: 'Fertility',
-        path: 'fertility',
-        unlocked: true
-      }]
-    }, {
-      unlocked: true,
-      panels: [{
-        title: 'Perks',
-        path: 'perkPanels',
-        unlocked: true
-      }]
-    }, {
-      unlocked: true,
-      panels: [{
-        title: 'Reproductive Imperative',
-        path: 'ri'
-      }, {
-        title: 'Nutrients',
-        path: 'nutrients',
-        unlocked: true
-      }]
-    }],
+    columns: {
+      body: {
+        panels: {
+          skeletal: {
+            title: 'Skeletal System'
+          }, muscle: {
+            title: 'Muscles'
+          }, fat: {
+            title: 'Fat'
+          }, skin: {
+            title: 'Skin & Hair'
+          }
+        }
+      }, primary: {
+        unlocked: true,
+        panels: {
+          endocrine: {
+            title: 'Endocrine System',
+            unlocked: true
+          }, mood: {
+            title: 'Mood'
+          }, fertility: {
+            title: 'Fertility',
+            unlocked: true
+          }
+        }
+      }, center: {
+        unlocked: true,
+        panels: {
+          perkPanels: {
+            title: 'Perks',
+            unlocked: true
+          }
+        }
+      }, tertiary: {
+        unlocked: true,
+        panels: {
+          ri: {
+            title: 'Reproductive Imperative'
+          }, nutrients: {
+            title: 'Nutrients',
+            unlocked: true
+          }
+        }
+      }
+    },
     perkPanels: {
       unlocked: true,
       observer: {
