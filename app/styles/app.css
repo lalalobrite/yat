@@ -90,6 +90,26 @@ body {
   font-size: 90%;
 }
 
+.perk {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+}
+
+.perk-title {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.perk-description {
+  margin-top: 2px;
+  font-size: 90%;
+}
+
+.perk-cost {
+  margin-top: 10px;
+}
+
 .message-box {
   flex-shrink: 0;
   height: 200px;

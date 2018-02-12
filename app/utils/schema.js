@@ -35,6 +35,13 @@ export default function schema(data) {
     }, {
       unlocked: true,
       panels: [{
+        title: 'Perks',
+        path: 'perkPanels',
+        unlocked: true
+      }]
+    }, {
+      unlocked: true,
+      panels: [{
         title: 'Reproductive Imperative',
         path: 'ri'
       }, {
@@ -43,6 +50,19 @@ export default function schema(data) {
         unlocked: true
       }]
     }],
+    perkPanels: {
+      unlocked: true,
+      observer: {
+        component: 'special-perks-observer',
+        unlocked: true
+      },
+      items: {
+        component: 'special-perks',
+        unlocked: true
+      }
+    },
+    perks: 'passthrough',
+    messages: 'passthrough',
     endocrine: {
       estrogen: {
         name: 'estrogen (E)',
@@ -168,7 +188,7 @@ export default function schema(data) {
         unlocked: true,
         amount: 0,
         factories: {
-          name: 'sperm factory',
+          name: 'spermatogonium',
           amount: 0,
           costs: [{
             data,

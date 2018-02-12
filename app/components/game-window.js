@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import EmberObject, { computed, get } from '@ember/object';
+import EmberObject, { computed, get, setProperties } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { isNone, isPresent, typeOf } from '@ember/utils';
@@ -11,11 +11,20 @@ export default Component.extend({
   store: service(),
 
   _data: computed(function() {
-    const data = Ember.Object.create(this.get('game.gameData'));
+    const data = this.get('game.gameData');
 
-    if (isNone(data.get('nutrients'))) data.set('nutrients', {});
+    if (isNone(data.nutrients)) {
+      setProperties(data, {
+        nutrients: {},
+        messages: [],
+        perks: {
+          available: [],
+          resolved: []
+        }
+      });
+    }
 
-    return data;
+    return EmberObject.create(data);
   }),
 
   data: computed(function() {
@@ -45,6 +54,8 @@ export default Component.extend({
       }).create() : gameData);
     } else if (typeOf(value) === 'array') {
       return value.map((item) => this.attachModels(item, path, { isArrayItem: true }));
+    } else if (value === 'passthrough') {
+      return this.get(`game.gameData.${path}`);
     } else {
       return value;
     }

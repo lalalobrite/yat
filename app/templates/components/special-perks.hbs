@@ -1,0 +1,11 @@
+{{#each perks as |perk|}}
+  <button class="perk" {{action "purchase" perk}}>
+    <div class="perk-title">{{perk.title}}</div>
+    <div class="perk-description">{{perk.description}}</div>
+    <div class="perk-cost">
+      {{#each perk.costs as |cost|}}
+        {{measurement-unit amount=cost.amount unit=cost.source.unit}} {{fallthrough cost.source.shortName cost.source.name}};
+      {{/each}}
+    </div>
+  </button>
+{{/each}}
