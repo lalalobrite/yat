@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import EmberObject, { computed, get, setProperties } from '@ember/object';
+import EmberObject, { computed, get, set, setProperties } from '@ember/object';
 import { alias } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { isNone, isPresent, typeOf } from '@ember/utils';
@@ -79,17 +79,17 @@ export default Component.extend({
 
   payResourceCost(resource, amount, costs) {
     costs.forEach((cost) => {
-      if (cost.get('amount') * amount > cost.get('source.amount')) {
-        amount = Math.floor(cost.get('source.amount') / cost.get('amount'))
+      if (get(cost, 'amount') * amount > get(cost, 'source.amount')) {
+        amount = Math.floor(get(cost, 'source.amount') / get(cost, 'amount'))
       }
     });
 
     costs.forEach((cost) => {
-      cost.decrementProperty('source.amount', amount * cost.get('amount'));
-      if (amount < 0 && cost.get('source.max.amount') < cost.get('source.amount')) cost.set('source.amount', cost.get('source.max.amount'));
+      set(cost, 'source.amount', get(cost, 'source.amount') - (amount * get(cost, 'amount')));
+      if (amount < 0 && get(cost, 'source.max.amount') < get(cost, 'source.amount')) cost.set('source.amount', get(cost, 'source.max.amount'));
     });
 
-    if (resource.get('multiplier')) amount *= resource.get('multiplier.amount');
+    if (get(resource, 'multiplier')) amount *= get(resource, 'multiplier.amount');
 
     return amount;
   },
@@ -135,6 +135,10 @@ export default Component.extend({
 
     unlockResource() {
       this.unlockResource(...arguments);
+    },
+
+    payResourceCost() {
+      this.payResourceCost(...arguments);
     }
   }
 });

@@ -89,6 +89,7 @@ export default Component.extend({
       const key = perk.key;
       this.get('data.perks.available').removeObject(key);
       this.get('data.perks.resolved').pushObject(key);
+      this.attrs.payResourceCost(perk, 1, perk.costs);
       perk.callback.apply(this);
     }
   }
