@@ -11,18 +11,75 @@ export default Component.extend({
     });
   }),
 
-  enableSpermFactories: computed(function() {
-    return {
-      key: 'enableSpermFactories',
-      title: 'spermatogonia',
-      description: 'generate sperm automatically',
-      costs: [{
-        data: this.get('data'),
-        amount: 20,
-        source: alias('data.endocrine.testosterone')
-      }],
-      callback() {
-        this.set('data.fertility.sperm.factories.unlocked', true);
+  enableSpermFactories: computed({
+    get(key) {
+      return {
+        key,
+        title: 'spermatogonia',
+        description: 'generate sperm automatically',
+        costs: [{
+          data: this.get('data'),
+          amount: 20,
+          source: alias('data.endocrine.testosterone')
+        }],
+        callback() {
+          this.attrs.unlockResource(this.get('data.fertility.sperm.factories'), 'fertility');
+        }
+      }
+    }
+  }),
+
+  enableTestosteroneFactories: computed({
+    get(key) {
+      return {
+        key,
+        title: 'Leydig cells',
+        description: 'generate testosterone automatically',
+        costs: [{
+          data: this.get('data'),
+          amount: 250,
+          source: alias('data.nutrients.protein')
+        }],
+        callback() {
+          this.attrs.unlockResource(this.get('data.endocrine.testosterone.factories'), 'endocrine');
+        }
+      }
+    }
+  }),
+
+  enableArousal: computed({
+    get(key) {
+      return {
+        key,
+        title: 'arousal',
+        description: 'encourage reproductive acts',
+        costs: [{
+          data: this.get('data'),
+          amount: 50,
+          source: alias('data.endocrine.testosterone')
+        }],
+        callback() {
+          this.attrs.unlockResource(this.get('data.mood.arousal'), 'mood');
+        }
+      }
+    }
+  }),
+
+  enableRi: computed({
+    get(key) {
+      return {
+        key,
+        title: 'reproductive imperative',
+        description: 'demand more resources',
+        costs: [{
+          data: this.get('data'),
+          amount: 50,
+          source: alias('data.mood.arousal')
+        }],
+        callback() {
+          this.attrs.unlockResource(this.get('data.ri.ri'), 'ri');
+          this.attrs.unlockResource(this.get('data.ri.children'), 'ri');
+        }
       }
     }
   }),

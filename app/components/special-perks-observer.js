@@ -5,9 +5,30 @@ const observations = [{
   message: 'Sperm production too slow. Enlist cells to help.',
   criteria: [{
     source: 'data.fertility.sperm.amount',
-    greaterThan: 20
+    greaterThan: 24
   }]
-}];
+}, {
+  key: 'enableTestosteroneFactories',
+  message: 'Surplus protein detected. Recruit more cells to aid in testosterone production.',
+  criteria: [{
+    source: 'data.nutrients.protein.amount',
+    greaterThan: 24
+  }]
+}, {
+  key: 'enableArousal',
+  message: 'Sperm production acceptable. Encourage Body to engage in reproductive acts.',
+  criteria: [{
+    source: 'data.fertility.sperm.amount',
+    greaterThan: 99
+  }]
+}, {
+  key: 'enableRi',
+  message: 'The Body gives too little support. Demand more resources for reproduction.',
+  criteria: [{
+    source: 'data.mood.arousal.amount',
+    greaterThan: 50
+  }]
+}, ];
 
 export default Component.extend({
   tagName: '',

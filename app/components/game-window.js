@@ -113,7 +113,13 @@ export default Component.extend({
   unlockResource(resource, path) {
     resource.set('unlocked', true);
 
-    this.get('data.panels.panels').find((panel) => panel.get('path') === path ? panel.set('unlocked', true) : false).set('unlocked', true);
+    this.get('data.panels').find((parentPanel) => {
+      const childPanel = parentPanel.get('panels').find((panel) => panel.get('path') === path ? panel.set('unlocked', true) : false);
+
+      if (isPresent(childPanel)) parentPanel.set('unlocked', true);
+
+      return isPresent(childPanel);
+    });
   },
 
   actions: {
