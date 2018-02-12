@@ -58,6 +58,10 @@ body {
   border: thin solid #333;
 }
 
+.panel-stats {
+  height: 100%;
+}
+
 .panel-avatar {
   height: 100%;
 }

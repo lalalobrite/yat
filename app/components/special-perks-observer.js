@@ -26,21 +26,21 @@ const observations = [{
   message: 'The Body gives too little support. Demand more resources for reproduction.',
   criteria: [{
     source: 'data.mood.arousal.amount',
-    greaterThan: 50
+    greaterThan: 20
   }]
 }, {
   key: 'enableMind',
   message: 'The Mind enjoys erogenous sensation. Use this weakness to seize its processing power for reproduction.',
   criteria: [{
     source: 'data.ri.ri.amount',
-    greaterThan: 3
+    greaterThan: 0
   }]
 }, {
   key: 'enableAvatar',
   message: 'The Body withholds information about itself. Use cognative resources to visualize it.',
   criteria: [{
     source: 'data.mind.cognition.amount',
-    greaterThan: 5
+    greaterThan: 25
   }]
 }];
 

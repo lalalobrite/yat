@@ -92,11 +92,13 @@ export default Component.extend({
         description: 'seize control of neural resources',
         costs: [{
           data: this.get('data'),
-          amount: 10,
+          amount: 5,
           source: alias('data.ri.ri')
         }],
         callback() {
-          this.attrs.unlockResource(this.get('data.cognative.sensory'), 'tertiary', 'mind');
+          this.attrs.unlockResource(this.get('data.mind.cognition'), 'tertiary', 'mind');
+          this.attrs.unlockResource(this.get('data.mind.cognition.factories'), 'tertiary', 'mind');
+          this.attrs.unlockResource(this.get('data.mind.cognition.max'), 'tertiary', 'mind');
         }
       }
     }
@@ -110,7 +112,7 @@ export default Component.extend({
         description: 'visualize the Body',
         costs: [{
           data: this.get('data'),
-          amount: 50,
+          amount: 250,
           source: alias('data.mind.cognition')
         }],
         callback() {

@@ -78,16 +78,18 @@ export default Component.extend({
   },
 
   payResourceCost(resource, amount, costs) {
-    costs.forEach((cost) => {
-      if (get(cost, 'amount') * amount > get(cost, 'source.amount')) {
-        amount = Math.floor(get(cost, 'source.amount') / get(cost, 'amount'))
-      }
-    });
+    if (costs) {
+      costs.forEach((cost) => {
+        if (get(cost, 'amount') * amount > get(cost, 'source.amount')) {
+          amount = Math.floor(get(cost, 'source.amount') / get(cost, 'amount'))
+        }
+      });
 
-    costs.forEach((cost) => {
-      set(cost, 'source.amount', get(cost, 'source.amount') - (amount * get(cost, 'amount')));
-      if (amount < 0 && get(cost, 'source.max.amount') < get(cost, 'source.amount')) cost.set('source.amount', get(cost, 'source.max.amount'));
-    });
+      costs.forEach((cost) => {
+        set(cost, 'source.amount', get(cost, 'source.amount') - (amount * get(cost, 'amount')));
+        if (amount < 0 && get(cost, 'source.max.amount') < get(cost, 'source.amount')) cost.set('source.amount', get(cost, 'source.max.amount'));
+      });
+    }
 
     if (get(resource, 'multiplier')) amount *= get(resource, 'multiplier.amount');
 
