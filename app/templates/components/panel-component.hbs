@@ -13,35 +13,46 @@
           unlockResource=unlockResource
           payResourceCost=payResourceCost
         }}
-      {{else}}
-        {{#if resource.costs}}
-          {{panel-stat-button
-            resource=resource
-            createResource=createResource
-            destroyResource=destroyResource
-            classNames="panel-stat-primary-resource-button"
-          }}
-        {{else if resource.name}}
-          {{panel-stat-info
-            resource=resource
-          }}
-        {{/if}}
+      {{else if resource.costs}}
+        {{panel-stat-button
+          resource=resource
+          createResource=createResource
+          destroyResource=destroyResource
+          classNames="panel-stat-primary-resource-button"
+        }}
+      {{else if resource.name}}
+        {{panel-stat-info
+          resource=resource
+        }}
+      {{/if}}
 
-        {{#if (and resource.factories (or resource.factories.unlocked data.debugging))}}
-          {{panel-stat-button-factory
-            resource=resource
-            createResource=createResource
-            destroyResource=destroyResource
-          }}
-        {{/if}}
+      {{#if (and resource.specialControls (or resource.specialControls.unlocked data.debugging))}}
+        {{component resource.specialControls.component
+          resource=resource.specialControls
+          parentResource=resource
+          data=data
+          createResource=createResource
+          destroyResource=destroyResource
+          lockResource=lockResource
+          unlockResource=unlockResource
+          payResourceCost=payResourceCost
+        }}
+      {{/if}}
 
-        {{#if (and resource.max (or resource.max.unlocked data.debugging))}}
-          {{panel-stat-button
-            resource=resource.max
-            createResource=createResource
-            destroyResource=destroyResource
-          }}
-        {{/if}}
+      {{#if (and resource.factories (or resource.factories.unlocked data.debugging))}}
+        {{panel-stat-button-factory
+          resource=resource
+          createResource=createResource
+          destroyResource=destroyResource
+        }}
+      {{/if}}
+
+      {{#if (and resource.max (or resource.max.unlocked data.debugging))}}
+        {{panel-stat-button
+          resource=resource.max
+          createResource=createResource
+          destroyResource=destroyResource
+        }}
       {{/if}}
     {{/if}}
   {{/each}}

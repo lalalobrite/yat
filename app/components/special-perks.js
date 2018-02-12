@@ -70,7 +70,7 @@ export default Component.extend({
       return {
         key,
         title: 'reproductive imperative',
-        description: 'demand more resources',
+        description: 'procreation is paramount',
         costs: [{
           data: this.get('data'),
           amount: 50,
@@ -79,6 +79,42 @@ export default Component.extend({
         callback() {
           this.attrs.unlockResource(this.get('data.ri.ri'), 'tertiary', 'ri');
           this.attrs.unlockResource(this.get('data.ri.children'), 'tertiary', 'ri');
+        }
+      }
+    }
+  }),
+
+  enableNutrientImperative: computed({
+    get(key) {
+      return {
+        key,
+        title: 'nutrient imperative',
+        description: 'demand more resources',
+        costs: [{
+          data: this.get('data'),
+          amount: 5,
+          source: alias('data.ri.ri')
+        }],
+        callback() {
+          this.attrs.unlockResource(this.get('data.nutrients.imperative'), 'tertiary', 'nutrieints');
+        }
+      }
+    }
+  }),
+
+  enableNutrientSalvage: computed({
+    get(key) {
+      return {
+        key,
+        title: 'nutrient salvage',
+        description: 'recover nutrients when decreasing resources',
+        costs: [{
+          data: this.get('data'),
+          amount: 5,
+          source: alias('data.ri.ri')
+        }],
+        callback() {
+          this.attrs.unlockResource(this.get('data.nutrients.salvage'), 'tertiary', 'nutrieints');
         }
       }
     }
@@ -117,6 +153,24 @@ export default Component.extend({
         }],
         callback() {
           this.attrs.unlockResource(this.get('data.avatar.avatar'), 'avatar', 'avatar');
+        }
+      }
+    }
+  }),
+
+  enableFantasy: computed({
+    get(key) {
+      return {
+        key,
+        title: 'erotic fantasy',
+        description: 'generate arousal automatically',
+        costs: [{
+          data: this.get('data'),
+          amount: 400,
+          source: alias('data.mind.cognition')
+        }],
+        callback() {
+          this.attrs.unlockResource(this.get('data.moond.arousal.factories'), 'primary', 'mood');
         }
       }
     }

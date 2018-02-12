@@ -27,7 +27,7 @@ export default Component.extend({
 
     if (absorption === 0) return;
 
-    ['fat', 'minerals', 'protein', 'calories'].forEach((nutrient) => {
+    ['fat', 'minerals', 'protein'].forEach((nutrient) => {
       this.incrementProperty(`data.nutrients.${nutrient}.amount`, Math.round(this.get(`data.mood.hunger.${nutrient}.amount`) * absorption));
     });
 

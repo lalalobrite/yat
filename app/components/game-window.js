@@ -16,6 +16,7 @@ export default Component.extend({
     if (isNone(data.nutrients)) {
       setProperties(data, {
         nutrients: {},
+        ri: {},
         messages: ['You are testicles. You must procreate.'],
         perks: {
           available: [],
@@ -74,7 +75,11 @@ export default Component.extend({
   destroyResource(resource, amount) {
     if (resource.min && resource.get('amount') - amount <= resource.get('min.amount')) amount = resource.get('amount') - resource.get('min.amount');
 
-    resource.decrementProperty('amount', this.payResourceCost(resource, amount, resource.get('destroyCosts')));
+    amount = this.payResourceCost(resource, amount, resource.get('destroyCosts'));
+
+    resource.decrementProperty('amount', amount);
+
+    this.incrementProperty('data.nutrients.recoveries.amount', amount);
   },
 
   payResourceCost(resource, amount, costs) {

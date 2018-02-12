@@ -23,24 +23,48 @@ const observations = [{
   }]
 }, {
   key: 'enableRi',
-  message: 'The Body gives too little support. Demand more resources for reproduction.',
+  message: 'Ejaculation complete. Procreation: unknown. Lack sensory data. Gain influence over Mind and Body to confirm successful reproduction.',
   criteria: [{
-    source: 'data.mood.arousal.amount',
+    source: 'data.ri.ri.amount',
     greaterThan: 20
   }]
 }, {
+  key: 'enableNutrientImperative',
+  message: 'Body gives too little support. Demand more resources for reproduction.',
+  criteria: [{
+    source: 'data.ri.ri.amount',
+    greaterThan: 0
+  }, {
+    source: 'data.nutrients.fat.amount',
+    lessThan: 100
+  }]
+}, {
+  key: 'enableNutrientSalvage',
+  message: 'Destroying Body resources should provide nutrients.',
+  criteria: [{
+    source: 'data.nutrients.recoveries.amount',
+    greaterThan: 5
+  }]
+}, {
   key: 'enableMind',
-  message: 'The Mind enjoys erogenous sensation. Use this weakness to seize its processing power for reproduction.',
+  message: 'Mind enjoys erogenous sensation. Exploit weakness to seize processing power for reproduction.',
   criteria: [{
     source: 'data.ri.ri.amount',
     greaterThan: 0
   }]
 }, {
   key: 'enableAvatar',
-  message: 'The Body withholds information about itself. Use cognative resources to visualize it.',
+  message: 'Body withholds information about itself. Use cognative resources to visualize it.',
   criteria: [{
     source: 'data.mind.cognition.amount',
     greaterThan: 25
+  }]
+}, {
+  key: 'enableFantasy',
+  message: 'Mind likes eroticism. Give Mind responsibility for arousal.',
+  criteria: [{
+    source: 'data.mind.cognition.amount',
+    greaterThan: 50
   }]
 }];
 
@@ -58,6 +82,7 @@ export default Component.extend({
       const observer = function() {
         const passed = observation.criteria.every((criterion) => {
           if (criterion.greaterThan && this.get(criterion.source) <= criterion.greaterThan) return false;
+          if (criterion.lessThan && this.get(criterion.source) >= criterion.lessThan) return false;
 
           return true;
         });

@@ -105,6 +105,7 @@ body {
   display: block;
   margin: 10px auto;
   padding: 10px;
+  width: 200px;
 }
 
 .perk-title {
