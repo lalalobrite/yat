@@ -16,7 +16,7 @@ export default Component.extend({
     if (isNone(data.nutrients)) {
       setProperties(data, {
         nutrients: {},
-        messages: [],
+        messages: ['You are testicles. You must procreate.'],
         perks: {
           available: [],
           resolved: []

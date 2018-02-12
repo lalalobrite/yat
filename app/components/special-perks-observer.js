@@ -2,6 +2,7 @@ import Component from '@ember/component';
 
 const observations = [{
   key: 'enableSpermFactories',
+  message: 'Sperm production too slow. Enlist cells to help.',
   criteria: [{
     source: 'data.fertility.sperm.amount',
     greaterThan: 20
@@ -27,6 +28,7 @@ export default Component.extend({
         });
 
         if (passed) {
+          if (observation.message) this.get('data.messages').unshiftObject(observation.message);
           this.get('data.perks.available').unshiftObject(observation.key);
           this.removeObserver(...observation.criteria.map((criterion) => criterion.source), this, observer);
         }
