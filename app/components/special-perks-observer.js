@@ -28,7 +28,21 @@ const observations = [{
     source: 'data.mood.arousal.amount',
     greaterThan: 50
   }]
-}, ];
+}, {
+  key: 'enableMind',
+  message: 'The Mind enjoys erogenous sensation. Use this weakness to seize its processing power for reproduction.',
+  criteria: [{
+    source: 'data.ri.ri.amount',
+    greaterThan: 3
+  }]
+}, {
+  key: 'enableAvatar',
+  message: 'The Body withholds information about itself. Use cognative resources to visualize it.',
+  criteria: [{
+    source: 'data.mind.cognition.amount',
+    greaterThan: 5
+  }]
+}];
 
 export default Component.extend({
   tagName: '',

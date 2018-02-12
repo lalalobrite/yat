@@ -1,34 +1,48 @@
-<h2 class="panel-header">{{title}}</h2>
+{{#if title}}<h2 class="panel-header">{{title}}</h2>{{/if}}
 
-{{#each resources as |resource|}}
-  {{#if (or resource.unlocked data.debugging)}}
-    {{#if resource.component}}
-      {{component resource.component
-        data=data
-        createResource=createResource
-        destroyResource=destroyResource
-        lockResource=lockResource
-        unlockResource=unlockResource
-        payResourceCost=payResourceCost
-      }}
-    {{else if resource.costs}}
-      <div class="panel-stat-group">
-        {{panel-stat-button
+<div class="panel-stats">
+  {{#each resources as |resource|}}
+    {{#if (or resource.unlocked data.debugging)}}
+      {{#if resource.component}}
+        {{component resource.component
           resource=resource
+          data=data
           createResource=createResource
           destroyResource=destroyResource
+          lockResource=lockResource
+          unlockResource=unlockResource
+          payResourceCost=payResourceCost
         }}
+      {{else}}
+        {{#if resource.costs}}
+          {{panel-stat-button
+            resource=resource
+            createResource=createResource
+            destroyResource=destroyResource
+            classNames="panel-stat-primary-resource-button"
+          }}
+        {{else if resource.name}}
+          {{panel-stat-info
+            resource=resource
+          }}
+        {{/if}}
 
-        {{panel-stat-button-factory
-          resource=resource
-          createResource=createResource
-          destroyResource=destroyResource
-        }}
-      </div>
-    {{else if resource.name}}
-      {{panel-stat-info
-        resource=resource
-      }}
+        {{#if (and resource.factories (or resource.factories.unlocked data.debugging))}}
+          {{panel-stat-button-factory
+            resource=resource
+            createResource=createResource
+            destroyResource=destroyResource
+          }}
+        {{/if}}
+
+        {{#if (and resource.max (or resource.max.unlocked data.debugging))}}
+          {{panel-stat-button
+            resource=resource.max
+            createResource=createResource
+            destroyResource=destroyResource
+          }}
+        {{/if}}
+      {{/if}}
     {{/if}}
-  {{/if}}
-{{/each}}
+  {{/each}}
+</div>

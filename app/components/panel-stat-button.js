@@ -9,6 +9,7 @@ export default Component.extend({
   }),
 
   createDisabled: computed('resource.costs.@each.amount', 'createSources.@each.amount', 'resource.max.amount', function() {
+    if (!this.get('resource.costs')) return true;
     if (this.get('resource.max') && this.get('resource.amount') >= this.get('resource.max.amount')) return true;
 
     this.get('createSources'); //need to initialize
@@ -20,6 +21,7 @@ export default Component.extend({
   }),
 
   destroyDisabled: computed('resource.destroyCosts.@each.amount', 'destroySources.@each.amount', 'resource.min.amount', function() {
+    if (!this.get('resource.destroyCosts')) return true;
     if (this.get('resource.min') && this.get('resource.amount') <= this.get('resource.min.amount')) return true;
 
     this.get('destroySources'); //need to initialize

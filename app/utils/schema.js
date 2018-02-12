@@ -4,7 +4,16 @@ import costFactor from 'yat/utils/cost-factor';
 
 export default function schema(data) {
   return {
+    // debugging: true,
     columns: {
+      avatar: {
+        classNames: 'panel-column-avatar',
+        panels: {
+          avatar: {
+            classNames: 'panel-avatar'
+          }
+        }
+      },
       body: {
         panels: {
           skeletal: {
@@ -32,6 +41,7 @@ export default function schema(data) {
         }
       }, center: {
         unlocked: true,
+        classNames: 'panel-column-market',
         panels: {
           perkPanels: {
             title: 'Perks',
@@ -46,6 +56,8 @@ export default function schema(data) {
           }, nutrients: {
             title: 'Nutrients',
             unlocked: true
+          }, mind: {
+            title: 'Mind'
           }
         }
       }
@@ -63,6 +75,11 @@ export default function schema(data) {
     },
     perks: 'passthrough',
     messages: 'passthrough',
+    avatar: {
+      avatar: {
+        component: 'avatar-canvas'
+      }
+    },
     endocrine: {
       estrogen: {
         name: 'estrogen (E)',
@@ -308,6 +325,36 @@ export default function schema(data) {
       },
       childrenUncertain: false,
       nutrientImperative: 1
+    },
+    mind: {
+      cognition: {
+        name: 'cognition',
+        amount: 0,
+        factories: {
+          name: 'neurons',
+          amount: 0,
+          costs: [{
+            data,
+            amount: 1,
+            source: alias('data.ri.ri')
+          }],
+          max: {
+            amount: 1000
+          }
+        },
+        max: {
+          name: 'memory',
+          amount: 100,
+          costs: [{
+            data,
+            amount: 1,
+            source: alias('data.ri.ri')
+          }],
+          multiplier: {
+            amount: 100
+          }
+        }
+      }
     },
     fat: {
       breastSize: {

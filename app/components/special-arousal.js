@@ -10,15 +10,15 @@ export default Component.extend({
     this.get('considerGettingOff').perform();
   },
 
-  resource: alias('data.mood.arousal'),
+  arousal: alias('data.mood.arousal'),
 
   considerGettingOff: task(function * () {
-    if (this.get('data.mood.arousal.amount') > randomNumber(50, 125) && this.get('data.fertility.sperm.amount') > 1000) {
+    if (this.get('arousal.amount') > randomNumber(50, 125) && this.get('data.fertility.sperm.amount') > 1000) {
       let ejaculate = randomNumber(500, 2000);
       if (ejaculate > this.get('data.fertility.sperm.amount')) ejaculate = this.get('data.fertility.sperm.amount');
       this.decrementProperty('data.fertility.sperm.amount', ejaculate);
       this.incrementProperty('data.ri.ri.amount');
-      this.set('data.mood.arousal.amount', 0);
+      this.set('arousal.amount', 0);
     }
 
     yield timeout(1000);

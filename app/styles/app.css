@@ -37,15 +37,6 @@ body {
   flex-grow: 1;
 }
 
-.player-avatar-canvas {
-}
-
-
-.avatar-canvas {
-  height: 100%;
-  width: 100%;
-}
-
 .panels {
   display: flex;
   flex-grow: 1;
@@ -67,18 +58,34 @@ body {
   border: thin solid #333;
 }
 
+.panel-avatar {
+  height: 100%;
+}
+
+.avatar-canvas {
+  height: 100%;
+  width: 100%;
+}
+
+.panel-column-market {
+  width: 500px;
+  margin: 0 20px 0 10px;
+}
+
 .panel-header {
   margin: 0 0 10px;
 }
 
-.panel-stat-group {
-  border-bottom: thin solid #333;
-  margin-bottom: 10px;
+.panel-stat-primary-resource-button {
+  border-top: thin solid #333;
+  margin-top: 10px;
+  padding-top: 10px;
 }
 
-.panel .panel-stat-group:last-child {
-  border-bottom: 0;
-  margin-bottom: 0;
+.panel-stat-primary-resource-button:first-child {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .panel-stat {
