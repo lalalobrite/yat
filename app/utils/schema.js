@@ -225,7 +225,21 @@ export default function schema(data) {
           data,
           amount: 1,
           source: alias('data.endocrine.testosterone')
-        }]
+        }],
+        max: {
+          name: 'epididymis',
+          amount: 100,
+          costs: [{
+            data,
+            amount: computed('data.fertility.sperm.max.amount', function() {
+              return costFactor(this.get('data.fertility.sperm.max.amount'), 'micro1');
+            }),
+            source: alias('data.nutrients.protein')
+          }],
+          max: {
+            amount: 250
+          }
+        }
       }
     },
     mood: {
@@ -326,19 +340,47 @@ export default function schema(data) {
         name: 'fat',
         unit: 'weight',
         amount: 0,
-        unlocked: true
+        unlocked: true,
+        max: {
+          data,
+          doNotStore: true,
+          amount: computed('data.nutrients.totalFat.amount', 'data.mood.hunger.fat.amount', function() {
+            return this.get('data.nutrients.totalFat.amount') * this.get('data.mood.hunger.fat.amount');
+          })
+        }
       },
       minerals: {
         name: 'minerals',
         unit: 'weight',
         amount: 0,
-        unlocked: true
+        unlocked: true,
+        max: {
+          data,
+          doNotStore: true,
+          amount: computed('data.nutrients.totalFat.amount', 'data.mood.hunger.minerals.amount', function() {
+            return this.get('data.nutrients.totalFat.amount') * this.get('data.mood.hunger.minerals.amount');
+          })
+        }
       },
       protein: {
         name: 'protein',
         unit: 'weight',
         amount: 0,
-        unlocked: true
+        unlocked: true,
+        max: {
+          data,
+          doNotStore: true,
+          amount: computed('data.nutrients.totalFat.amount', 'data.mood.hunger.protein.amount', function() {
+            return this.get('data.nutrients.totalFat.amount') * this.get('data.mood.hunger.protein.amount');
+          })
+        }
+      },
+      totalFat: {
+        data,
+        doNotStore: true,
+        amount: computed('data.fat.buttFullness.amount', 'data.fat.legFem.amount', 'data.fat.legFullness.amount', 'data.fat.waistWidth.amount', function() {
+          return 2 * ((this.get('data.fat.buttFullness.amount') * 2) + (this.get('data.fat.legFem.amount')) + (this.get('data.fat.legFullness.amount') * 2) + (this.get('data.fat.waistWidth.amount') * 5));
+        })
       }
     },
     ri: {
@@ -379,6 +421,13 @@ export default function schema(data) {
             amount: 100
           }
         }
+      }
+    },
+    avatarMods: {
+      arousal: {
+        data,
+        doNotStore: true,
+        amount: alias('data.mood.arousal.amount')
       }
     },
     fat: {
@@ -797,48 +846,53 @@ export default function schema(data) {
       },
       testicleSize: {
         name: 'testicles',
-        amount: 45,
-        multiplier: {
-          amount: 0.74
-        },
-        costs: [{
-          data,
-          amount: computed('data.muscle.testicleSize.amount', function() {
-            return costFactor((this.get('data.muscle.testicleSize.amount') - 25) * 1.35, 'macro5');
-          }),
-          source: alias('data.nutrients.protein')
-        }, {
-          data,
-          amount: computed('data.muscle.testicleSize.amount', function() {
-            return costFactor((this.get('data.muscle.testicleSize.amount') - 25) * 1.35, 'micro5');
-          }),
-          source: alias('data.endocrine.testosterone')
-        }],
-        destroyCosts: [{
-          data,
-          amount: computed('data.muscle.testicleSize.amount', function() {
-            return -costFactor((this.get('data.muscle.testicleSize.amount') - 25) * 1.35, 'macro5') * this.get('data.nutrients.salvage.amount');
-          }),
-          source: alias('data.nutrients.protein')
-        }, {
-          data,
-          amount: computed('data.muscle.testicleSize.amount', function() {
-            return costFactor(101 - ((this.get('data.muscle.testicleSize.amount') - 25) * 1.35), 'micro5');
-          }),
-          source: alias('data.endocrine.estrogen')
-        }],
-        max: {
-          amount: 60,
-          max: {
-            amount: 100
-          }
-        },
-        min: {
-          amount: 35,
-          min: {
-            amount: 26
-          }
-        }
+        doNotStore: true,
+        data,
+        amount: computed('data.fertility.sperm.max.amount', function() {
+          return (this.get('data.fertility.sperm.max.amount') / this.get('data.fertility.sperm.max.max.amount')) * 100;
+        })
+        // amount: 45,
+        // multiplier: {
+        //   amount: 0.74
+        // },
+        // costs: [{
+        //   data,
+        //   amount: computed('data.muscle.testicleSize.amount', function() {
+        //     return costFactor((this.get('data.muscle.testicleSize.amount') - 25) * 1.35, 'macro5');
+        //   }),
+        //   source: alias('data.nutrients.protein')
+        // }, {
+        //   data,
+        //   amount: computed('data.muscle.testicleSize.amount', function() {
+        //     return costFactor((this.get('data.muscle.testicleSize.amount') - 25) * 1.35, 'micro5');
+        //   }),
+        //   source: alias('data.endocrine.testosterone')
+        // }],
+        // destroyCosts: [{
+        //   data,
+        //   amount: computed('data.muscle.testicleSize.amount', function() {
+        //     return -costFactor((this.get('data.muscle.testicleSize.amount') - 25) * 1.35, 'macro5') * this.get('data.nutrients.salvage.amount');
+        //   }),
+        //   source: alias('data.nutrients.protein')
+        // }, {
+        //   data,
+        //   amount: computed('data.muscle.testicleSize.amount', function() {
+        //     return costFactor(101 - ((this.get('data.muscle.testicleSize.amount') - 25) * 1.35), 'micro5');
+        //   }),
+        //   source: alias('data.endocrine.estrogen')
+        // }],
+        // max: {
+        //   amount: 60,
+        //   max: {
+        //     amount: 100
+        //   }
+        // },
+        // min: {
+        //   amount: 35,
+        //   min: {
+        //     amount: 26
+        //   }
+        // }
       },
       upperMuscle: {
         name: 'upper body',

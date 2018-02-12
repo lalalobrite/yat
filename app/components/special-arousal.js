@@ -13,9 +13,8 @@ export default Component.extend({
   arousal: alias('data.mood.arousal'),
 
   considerGettingOff: task(function * () {
-    if (this.get('arousal.amount') > randomNumber(50, 125) && this.get('data.fertility.sperm.amount') > 1000) {
-      let ejaculate = randomNumber(500, 2000);
-      if (ejaculate > this.get('data.fertility.sperm.amount')) ejaculate = this.get('data.fertility.sperm.amount');
+    if (this.get('arousal.amount') > randomNumber(50, 125) && this.get('data.fertility.sperm.amount') >= 100) {
+      const ejaculate = Math.min(this.get('data.fertility.sperm.amount'), randomNumber(500, 2000));
       this.decrementProperty('data.fertility.sperm.amount', ejaculate);
       this.incrementProperty('data.ri.ri.amount');
       this.set('arousal.amount', 0);

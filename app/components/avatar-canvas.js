@@ -57,5 +57,14 @@ export default Component.extend({
         });
       });
     });
+
+    Object.keys(this.get('data.avatarMods')).forEach((attribute) => {
+      this.set(`daInstance.${attribute}`, this.get(`data.avatarMods.${attribute}.amount`));
+
+      this.addObserver(`data.avatarMods.${attribute}.amount`, () => {
+        this.set(`daInstance.${attribute}`, this.get(`data.avatarMods.${attribute}.amount`));
+        this.draw();
+      });
+    });
   }
 });

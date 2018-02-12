@@ -33,10 +33,7 @@ const observations = [{
   message: 'Body gives too little support. Demand more resources for reproduction.',
   criteria: [{
     source: 'data.ri.ri.amount',
-    greaterThan: 0
-  }, {
-    source: 'data.nutrients.fat.amount',
-    lessThan: 100
+    greaterThan: 1
   }]
 }, {
   key: 'enableNutrientSalvage',

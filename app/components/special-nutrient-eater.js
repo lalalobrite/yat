@@ -28,7 +28,7 @@ export default Component.extend({
     if (absorption === 0) return;
 
     ['fat', 'minerals', 'protein'].forEach((nutrient) => {
-      this.incrementProperty(`data.nutrients.${nutrient}.amount`, Math.round(this.get(`data.mood.hunger.${nutrient}.amount`) * absorption));
+      this.attrs.createResource(this.get(`data.nutrients.${nutrient}`), Math.round(this.get(`data.mood.hunger.${nutrient}.amount`) * absorption));
     });
 
     yield timeout(75);

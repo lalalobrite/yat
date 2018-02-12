@@ -15,6 +15,7 @@ export default Component.extend({
 
     if (isNone(data.nutrients)) {
       setProperties(data, {
+        mind: {},
         nutrients: {},
         ri: {},
         messages: ['You are testicles. You must procreate.'],
@@ -36,7 +37,7 @@ export default Component.extend({
     if (typeOf(value) === 'object') {
       let gameData;
       if (isPresent(path)) {
-        gameData = this.get(`game.gameData.${path}`) || this.set(`game.gameData.${path}`, {
+        gameData = value.doNotStore ? Ember.Object.extend(value).create() : this.get(`game.gameData.${path}`) || this.set(`game.gameData.${path}`, {
           amount: value.amount || 0,
           unlocked: value.unlocked || false
         });
@@ -48,7 +49,7 @@ export default Component.extend({
         if (key !== 'amount' && key !== 'unlocked') accumulator.set(key, key === 'source' ? get(value, key) : this.attachModels(get(value, key), isPresent(path) ? `${path}.${key}` : key));
 
         return accumulator;
-      }, isPresent(path) ? EmberObject.extend(options.isArrayItem ? value : {
+      }, isPresent(path) && !value.doNotStore ? EmberObject.extend(options.isArrayItem ? value : {
         gameData,
         amount: alias('gameData.amount'),
         unlocked: alias('gameData.unlocked')

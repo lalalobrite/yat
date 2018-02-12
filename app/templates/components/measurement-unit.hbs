@@ -3,7 +3,7 @@
 {{else if (eq unit "energy")}}
   {{energy-measurement amount}}
 {{else if (eq unit "percent")}}
-  {{amount}}%
+  {{to-fixed amount 2}}%
 {{else}}
-  {{amount}}
+  {{to-fixed amount}}
 {{/if}}
