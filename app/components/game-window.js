@@ -22,7 +22,8 @@ export default Component.extend({
         perks: {
           available: [],
           resolved: []
-        }
+        },
+        currentEncounter: {}
       });
     }
 

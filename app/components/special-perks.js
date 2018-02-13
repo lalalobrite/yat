@@ -170,7 +170,25 @@ export default Component.extend({
           source: alias('data.mind.cognition')
         }],
         callback() {
-          this.attrs.unlockResource(this.get('data.moond.arousal.factories'), 'primary', 'mood');
+          this.attrs.unlockResource(this.get('data.mood.arousal.factories'), 'primary', 'mood');
+        }
+      }
+    }
+  }),
+
+  enableSocial: computed({
+    get(key) {
+      return {
+        key,
+        title: 'social awareness',
+        description: 'gain awareness of social interactions',
+        costs: [{
+          data: this.get('data'),
+          amount: 750,
+          source: alias('data.mind.cognition')
+        }],
+        callback() {
+          this.attrs.unlockResource(this.get('data.social.visualizer'), 'social', 'social');
         }
       }
     }

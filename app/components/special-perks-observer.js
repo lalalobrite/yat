@@ -63,6 +63,13 @@ const observations = [{
     source: 'data.mind.cognition.amount',
     greaterThan: 50
   }]
+}, {
+  key: 'enableSocial',
+  message: 'Procreation: still unknown. Seize control of Mind\'s social faculties to confirm reproduction',
+  criteria: [{
+    source: 'data.mind.cognition.amount',
+    greaterThan: 200
+  }]
 }];
 
 export default Component.extend({

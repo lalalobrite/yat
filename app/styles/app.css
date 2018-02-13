@@ -16,6 +16,8 @@ body {
 .top-bar {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  height: 30px;
   padding: 10px;
   margin-bottom: 10px;
   border-bottom: thin solid #333;
@@ -71,11 +73,6 @@ body {
   width: 100%;
 }
 
-.panel-column-market {
-  width: 500px;
-  margin: 0 20px 0 10px;
-}
-
 .panel-header {
   margin: 0 0 10px;
 }
@@ -101,6 +98,11 @@ body {
   font-size: 90%;
 }
 
+.panel-column-market {
+  width: 350px;
+  margin: 0 20px 0 10px;
+}
+
 .perk {
   display: block;
   margin: 10px auto;
@@ -124,7 +126,7 @@ body {
 
 .message-box {
   flex-shrink: 0;
-  height: 200px;
+  height: 100px;
   padding: 10px;
   border-top: thin solid #333;
   overflow: hidden;

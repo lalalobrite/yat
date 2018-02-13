@@ -60,6 +60,13 @@ export default function schema(data) {
             title: 'Mind'
           }
         }
+      }, social: {
+        classNames: 'panel-column-avatar',
+        panels: {
+          social: {
+            classNames: 'panel-avatar'
+          }
+        }
       }
     },
     perkPanels: {
@@ -379,7 +386,7 @@ export default function schema(data) {
         data,
         doNotStore: true,
         amount: computed('data.fat.buttFullness.amount', 'data.fat.legFem.amount', 'data.fat.legFullness.amount', 'data.fat.waistWidth.amount', function() {
-          return 2 * ((this.get('data.fat.buttFullness.amount') * 2) + (this.get('data.fat.legFem.amount')) + (this.get('data.fat.legFullness.amount') * 2) + (this.get('data.fat.waistWidth.amount') * 5));
+          return 100 * ((this.get('data.fat.buttFullness.amount') * 2) + (this.get('data.fat.legFem.amount')) + (this.get('data.fat.legFullness.amount') * 2) + (this.get('data.fat.waistWidth.amount') * 5));
         })
       }
     },
@@ -421,6 +428,20 @@ export default function schema(data) {
             amount: 100
           }
         }
+      }
+    },
+    social: {
+      visualizer: {
+        component: 'special-social-visualizer'
+      },
+      orientation: {
+        amount: 50
+      },
+      orientationVariance: {
+        amount: 25
+      },
+      recentAttraction: {
+        amount: []
       }
     },
     avatarMods: {
@@ -850,7 +871,19 @@ export default function schema(data) {
         data,
         amount: computed('data.fertility.sperm.max.amount', function() {
           return (this.get('data.fertility.sperm.max.amount') / this.get('data.fertility.sperm.max.max.amount')) * 100;
-        })
+        }),
+        // max: {
+        //   amount: 60,
+        //   max: {
+        //     amount: 100
+        //   }
+        // },
+        // min: {
+        //   amount: 35,
+        //   min: {
+        //     amount: 26
+        //   }
+        // }
         // amount: 45,
         // multiplier: {
         //   amount: 0.74
@@ -881,18 +914,6 @@ export default function schema(data) {
         //   }),
         //   source: alias('data.endocrine.estrogen')
         // }],
-        // max: {
-        //   amount: 60,
-        //   max: {
-        //     amount: 100
-        //   }
-        // },
-        // min: {
-        //   amount: 35,
-        //   min: {
-        //     amount: 26
-        //   }
-        // }
       },
       upperMuscle: {
         name: 'upper body',
@@ -1121,13 +1142,13 @@ export default function schema(data) {
           source: alias('data.endocrine.progesterone')
         }],
         max: {
-          amount: 40,
+          amount: 60,
           max: {
             amount: 110
           }
         },
         min: {
-          amount: 60,
+          amount: 40,
           min: {
             amount: 30
           }
