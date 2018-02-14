@@ -33,6 +33,18 @@ body {
   flex-grow: 1;
 }
 
+.new-character-form {
+  padding: 20px;
+}
+
+.new-character-form div {
+  margin-bottom: 10px;
+}
+
+.new-character-form button {
+  margin-top: 10px;
+}
+
 .content {
   display: flex;
   flex-direction: column;

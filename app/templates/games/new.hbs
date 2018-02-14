@@ -1,1 +1,101 @@
-{{outlet}}
+<div class="new-character-form">
+  <div>
+    {{input value=model.gameData.name placeholder="name"}}
+  </div>
+
+  <div>
+    skin color:
+    {{#radio-button
+        value=-1
+        groupValue=model.gameData.skin.skin.amount
+        changed=(mut model.gameData.skin.skin.amount)
+    }}
+      <span>peach</span>
+    {{/radio-button}}
+
+    {{#radio-button
+        value=7
+        groupValue=model.gameData.skin.skin.amount
+        changed=(mut model.gameData.skin.skin.amount)
+    }}
+      <span>tan</span>
+    {{/radio-button}}
+
+    {{#radio-button
+        value=13
+        groupValue=model.gameData.skin.skin.amount
+        changed=(mut model.gameData.skin.skin.amount)
+    }}
+      <span>olive</span>
+    {{/radio-button}}
+
+    {{#radio-button
+        value=18
+        groupValue=model.gameData.skin.skin.amount
+        changed=(mut model.gameData.skin.skin.amount)
+    }}
+      <span>coffee</span>
+    {{/radio-button}}
+
+    {{#radio-button
+        value=23
+        groupValue=model.gameData.skin.skin.amount
+        changed=(mut model.gameData.skin.skin.amount)
+    }}
+      <span>chocolate</span>
+    {{/radio-button}}
+  </div>
+
+  <div>
+    hair color:
+    {{#radio-button
+        value='black'
+        groupValue=model.gameData.skin.hairColor
+        changed=(mut model.gameData.skin.hairColor)
+    }}
+      <span>black</span>
+    {{/radio-button}}
+
+    {{#radio-button
+        value='brown'
+        groupValue=model.gameData.skin.hairColor
+        changed=(mut model.gameData.skin.hairColor)
+    }}
+      <span>brown</span>
+    {{/radio-button}}
+
+    {{#radio-button
+        value='red'
+        groupValue=model.gameData.skin.hairColor
+        changed=(mut model.gameData.skin.hairColor)
+    }}
+      <span>red</span>
+    {{/radio-button}}
+
+    {{#radio-button
+        value='blonde'
+        groupValue=model.gameData.skin.hairColor
+        changed=(mut model.gameData.skin.hairColor)
+    }}
+      <span>blonde</span>
+    {{/radio-button}}
+
+    {{#radio-button
+        value='gray'
+        groupValue=model.gameData.skin.hairColor
+        changed=(mut model.gameData.skin.hairColor)
+    }}
+      <span>gray</span>
+    {{/radio-button}}
+
+    {{#radio-button
+        value='white'
+        groupValue=model.gameData.skin.hairColor
+        changed=(mut model.gameData.skin.hairColor)
+    }}
+      <span>white</span>
+    {{/radio-button}}
+  </div>
+
+  <button {{action "begin" model}}>begin</button>
+</div>
