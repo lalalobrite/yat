@@ -1,6 +1,8 @@
 import { computed } from '@ember/object';
 import { alias } from '@ember/object/computed';
+import attraction from 'yat/utils/attraction-schema';
 import costFactor from 'yat/utils/cost-factor';
+import randomNumber from 'yat/utils/random-number';
 
 export default function schema(data) {
   return {
@@ -51,7 +53,9 @@ export default function schema(data) {
       }, tertiary: {
         unlocked: true,
         panels: {
-          ri: {
+          sexuality: {
+            title: 'Sexualiity'
+          }, ri: {
             title: 'Reproductive Imperative'
           }, nutrients: {
             title: 'Nutrients',
@@ -430,18 +434,90 @@ export default function schema(data) {
         }
       }
     },
-    social: {
-      visualizer: {
-        component: 'special-social-visualizer'
+    sexuality: {
+      attractionInterface: {
+        component: 'special-attraction-interface'
       },
       orientation: {
         amount: 50
       },
       orientationVariance: {
-        amount: 25
+        amount: 10
       },
-      recentAttraction: {
-        amount: []
+      maleSexWithMen: {
+        name: 'men',
+        amount: 0,
+      },
+      maleSexWithWomen: {
+        name: 'women',
+        amount: 0
+      },
+      femaleSexWithMen: {
+        name: 'men',
+        amount: 0,
+      },
+      femaleSexWithWomen: {
+        name: 'women',
+        amount: 0
+      },
+      sexIdentity: {
+        data,
+        doNotStore: true,
+        amount: computed('data.muscle.testicleSize.amount', function() {
+          return this.get('data.muscle.testicleSize.amount') > 0 ? 'male' : 'female';
+        })
+      },
+      masculinity: {
+        data,
+        doNotStore: true,
+        amount: computed(function() {
+          const playerGender = this.get('data.sexuality.sexIdentity.amount') === 'male' ? 'masc' : 'femme';
+          let totalMasculinity = 0;
+          let totalWeight = 0;
+          Object.keys(attraction).forEach((key) => {
+            const category = ['fat', 'muscle', 'skeletal', 'skin'].find((category) => this.get(`data.${category}.${key}.amount`) !== undefined);
+            let masculinity = this.get(`data.${category}.${key}.amount`) * attraction[key][playerGender].weight;
+            totalWeight += attraction[key][playerGender].weight;
+
+            if (attraction[key].isFemme) masculinity = 100 - masculinity;
+
+            totalMasculinity += masculinity;
+          });
+
+          return totalMasculinity / totalWeight;
+        }).volatile()
+      }
+    },
+    social: {
+      visualizer: {
+        component: 'special-social-visualizer'
+      },
+      currentEncounter: {
+        genderExtremeness: {
+          data,
+          doNotStore: true,
+          amount: computed('data.social.currentEncounter.masculinity', function() {
+            const isMale = this.get('data.social.currentEncounter.isMale');
+            const masculinity = this.get('data.social.currentEncounter.masculinity');
+            return isMale ? (masculinity - 50) * 2 : (50 - masculinity) * 2;
+          })
+        },
+        attractionRange: {
+          data,
+          doNotStore: true,
+          amount: computed('data.social.currentEncounter.genderExtremeness.amount', function() {
+            const isMale = this.get('data.social.currentEncounter.isMale');
+            const encounterGenderExtremeness = this.get('data.social.currentEncounter.genderExtremeness.amount');
+            let encounterAttractionMax = isMale ? 0 : 100;
+            if (randomNumber(0, 100) > 90) encounterAttractionMax = encounterAttractionMax === 100 ? 0 : 100; // gay
+            let encounterAttractionMin = encounterAttractionMax === 0 ?
+              Math.max(3, 50 - (randomNumber((100 - encounterGenderExtremeness) - 5, (100 - encounterGenderExtremeness) + 15) / 2)) :
+              Math.min(95, 50 + (randomNumber(encounterGenderExtremeness - 15, encounterGenderExtremeness + 5) / 2));
+            if (randomNumber(0, 100) > 95) encounterAttractionMin = encounterAttractionMin === 100 ? 0 : 100; // pan/asexual
+
+            return encounterAttractionMin < encounterAttractionMax ? [encounterAttractionMin, encounterAttractionMax] : [encounterAttractionMax, encounterAttractionMin];
+          })
+        }
       }
     },
     avatarMods: {
@@ -685,7 +761,7 @@ export default function schema(data) {
       },
       waistWidth: {
         name: 'waist',
-        amount: 120,
+        amount: 105,
         multiplier: {
           amount: 0.8
         },
@@ -732,7 +808,7 @@ export default function schema(data) {
     muscle: {
       lowerMuscle: {
         name: 'legs',
-        amount: 10,
+        amount: 0,
         multiplier: {
           amount: 0.4
         },
@@ -777,7 +853,7 @@ export default function schema(data) {
       },
       neckWidth: {
         name: 'neck',
-        amount: 50,
+        amount: 45,
         multiplier: {
           amount: 0.4
         },
@@ -822,7 +898,7 @@ export default function schema(data) {
       },
       penisSize: {
         name: 'penis',
-        amount: 65,
+        amount: 20,
         multiplier: {
           amount: 1.85
         },
@@ -917,7 +993,7 @@ export default function schema(data) {
       },
       upperMuscle: {
         name: 'upper body',
-        amount: 15,
+        amount: 5,
         multiplier: {
           amount: 0.4
         },
@@ -1054,7 +1130,7 @@ export default function schema(data) {
       },
       armThickness: {
         name: 'shoulders',
-        amount: 65,
+        amount: 45,
         multiplier: {
           amount: 0.5
         },
@@ -1105,7 +1181,7 @@ export default function schema(data) {
       },
       chinWidth: {
         name: 'chin',
-        amount: 50,
+        amount: 40,
         multiplier: {
           amount: 0.8
         },
@@ -1156,7 +1232,7 @@ export default function schema(data) {
       },
       faceLength: {
         name: 'face length',
-        amount: 240,
+        amount: 225,
         multiplier: {
           amount: 0.9
         },
@@ -1246,7 +1322,7 @@ export default function schema(data) {
       },
       height: {
         name: 'overall',
-        amount: 170,
+        amount: 165,
         multiplier: {
           amount: 0.8
         },
@@ -1297,7 +1373,7 @@ export default function schema(data) {
       },
       handSize: {
         name: 'hands',
-        amount: 150,
+        amount: 100,
         multiplier: {
           amount: 1.6
         },
@@ -1348,7 +1424,7 @@ export default function schema(data) {
       },
       hipWidth: {
         name: 'hips',
-        amount: 110,
+        amount: 120,
         multiplier: {
           amount: 1.1
         },
@@ -1489,7 +1565,7 @@ export default function schema(data) {
       },
       shoulderWidth: {
         name: 'chest',
-        amount: 75,
+        amount: 70,
         multiplier: {
           amount: 1.1
         },
