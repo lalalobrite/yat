@@ -18,6 +18,7 @@ export default Component.extend({
         mind: {},
         nutrients: {},
         ri: {},
+        fertility: {},
         messages: ['You are testicles. You must procreate.'],
         perks: {
           available: [],
@@ -104,15 +105,6 @@ export default Component.extend({
 
   lockResource(resource, columnKey, panelKey) {
     resource.set('unlocked', false);
-
-    let childPanel;
-
-    const parentPanel = this.get('data.panels.panels').find((panel) => {
-      if (panel.get('path') === path) {
-        childPanel = panel;
-        return true;
-      }
-    });
 
     const panel = this.get(`data.columns.${columnKey}.panels.${panelKey}`);
     const column = this.get(`data.columns.${columnKey}`);

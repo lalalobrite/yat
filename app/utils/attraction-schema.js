@@ -40,7 +40,7 @@ export default {
       min: 45,
       ideal: 95,
       max: 95,
-      weight: 2
+      weight: 5
     }
   },
   breastSize: {
@@ -84,7 +84,7 @@ export default {
       min: 40,
       ideal: 100,
       max: 100,
-      weight: 1
+      weight: 2
     }
   },
   eyelashLength: {
@@ -187,7 +187,7 @@ export default {
       min: 0,
       ideal: 0,
       max: 70,
-      weight: 3
+      weight: 1
     }
   },
   hairLightness: {
@@ -242,7 +242,7 @@ export default {
       min:100 ,
       ideal: 150,
       max: 150,
-      weight: 1
+      weight: 2
     }
   },
   height: {
@@ -256,7 +256,7 @@ export default {
       min: 165,
       ideal: 190,
       max: 190,
-      weight: 4
+      weight: 10
     }
   },
   hipWidth: {
@@ -286,7 +286,7 @@ export default {
       min: 0,
       ideal: 0,
       max: 15,
-      weight: 2
+      weight: 1
     }
   },
   legFullness: {
@@ -301,7 +301,7 @@ export default {
       min: 0,
       ideal: 0,
       max: 10,
-      weight: 2
+      weight: 1
     }
   },
   legLength: {
@@ -331,7 +331,7 @@ export default {
       min: 5,
       ideal: 7,
       max: 13,
-      weight: 2
+      weight: 1
     }
   },
   lowerMuscle: {
@@ -345,7 +345,7 @@ export default {
       min: 5,
       ideal: 40,
       max: 40,
-      weight: 4
+      weight: 8
     }
   },
   neckLength: {
@@ -374,7 +374,7 @@ export default {
       min: 45,
       ideal: 53,
       max: 53,
-      weight: 2
+      weight: 4
     }
   },
   penisSize: {
@@ -388,7 +388,7 @@ export default {
       min: 15,
       ideal: 130,
       max: 130,
-      weight: 3
+      weight: 4
     }
   },
   shoulderWidth: {
@@ -402,7 +402,7 @@ export default {
       min: 70,
       ideal: 100,
       max: 100,
-      weight: 3
+      weight: 5
     }
   },
   skin: {
@@ -429,7 +429,7 @@ export default {
       min: 35,
       ideal: 80,
       max: 80,
-      weight: 2
+      weight: 4
     }
   },
   upperMuscle: {
@@ -443,7 +443,7 @@ export default {
       min: 5,
       ideal: 40,
       max: 40,
-      weight: 4
+      weight: 8
     }
   },
   vaginaSize: {
@@ -472,7 +472,7 @@ export default {
       min: 105,
       ideal: 130,
       max: 140,
-      weight: 1
+      weight: 0
     }
   }
 };

@@ -12,7 +12,7 @@ const observations = [{
   message: 'Surplus protein detected. Recruit more cells to aid in testosterone production.',
   criteria: [{
     source: 'data.nutrients.protein.amount',
-    greaterThan: 24
+    greaterThan: 1000
   }]
 }, {
   key: 'enableArousal',
@@ -26,7 +26,7 @@ const observations = [{
   message: 'Ejaculation complete. Procreation: unknown. Lack sensory data. Gain influence over Mind and Body to confirm successful reproduction.',
   criteria: [{
     source: 'data.ri.ri.amount',
-    greaterThan: 20
+    greaterThan: 0
   }]
 }, {
   key: 'enableNutrientImperative',
@@ -65,10 +65,66 @@ const observations = [{
   }]
 }, {
   key: 'enableSocial',
-  message: 'Procreation: still unknown. Seize control of Mind\'s social faculties to confirm reproduction',
+  message: 'Procreation: still unknown. Seize control of Mind\'s social faculties to confirm reproduction.',
   criteria: [{
     source: 'data.mind.cognition.amount',
     greaterThan: 200
+  }]
+}, {
+  key: 'enableMasculineGrowth',
+  message: 'Sexual encounter: failure. Body deemed unattractive. Grow muscle and size to improve sex appeal.',
+  criteria: [{
+    source: 'data.sexuality.rejectionsAsMan.amount',
+    greaterThan: 0
+  }]
+}, {
+  key: 'enableMasculineGrowth2',
+  message: 'Sexual encounters: failure. Must further masculinize Body.',
+  criteria: [{
+    source: 'data.sexuality.rejectionsAsMan.amount',
+    greaterThan: 5
+  }]
+}, {
+  key: 'enableMasculineGrowth3',
+  message: 'Sexual encounters: more failure. Unlock final masculine form.',
+  criteria: [{
+    source: 'data.sexuality.rejectionsAsMan.amount',
+    greaterThan: 15
+  }]
+}, {
+  key: 'enableDeepGeneticScan',
+  message: 'Procreation: still unknown. Consider deep genetic scan to find a solution.',
+  criteria: [{
+    source: 'data.sexuality.maleSexWithWomen.amount',
+    greaterThan: 15
+  }]
+}, {
+  key: 'enableSexChange',
+  message: 'Deep genetic scan complete. Solution discovered. Convert from testes to ovaries. Ensure procreation by bearing own young.',
+  criteria: [{
+    source: 'data.perks.resolved.[]',
+    resolvedIncludes: 'enableDeepGeneticScan'
+  }]
+}, {
+  key: 'enableFeminineGrowth',
+  message: 'Ovarian conversion complete. Begin preparing Body for child-bearing.',
+  criteria: [{
+    source: 'data.fertility.ovarianConversion.amount',
+    greaterThan: 99
+  }]
+}, {
+  key: 'enableFeminineGrowth2',
+  message: 'Ovarian conversion complete. Begin preparing Body for child-bearing.',
+  criteria: [{
+    source: 'data.sexuality.femaleSexWithMen.amount',
+    greaterThan: 5
+  }]
+}, {
+  key: 'enableFeminineGrowth3',
+  message: 'Ovarian conversion complete. Begin preparing Body for child-bearing.',
+  criteria: [{
+    source: 'data.sexuality.femaleSexWithMen.amount',
+    greaterThan: 15
   }]
 }];
 
@@ -87,6 +143,7 @@ export default Component.extend({
         const passed = observation.criteria.every((criterion) => {
           if (criterion.greaterThan && this.get(criterion.source) <= criterion.greaterThan) return false;
           if (criterion.lessThan && this.get(criterion.source) >= criterion.lessThan) return false;
+          if (criterion.resolvedIncludes && !this.get('data.perks.resolved').includes(criterion.resolvedIncludes)) return false;
 
           return true;
         });

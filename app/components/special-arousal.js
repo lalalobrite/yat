@@ -13,7 +13,7 @@ export default Component.extend({
   arousal: alias('data.mood.arousal'),
 
   considerGettingOff: task(function * () {
-    if (this.get('arousal.amount') > randomNumber(50, 125) && (this.get('data.social.sexIdentity.amount') === 'female' || this.get('data.fertility.sperm.amount') >= 100)) {
+    if (this.get('arousal.amount') > randomNumber(50, 125) && (this.get('data.sexuality.sexIdentity.amount') === 'female' || this.get('data.fertility.sperm.amount') >= 100)) {
       this.getOff();
     }
 
@@ -47,7 +47,10 @@ export default Component.extend({
       if (totalMasculinity <= encounterAttractionMax && totalMasculinity >= encounterAttractionMin) {
         this.haveSex();
       }
-      else this.resolveSelfLove();
+      else {
+        this.get('data.sexuality.sexIdentity.amount') === 'male' ? this.incrementProperty('data.sexuality.rejectionsAsMan.amount') : this.incrementProperty('data.sexuality.rejectionsAsWoman.amount')
+        this.resolveSelfLove();
+      }
     } else this.resolveSelfLove();
 
     this.set('data.social.currentEncounter.shouldChange', true);
