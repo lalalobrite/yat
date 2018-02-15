@@ -31,6 +31,7 @@ body {
 .main {
   display: flex;
   flex-grow: 1;
+  min-height: 0;
 }
 
 .new-character-form {
@@ -49,6 +50,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  min-height: 0;
 }
 
 .panels {
@@ -78,11 +80,13 @@ body {
 
 .panel-avatar {
   height: 100%;
+  min-height: 0;
 }
 
 .avatar-canvas {
   height: 100%;
   width: 100%;
+  min-height: 0;
 }
 
 .panel-header {
@@ -141,7 +145,6 @@ body {
   height: 100px;
   padding: 10px;
   border-top: thin solid #333;
-  overflow: hidden;
 }
 
 .message-box .message:first-child {

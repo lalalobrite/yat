@@ -23,10 +23,7 @@ export default Component.extend({
   }),
 
   getOff() {
-    const encounterIsMale = this.get('data.social.currentEncounter.isMale');
-    const encounterMasculinity = this.get('data.social.currentEncounter.masculinity');
-
-    if (encounterIsMale !== undefined) {
+    if (this.get('data.social.currentEncounter.isMale') !== undefined) {
       this.resolveEncounter();
     } else {
       this.resolveSelfLove()

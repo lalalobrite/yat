@@ -6,7 +6,7 @@ import randomNumber from 'yat/utils/random-number';
 
 export default function schema(data) {
   return {
-    // debugging: true,
+    debugging: true,
     columns: {
       avatar: {
         classNames: 'panel-column-avatar',
@@ -107,6 +107,11 @@ export default function schema(data) {
             }),
             source: alias('data.nutrients.protein')
           }],
+          destroyCosts: [{
+            data,
+            amount: -1,
+            source: alias('data.nutrients.protein')
+          }],
           max: {
             amount: 1000
           }
@@ -133,6 +138,11 @@ export default function schema(data) {
             amount: computed('data.endocrine.humanGrowthHormone.factories.amount', function() {
               return costFactor(this.get('data.endocrine.humanGrowthHormone.factories.amount') + 1, 'micro3');
             }),
+            source: alias('data.nutrients.protein')
+          }],
+          destroyCosts: [{
+            data,
+            amount: -1,
             source: alias('data.nutrients.protein')
           }],
           max: {
@@ -163,6 +173,11 @@ export default function schema(data) {
             }),
             source: alias('data.nutrients.protein')
           }],
+          destroyCosts: [{
+            data,
+            amount: -1,
+            source: alias('data.nutrients.protein')
+          }],
           max: {
             amount: 1000
           }
@@ -190,6 +205,11 @@ export default function schema(data) {
             amount: computed('data.endocrine.testosterone.factories.amount', function() {
               return costFactor(this.get('data.endocrine.testosterone.factories.amount') + 1, 'micro3');
             }),
+            source: alias('data.nutrients.protein')
+          }],
+          destroyCosts: [{
+            data,
+            amount: -1,
             source: alias('data.nutrients.protein')
           }],
           max: {
@@ -238,8 +258,13 @@ export default function schema(data) {
             }),
             source: alias('data.nutrients.protein')
           }],
+          destroyCosts: [{
+            data,
+            amount: -1,
+            source: alias('data.nutrients.protein')
+          }],
           max: {
-            amount: 1000
+            amount: 100
           }
         },
         multiplier: {
@@ -293,8 +318,13 @@ export default function schema(data) {
             }),
             source: alias('data.mind.cognition')
           }],
+          destroyCosts: [{
+            data,
+            amount: -1,
+            source: alias('data.mind.cognition')
+          }],
           max: {
-            amount: 1000
+            amount: 100
           }
         }
       },
