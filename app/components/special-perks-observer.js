@@ -133,6 +133,13 @@ const observations = [{
     source: 'data.sexuality.femaleSexWithMen.amount',
     greaterThan: 15
   }]
+}, {
+  key: 'enableVictory',
+  message: 'Procreation: confirmed. Purpose fulfilled',
+  criteria: [{
+    source: 'data.ri.children.amount',
+    greaterThan: 0
+  }]
 }];
 
 export default Component.extend({

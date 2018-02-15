@@ -490,6 +490,24 @@ export default Component.extend({
     }
   }),
 
+  enableVictory: computed({
+    get(key) {
+      return {
+        key,
+        title: 'purpose fulfilled',
+        description: '',
+        costs: [{
+          data: this.get('data'),
+          amount: 1,
+          source: alias('data.ri.ri')
+        }],
+        callback() {
+          alert("Thanks for playing! I hope you have lots of babies.");
+        }
+      }
+    }
+  }),
+
   actions: {
     purchase(perk) {
       const key = perk.key;

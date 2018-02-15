@@ -7,11 +7,11 @@ function getConstant(factor) {
     case 'micro15': return 30;
     case 'micro20': return 50;
     case 'micro25': return 70;
-    case 'macro5': return 250;
-    case 'macro10': return 500;
-    case 'macro15': return 750;
-    case 'macro20': return 1000;
-    case 'macro25': return 1250;
+    case 'macro5': return 100;
+    case 'macro10': return 200;
+    case 'macro15': return 300;
+    case 'macro20': return 400;
+    case 'macro25': return 500;
   }
 }
 
