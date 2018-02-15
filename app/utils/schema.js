@@ -616,7 +616,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.fat.breastSize.amount', function() {
-            return -costFactor((this.get('data.fat.breastSize.amount') + 2) * 2, 'macro10') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.fat.breastSize.amount') + 2) * 2, 'macro10') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.fat')
         }, {
@@ -661,7 +661,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.fat.buttFullness.amount', function() {
-            return -costFactor((this.get('data.fat.buttFullness.amount') + 1) * 2.5, 'macro15') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.fat.buttFullness.amount') + 1) * 2.5, 'macro15') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.fat')
         }, {
@@ -706,7 +706,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.fat.faceFem.amount', function() {
-            return -costFactor((this.get('data.fat.faceFem.amount') + 1) * 2.5, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.fat.faceFem.amount') + 1) * 2.5, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.fat')
         }, {
@@ -751,7 +751,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.fat.legFem.amount', function() {
-            return -costFactor((this.get('data.fat.legFem.amount') + 1) * 2.5, 'macro15') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.fat.legFem.amount') + 1) * 2.5, 'macro15') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.fat')
         }, {
@@ -796,7 +796,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.fat.legFullness.amount', function() {
-            return -costFactor((this.get('data.fat.legFullness.amount') + 1) * 2.5, 'macro20') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.fat.legFullness.amount') + 1) * 2.5, 'macro20') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.fat')
         }, {
@@ -841,7 +841,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.fat.legFullness.amount', function() {
-            return -costFactor((this.get('data.fat.waistWidth.amount') - 69) * 1.25, 'macro20') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.fat.waistWidth.amount') - 69) * 1.25, 'macro20') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.fat')
         }, {
@@ -888,7 +888,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.muscle.lowerMuscle.amount', function() {
-            return -costFactor((this.get('data.muscle.lowerMuscle.amount') + 1) * 2.5, 'macro20') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.muscle.lowerMuscle.amount') + 1) * 2.5, 'macro20') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.protein')
         }, {
@@ -933,7 +933,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.muscle.neckWidth.amount', function() {
-            return -costFactor((this.get('data.muscle.neckWidth.amount') - 34) * 2.5, 'macro10') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.muscle.neckWidth.amount') - 34) * 2.5, 'macro10') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.protein')
         }, {
@@ -983,7 +983,7 @@ export default function schema(data) {
         // destroyCosts: [{
         //   data,
         //   amount: computed('data.muscle.penisSize.amount', function() {
-        //     return -costFactor((this.get('data.muscle.penisSize.amount') - 13) * 0.54, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+        //     return -costFactor((this.get('data.muscle.penisSize.amount') - 13) * 0.54, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
         //   }),
         //   source: alias('data.nutrients.protein')
         // }, {
@@ -1045,7 +1045,7 @@ export default function schema(data) {
         // destroyCosts: [{
         //   data,
         //   amount: computed('data.muscle.testicleSize.amount', function() {
-        //     return -costFactor((this.get('data.muscle.testicleSize.amount') - 25) * 1.35, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+        //     return -costFactor((this.get('data.muscle.testicleSize.amount') - 25) * 1.35, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
         //   }),
         //   source: alias('data.nutrients.protein')
         // }, {
@@ -1078,7 +1078,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.muscle.upperMuscle.amount', function() {
-            return -costFactor((this.get('data.muscle.upperMuscle.amount') + 1) * 2.5, 'macro20') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.muscle.upperMuscle.amount') + 1) * 2.5, 'macro20') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.protein')
         }, {
@@ -1123,7 +1123,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.muscle.vaginaSize.amount', function() {
-            return -costFactor((this.get('data.muscle.vaginaSize.amount') + 1) * 1, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.muscle.vaginaSize.amount') + 1) * 1, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.protein')
         }, {
@@ -1170,7 +1170,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skeletal.armLength.amount', function() {
-            return -costFactor((this.get('data.skeletal.armLength.amount') - 29) * 2, 'macro20') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skeletal.armLength.amount') - 29) * 2, 'macro20') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1221,7 +1221,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skeletal.armThickness.amount', function() {
-            return -costFactor((this.get('data.skeletal.armThickness.amount') - 44) * 2, 'macro15') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skeletal.armThickness.amount') - 44) * 2, 'macro15') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1272,7 +1272,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skeletal.chinWidth.amount', function() {
-            return -costFactor((this.get('data.skeletal.chinWidth.amount') - 29) * 1.25, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skeletal.chinWidth.amount') - 29) * 1.25, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1317,7 +1317,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skeletal.faceLength.amount', function() {
-            return -costFactor((this.get('data.skeletal.faceLength.amount') - 179) * 1.11, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skeletal.faceLength.amount') - 179) * 1.11, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1362,7 +1362,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skeletal.faceWidth.amount', function() {
-            return -costFactor((this.get('data.skeletal.faceWidth.amount') - 74) * 3.33, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skeletal.faceWidth.amount') - 74) * 3.33, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1413,7 +1413,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skeletal.height.amount', function() {
-            return -costFactor((this.get('data.skeletal.height.amount') - 109) * 1.25, 'macro25') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skeletal.height.amount') - 109) * 1.25, 'macro25') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1464,7 +1464,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skeletal.handSize.amount', function() {
-            return -costFactor((this.get('data.skeletal.handSize.amount') - 39) * 0.625, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skeletal.handSize.amount') - 39) * 0.625, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1515,7 +1515,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skeletal.hipWidth.amount', function() {
-            return -costFactor((this.get('data.skeletal.hipWidth.amount') - 89) * 0.91, 'macro15') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skeletal.hipWidth.amount') - 89) * 0.91, 'macro15') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1560,7 +1560,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skeletal.legLength.amount', function() {
-            return -costFactor((this.get('data.skeletal.legLength.amount') - 89) * 4, 'macro20') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skeletal.legLength.amount') - 89) * 4, 'macro20') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1605,7 +1605,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skeletal.neckLength.amount', function() {
-            return -costFactor((this.get('data.skeletal.neckLength.amount') + 1) * 0.83, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skeletal.neckLength.amount') + 1) * 0.83, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1656,7 +1656,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skeletal.shoulderWidth.amount', function() {
-            return -costFactor((this.get('data.skeletal.shoulderWidth.amount') - 39) * 0.91, 'macro20') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skeletal.shoulderWidth.amount') - 39) * 0.91, 'macro20') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1709,7 +1709,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skin.areolaSize.amount', function() {
-            return -costFactor((this.get('data.skin.areolaSize.amount') + 1) * 2, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skin.areolaSize.amount') + 1) * 2, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1754,7 +1754,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skin.eyelashLength.amount', function() {
-            return -costFactor((this.get('data.skin.eyelashLength.amount') + 1) * 6.67, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skin.eyelashLength.amount') + 1) * 6.67, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1799,7 +1799,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skin.eyeSize.amount', function() {
-            return -costFactor((this.get('data.skin.eyeSize.amount') + 1) * 2.5, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skin.eyeSize.amount') + 1) * 2.5, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.minerals')
         }, {
@@ -1999,7 +1999,7 @@ export default function schema(data) {
         destroyCosts: [{
           data,
           amount: computed('data.skin.lipSize.amount', function() {
-            return -costFactor((this.get('data.skin.lipSize.amount') - 4) * 4, 'macro5') * (this.get('data.nutrients.salvage.amount') / 100);
+            return -costFactor((this.get('data.skin.lipSize.amount') - 4) * 4, 'macro5') * ((this.get('data.nutrients.salvage.amount') || 1) / 100);
           }),
           source: alias('data.nutrients.fat')
         }, {
