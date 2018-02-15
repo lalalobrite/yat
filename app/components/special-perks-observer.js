@@ -71,6 +71,13 @@ const observations = [{
     greaterThan: 200
   }]
 }, {
+  key: 'enableAttractionHint',
+  message: 'Gain insight into what attracts Mind.',
+  criteria: [{
+    source: 'data.sexuality.rejectionsAsMan.amount',
+    greaterThan: 3
+  }]
+}, {
   key: 'enableMasculineGrowth',
   message: 'Sexual encounter: failure. Body deemed unattractive. Grow muscle and size to improve sex appeal.',
   criteria: [{
@@ -114,14 +121,14 @@ const observations = [{
   }]
 }, {
   key: 'enableFeminineGrowth2',
-  message: 'Ovarian conversion complete. Begin preparing Body for child-bearing.',
+  message: 'Fertility too low. Devote more resources to child-bearing.',
   criteria: [{
     source: 'data.sexuality.femaleSexWithMen.amount',
     greaterThan: 5
   }]
 }, {
   key: 'enableFeminineGrowth3',
-  message: 'Ovarian conversion complete. Begin preparing Body for child-bearing.',
+  message: 'Fertility could be further optimized. Devote all resources to child-bearing.',
   criteria: [{
     source: 'data.sexuality.femaleSexWithMen.amount',
     greaterThan: 15

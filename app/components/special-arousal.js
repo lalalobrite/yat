@@ -37,7 +37,7 @@ export default Component.extend({
   resolveEncounter() {
     const encounterMasculinity = this.get('data.social.currentEncounter.masculinity');
 
-    if (100 - Math.abs(this.get('data.sexuality.orientation.amount') - encounterMasculinity) > 97.5) {
+    if (this.get('data.social.currentEncounter.playerAttraction.amount') > 70) {
       const [encounterAttractionMin, encounterAttractionMax] = this.get('data.social.currentEncounter.attractionRange.amount');
       const totalMasculinity = this.get('data.sexuality.masculinity.amount');
 

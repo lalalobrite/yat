@@ -198,6 +198,24 @@ export default Component.extend({
     }
   }),
 
+  enableAttractionHint: computed({
+    get(key) {
+      return {
+        key,
+        title: 'attraction hinting',
+        description: 'gain insight into how attraction works',
+        costs: [{
+          data: this.get('data'),
+          amount: 1250,
+          source: alias('data.mind.cognition')
+        }],
+        callback() {
+          this.attrs.unlockResource(this.get('data.sexuality.attractionHint'), 'tertiary', 'sexuality');
+        }
+      }
+    }
+  }),
+
   enableMasculineGrowth: computed({
     get(key) {
       return {

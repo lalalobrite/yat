@@ -2,8 +2,8 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default Component.extend({
-  attraction: computed('data.sexuality.orientation.amount', 'data.social.currentEncounter.masculinity', function() {
-    return Math.max(0, ((100 - Math.abs(this.get('data.sexuality.orientation.amount') - this.get('data.social.currentEncounter.masculinity'))) - 90) * 10);
+  attraction: computed('data.social.currentEncounter.playerAttraction.amount', function() {
+    return this.get('data.social.currentEncounter.playerAttraction.amount');
   }),
 
   theirAttraction: computed('data.social.currentEncounter.attractionRange.amount', 'data.sexuality.masculinity.amount', function() {
@@ -17,21 +17,19 @@ export default Component.extend({
     } else return 100;
   }),
 
+  attractionDirection: computed('data.social.currentEncounter.masculinity', 'data.sexuality.orientation.amount', function() {
+    const encounterMasculinity = this.get('data.social.currentEncounter.masculinity');
+    const orientation = this.get('data.sexuality.orientation.amount');
+    return encounterMasculinity > orientation ? 1 : -1;
+  }),
+
   actions: {
     attract() {
-      const encounterMasculinity = this.get('data.social.currentEncounter.masculinity');
-      const orientation = this.get('data.sexuality.orientation.amount');
-      const direction = encounterMasculinity > orientation ? 0.1 : -0.1;
-
-      this.incrementProperty('data.sexuality.orientation.amount', direction);
+      this.attrs.createResource(this.get('data.sexuality.orientation'), this.get('attractionDirection'));
     },
 
     repulse() {
-      const encounterMasculinity = this.get('data.social.currentEncounter.masculinity');
-      const orientation = this.get('data.sexuality.orientation.amount');
-      const direction = encounterMasculinity > orientation ? 0.1 : -0.1;
-
-      this.decrementProperty('data.sexuality.orientation.amount', direction);
+      this.attrs.destroyResource(this.get('data.sexuality.orientation'), this.get('attractionDirection'));
     }
   }
 });

@@ -6,7 +6,7 @@ import randomNumber from 'yat/utils/random-number';
 
 export default function schema(data) {
   return {
-    // debugging: true,
+    debugging: true,
     columns: {
       avatar: {
         classNames: 'panel-column-avatar',
@@ -114,6 +114,9 @@ export default function schema(data) {
           }],
           max: {
             amount: 1000
+          },
+          min: {
+            amount: 0
           }
         },
         multiplier: {
@@ -147,6 +150,9 @@ export default function schema(data) {
           }],
           max: {
             amount: 1000
+          },
+          min: {
+            amount: 0
           }
         },
         multiplier: {
@@ -180,6 +186,9 @@ export default function schema(data) {
           }],
           max: {
             amount: 1000
+          },
+          min: {
+            amount: 0
           }
         },
         multiplier: {
@@ -214,6 +223,9 @@ export default function schema(data) {
           }],
           max: {
             amount: 1000
+          },
+          min: {
+            amount: 0
           }
         },
         multiplier: {
@@ -265,6 +277,9 @@ export default function schema(data) {
           }],
           max: {
             amount: 100
+          },
+          min: {
+            amount: 0
           }
         },
         multiplier: {
@@ -325,6 +340,9 @@ export default function schema(data) {
           }],
           max: {
             amount: 100
+          },
+          min: {
+            amount: 0
           }
         }
       },
@@ -481,8 +499,27 @@ export default function schema(data) {
       attractionInterface: {
         component: 'special-attraction-interface'
       },
+      attractionHint: {
+
+      },
       orientation: {
-        amount: 50
+        amount: 50,
+        costs: [{
+          data,
+          amount: 1,
+          source: alias('data.mind.cognition')
+        }],
+        destroyCosts: [{
+          data,
+          amount: 1,
+          source: alias('data.mind.cognition')
+        }],
+        min: {
+          amount: 0
+        },
+        max: {
+          amount: 100
+        }
       },
       orientationVariance: {
         amount: 10
@@ -576,6 +613,13 @@ export default function schema(data) {
             if (randomNumber(0, 100) > 95) encounterAttractionMin = encounterAttractionMin === 100 ? 0 : 100; // pan/asexual
 
             return encounterAttractionMin < encounterAttractionMax ? [encounterAttractionMin, encounterAttractionMax] : [encounterAttractionMax, encounterAttractionMin];
+          })
+        },
+        playerAttraction: {
+          data,
+          doNotStore: true,
+          amount: computed('data.sexuality.orientation.amount', 'data.social.currentEncounter.masculinity', function() {
+            return Math.max(0, ((100 - Math.abs(this.get('data.sexuality.orientation.amount') - this.get('data.social.currentEncounter.masculinity'))) - 90) * 10) || 0;
           })
         }
       }
