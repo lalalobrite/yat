@@ -6,7 +6,7 @@ import randomNumber from 'yat/utils/random-number';
 
 export default function schema(data) {
   return {
-    debugging: true,
+    // debugging: true,
     columns: {
       avatar: {
         classNames: 'panel-column-avatar',
