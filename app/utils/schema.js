@@ -6,7 +6,7 @@ import randomNumber from 'yat/utils/random-number';
 
 export default function schema(data) {
   return {
-    debugging: true,
+    // debugging: true,
     columns: {
       avatar: {
         classNames: 'panel-column-avatar',
@@ -239,8 +239,20 @@ export default function schema(data) {
       }
     },
     fertility: {
-      eggs: {
-        amount: 0
+      fertility: {
+        data,
+        doNotStore: true,
+        name: 'fertility',
+        unit: 'percent',
+        amount: computed('data.fat.buttFullness.amount', 'data.fat.legFem.amount', 'data.fat.legFullness.amount', function() {
+          return ((this.get('data.fat.buttFullness.amount') + this.get('data.fat.legFem.amount') + this.get('data.fat.legFullness.amount')) / 4) * 2.25;
+        })
+      },
+      pregnancy: {
+        name: 'pregnancy',
+        amount: 0,
+        unit: 'percent',
+        component: 'special-pregnancy'
       },
       ovarianConversion: {
         name: 'ovarian conversion',
@@ -248,7 +260,7 @@ export default function schema(data) {
         amount: 0,
         costs: [{
           data,
-          amount: 100,
+          amount: 25,
           source: alias('data.fertility.sperm')
         }],
         max: {

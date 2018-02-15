@@ -20,7 +20,7 @@ export default Component.extend({
   attractionDirection: computed('data.social.currentEncounter.masculinity', 'data.sexuality.orientation.amount', function() {
     const encounterMasculinity = this.get('data.social.currentEncounter.masculinity');
     const orientation = this.get('data.sexuality.orientation.amount');
-    return encounterMasculinity > orientation ? 1 : -1;
+    return encounterMasculinity > orientation ? 0.1 : -0.1;
   }),
 
   actions: {

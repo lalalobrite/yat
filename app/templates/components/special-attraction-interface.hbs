@@ -1,8 +1,8 @@
 <div>attraction to encounter: {{to-fixed attraction}}%</div>
 <div>encounter attraction to you: {{to-fixed theirAttraction}}%</div>
 
-<button {{action "attract"}}>attract{{#if data.sexuality.attractionHint.unlocked}} ({{#if (eq attractionDirection 1)}}masculinity{{else}}femininity{{/if}}){{/if}}</button>
-<button {{action "repulse"}}>repulse{{#if data.sexuality.attractionHint.unlocked}} ({{#if (eq attractionDirection 1)}}masculinity{{else}}femininity{{/if}}){{/if}}</button>
+<button {{action "attract"}}>attract{{#if data.sexuality.attractionHint.unlocked}} ({{#if (eq attractionDirection 0.1)}}masculinity{{else}}femininity{{/if}}){{/if}}</button>
+<button {{action "repulse"}}>repulse{{#if data.sexuality.attractionHint.unlocked}} ({{#if (eq attractionDirection 0.1)}}masculinity{{else}}femininity{{/if}}){{/if}}</button>
 
 <div class="panel-stat-secondary">
   cost:

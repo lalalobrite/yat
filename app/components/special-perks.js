@@ -359,6 +359,7 @@ export default Component.extend({
           this.set('data.sexuality.sexIdentity.amount', 'female');
           this.attrs.lockResource(this.get('data.fertility.ovarianConversion'), 'primary', 'fertility');
           this.attrs.lockResource(this.get('data.fertility.sperm'), 'primary', 'fertility');
+          this.attrs.unlockResource(this.get('data.fertility.fertility'), 'primary', 'fertility');
           this.attrs.unlockResource(this.get('data.endocrine.estrogen'), 'primary', 'endocrine');
           this.attrs.unlockResource(this.get('data.endocrine.estrogen.factories'), 'primary', 'endocrine');
           this.attrs.unlockResource(this.get('data.endocrine.progesterone'), 'primary', 'endocrine');

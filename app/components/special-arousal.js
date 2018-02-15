@@ -60,7 +60,10 @@ export default Component.extend({
     let riIncrement = 1;
     if (isMale) {
       sexType += 'Men';
-      if (this.get('data.sexuality.sexIdentity.amount') === 'female') riIncrement += genderExtremeness / 10;
+      if (this.get('data.sexuality.sexIdentity.amount') === 'female') {
+        riIncrement += genderExtremeness / 10;
+        if (this.get('data.fertility.fertility.amount') > randomNumber(15, 100)) this.getPregnant();
+      }
     } else {
       sexType += 'Women';
       if (this.get('data.sexuality.sexIdentity.amount') === 'male') riIncrement += genderExtremeness / 10;
@@ -75,5 +78,12 @@ export default Component.extend({
     this.decrementProperty('data.fertility.sperm.amount', ejaculate);
     this.incrementProperty('data.ri.ri.amount', riIncrement);
     this.set('arousal.amount', 0);
+  },
+
+  getPregnant() {
+    if (this.get('data.fertility.pregnancy.amount') === 0) {
+      this.attrs.createResource(this.get('data.fertility.pregnancy'), 1);
+      this.attrs.unlockResource(this.get('data.fertility.pregnancy'), 'primary', 'fertility');
+    }
   }
 });
